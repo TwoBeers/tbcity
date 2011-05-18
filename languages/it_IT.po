@@ -1,0 +1,261 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: TwoBeers Crew <light@twobeers.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Text in function
+#: functions.php:386
+msgid " image/s stored in "
+msgstr " immagini caricate in "
+
+#. Text in function
+#: index.php:52
+msgid "&laquo; Newer Posts"
+msgstr "&laquo; Articoli pi&ugrave; recenti"
+
+#. Text in echo
+#: functions.php:346
+msgid ". It is currently "
+msgstr ". Attualmente sono le "
+
+#. Text in echo
+#: functions.php:91
+msgid "<li>No comments yet</li>"
+msgstr "<li>Ancora nessun commento</li>"
+
+#. Text in echo
+#: functions.php:91
+msgid "<li>No posts yet</li>"
+msgstr "<li>Ancora nessun articolo</li>"
+
+#. Text in echo
+#: functions.php:369
+msgid "Activate/Deactivate the flash animation that show the blog's geographical location."
+msgstr "Attiva/Disattiva l&#39;animazione che indica la posizione geografica"
+
+#. Text in echo
+#: functions.php:369
+msgid "Blog's geographical location"
+msgstr "Posizione geografica del blog"
+
+#. Text in echo
+#: functions.php:357
+msgid "Activate/Deactivate the flash header animation."
+msgstr "Attiva/Disattiva l&#39;animazione flash del titolo"
+
+#. Text in echo
+#: footer.php:9
+msgid "All logos, trademarks and posts in this site are property of their respective owners, all the rest &copy;"
+msgstr "Tutti i loghi, marchi e articoli in questo sito appartengono ai rispettivi proprietari, per tutto il resto &copy;"
+
+#. Text in echo
+#: footer.php:9
+msgid "All rights reserved"
+msgstr "Tutti i diritti riservati"
+
+#. Text in function
+#: comments.php:72
+msgid "Cancel reply"
+msgstr "Cancella la replica"
+
+#. Text in echo
+#: functions.php:345
+msgid "Default to East (13), use a negative value for West. Must be between -180 to 180"
+msgstr "Predefinito ad Est (13), utilizza valori negativi per l&#39;Ovest. Il valore deve essere compreso tra -180 e 180"
+
+#. Text in echo
+#: functions.php:341
+msgid "Default to North (46), use a negative value for South. Must be between -90 to 90"
+msgstr "Predefinito ad Nord (46), utilizza valori negativi per il Sud. Il valore deve essere compreso tra -90 e 90"
+
+#. Text in function
+#: header.php:34
+msgid "Disable/Enable Flash Header"
+msgstr "Attiva/Disattiva l'animazione flash"
+
+#. Text in echo
+#: functions.php:164
+msgid "Flash header disabled!"
+msgstr "Animazione disattivata!"
+
+#. Text in echo
+#: functions.php:157
+msgid "Flash header enabled!"
+msgstr "Animazione attivata!"
+
+#. Text in echo
+#: functions.php:154
+msgid "Flash header will be enable and the cookie will be deleted."
+msgstr "L\\'animazione verrà ora attivata"
+
+#. Text in echo
+#: functions.php:339
+msgid "Latitude"
+msgstr "Latitudine"
+
+#. Text in echo
+#: functions.php:335
+msgid "Latitude and longitude are needed to show the correct changes in light (sunrise, day, sunset, night), in the header of the blog.<br />You can use <a href='http://itouchmap.com/latlong.html' target='_blank'>itouchmap.com</a> to find yours."
+msgstr "I valori di latitudine e longitudine sono necessari per visualizzare correttamente i cambiamenti di luce nell'arco della giornata (alba, giorno, tramonto e notte) dell'animazione flash principale.<br />Puoi fare riferimento a <a href='http://itouchmap.com/latlong.html' target='_blank'>itouchmap.com</a> per conoscere i tuoi"
+
+#. Text in echo
+#. Text in function
+#: functions.php:335
+#: header.php:76
+#: comments.php:47
+msgid "Logged in as %s"
+msgstr "Collegato come %s"
+
+#. Text in echo
+#: functions.php:343
+msgid "Longitude"
+msgstr "Longitudine"
+
+#. Text in function
+#: functions.php:413
+msgid "Main Navigation Menu"
+msgstr "Menu di navigazione principale"
+
+#. Text in function
+#: 404.php:4
+msgid "Navigate through the blog by the menu on the top"
+msgstr "Naviga nel blog tramite il menu qui sopra"
+
+#. Text in function
+#: header.php:76
+msgid "Not logged in"
+msgstr "Non collegato"
+
+#. Text in function
+#: index.php:55
+msgid "Older Posts &raquo;"
+msgstr "Articoli precedenti &raquo;"
+
+#. Text in function
+#: functions.php:386
+msgid "Custom logo"
+msgstr "Logo personalizzato"
+
+#. Text in function
+#: comments.php:88
+msgid "Pingback and Trackback are allowed:"
+msgstr "I Pingback e i Trackback sono permessi:"
+
+#. Text in echo
+#: functions.php:384
+msgid "Portrait directory name"
+msgstr "Nome della cartella dei ritratti"
+
+#. Text in echo
+#: functions.php:406
+msgid "Portrait folder, must be inside images theme folder (e.g. ...themes\\tbcity\\images\\portrait\\).<br />Images must be in .jpg format and named imageNN where NN is the number of the image - max 99 - e.g. image01.jpg.<br />Every time an image is added or removed, theme options <b><u>must be manually updated</u></b>."
+msgstr "Cartella dei ritratti, deve trovarsi all&#39;interno della cartella \"images\" del tema (es. ...themes\\tbcity\\images\\portrait\\).<br /> Le immagini devono essere in formato .jpg ed avere un nome standard imageNN, dove NN &egrave; il numero dell&#39;immagine - non pi&ugrave; di 99 - es. image01.jpg<br />Ogni volta che un&#39;immagine viene aggiunta o eliminata <b><u>&egrave; necessario aggiornare manualmente</u></b> le opzioni del tema"
+
+#. Text in function
+#: 404.php:4
+msgid "Search the site using the search box on the left"
+msgstr "Fai una ricerca all&#39;interno del sito utilizzando la casella a sinistra"
+
+#. Text in function
+#: sidebar.php:3
+msgid "Search..."
+msgstr "Cerca..."
+
+#. Text in echo
+#: functions.php:359
+msgid "Show I'm here"
+msgstr "Visualizza \"Io Sono Qui\""
+
+#. Text in function
+#: 404.php:4
+msgid "Sorry, but you are looking for something that isn&#8217;t here."
+msgstr "Purtroppo qui non c&#39;&egrave; quello che stai cercando."
+
+#. Text in echo
+#: functions.php:346
+msgid "System timezone"
+msgstr "Fuso orario"
+
+#. Text in echo
+#: functions.php:334
+msgid "The Black City theme options"
+msgstr "The Black City - Opzioni del tema"
+
+#. Text in function
+#: functions.php:413
+msgid "Theme Options"
+msgstr "Opzioni del tema"
+
+#. Text in function
+#: functions.php:386
+msgid "There&#39;s no directory with that name"
+msgstr "Non esiste una cartella con questo nome"
+
+#. Text in function
+#: functions.php:386
+msgid "Title + description"
+msgstr "Titolo + descrizione"
+
+#. Text in echo
+#: functions.php:161
+msgid "To disable flash header, a cookie will be set."
+msgstr "Per disattivare l\\'animazione è necessario utilizzare un cookie"
+
+#. Text in function
+#: 404.php:4
+msgid "Try this:"
+msgstr "Prova questo:"
+
+#. Text in echo
+#: functions.php:373
+msgid "Use a custom logo or the default blog title and description"
+msgstr "Usa un logo personalizzato oppure il titolo e la descrizione standard del blog"
+
+#. Text in echo
+#: functions.php:347
+msgid "Use flash header"
+msgstr "Usa l&#39;animazione flash del titolo"
+
+#. Text in echo
+#: header.php:72
+msgid "User"
+msgstr "Utente"
+
+#. Text in function
+#: 404.php:4
+msgid "Visit the"
+msgstr "Visita il"
+
+#. Text in echo
+#: functions.php:383
+msgid "You can switch between: a personalized image to be used as a logo (must be saved as \"logo.png\" in images folder - ...themes\\tbcity\\images\\ - dim. width 330px height 200px), and the default text for blog title and description."
+msgstr "Puoi scegliere tra: un'immagine da usare come logo personalizzato (deve essere salvata come \"logo.png\" nella cartella images - ...themes\\tbcity\\images\\ - dim. larghezza 330px altezza 200px) e il classico titolo del blog (con descrizione)"
+
+#. Text in echo
+#. Text in function
+#: functions.php:383
+#: header.php:34
+msgid "click to disable/enable the Flash header animation"
+msgstr "click per disattivare/attivare l&#39;animazione flash"
+
+#. Text in echo
+#: functions.php:87
+msgid "system message"
+msgstr "messaggio di sistema"
+
+#. Text in echo
+#: functions.php:407
+msgid "Update Options"
+msgstr "Aggiorna Opzioni"
+
+#. Text in echo
+#: functions.php:87
+msgid "by"
+msgstr "di"
+

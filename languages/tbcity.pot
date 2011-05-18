@@ -1,0 +1,261 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: TwoBeers Crew <light@twobeers.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Text in function
+#: functions.php:386
+msgid " image/s stored in "
+msgstr ""
+
+#. Text in function
+#: index.php:52
+msgid "&laquo; Newer Posts"
+msgstr ""
+
+#. Text in echo
+#: functions.php:346
+msgid ". It is currently "
+msgstr ""
+
+#. Text in echo
+#: functions.php:91
+msgid "<li>No comments yet</li>"
+msgstr ""
+
+#. Text in echo
+#: functions.php:91
+msgid "<li>No posts yet</li>"
+msgstr ""
+
+#. Text in echo
+#: functions.php:369
+msgid "Activate/Deactivate the flash animation that show the blog's geographical location."
+msgstr ""
+
+#. Text in echo
+#: functions.php:369
+msgid "Blog's geographical location"
+msgstr ""
+
+#. Text in echo
+#: functions.php:357
+msgid "Activate/Deactivate the flash header animation."
+msgstr ""
+
+#. Text in echo
+#: footer.php:9
+msgid "All logos, trademarks and posts in this site are property of their respective owners, all the rest &copy;"
+msgstr ""
+
+#. Text in echo
+#: footer.php:9
+msgid "All rights reserved"
+msgstr ""
+
+#. Text in function
+#: comments.php:72
+msgid "Cancel reply"
+msgstr ""
+
+#. Text in echo
+#: functions.php:345
+msgid "Default to East (13), use a negative value for West. Must be between -180 to 180"
+msgstr ""
+
+#. Text in echo
+#: functions.php:341
+msgid "Default to North (46), use a negative value for South. Must be between -90 to 90"
+msgstr ""
+
+#. Text in function
+#: header.php:34
+msgid "Disable/Enable Flash Header"
+msgstr ""
+
+#. Text in echo
+#: functions.php:164
+msgid "Flash header disabled!"
+msgstr ""
+
+#. Text in echo
+#: functions.php:157
+msgid "Flash header enabled!"
+msgstr ""
+
+#. Text in echo
+#: functions.php:154
+msgid "Flash header will be enable and the cookie will be deleted."
+msgstr ""
+
+#. Text in echo
+#: functions.php:339
+msgid "Latitude"
+msgstr ""
+
+#. Text in echo
+#: functions.php:335
+msgid "Latitude and longitude are needed to show the correct changes in light (sunrise, day, sunset, night), in the header of the blog.<br />You can use <a href='http://itouchmap.com/latlong.html' target='_blank'>itouchmap.com</a> to find yours."
+msgstr ""
+
+#. Text in echo
+#. Text in function
+#: functions.php:335
+#: header.php:76
+#: comments.php:47
+msgid "Logged in as %s"
+msgstr ""
+
+#. Text in echo
+#: functions.php:343
+msgid "Longitude"
+msgstr ""
+
+#. Text in function
+#: functions.php:413
+msgid "Main Navigation Menu"
+msgstr ""
+
+#. Text in function
+#: 404.php:4
+msgid "Navigate through the blog by the menu on the top"
+msgstr ""
+
+#. Text in function
+#: header.php:76
+msgid "Not logged in"
+msgstr ""
+
+#. Text in function
+#: index.php:55
+msgid "Older Posts &raquo;"
+msgstr ""
+
+#. Text in function
+#: functions.php:386
+msgid "Custom logo"
+msgstr ""
+
+#. Text in function
+#: comments.php:88
+msgid "Pingback and Trackback are allowed:"
+msgstr ""
+
+#. Text in echo
+#: functions.php:384
+msgid "Portrait directory name"
+msgstr ""
+
+#. Text in echo
+#: functions.php:406
+msgid "Portrait folder, must be inside images theme folder (e.g. ...themes\\tbcity\\images\\portrait\\).<br />Images must be in .jpg format and named imageNN where NN is the number of the image - max 99 - e.g. image01.jpg.<br />Every time an image is added or removed, theme options <b><u>must be manually updated</u></b>."
+msgstr ""
+
+#. Text in function
+#: 404.php:4
+msgid "Search the site using the search box on the left"
+msgstr ""
+
+#. Text in function
+#: sidebar.php:3
+msgid "Search..."
+msgstr ""
+
+#. Text in echo
+#: functions.php:359
+msgid "Show I'm here"
+msgstr ""
+
+#. Text in function
+#: 404.php:4
+msgid "Sorry, but you are looking for something that isn&#8217;t here."
+msgstr ""
+
+#. Text in echo
+#: functions.php:346
+msgid "System timezone"
+msgstr ""
+
+#. Text in echo
+#: functions.php:334
+msgid "The Black City theme options"
+msgstr ""
+
+#. Text in function
+#: functions.php:413
+msgid "Theme Options"
+msgstr ""
+
+#. Text in function
+#: functions.php:386
+msgid "There&#39;s no directory with that name"
+msgstr ""
+
+#. Text in function
+#: functions.php:386
+msgid "Title + description"
+msgstr ""
+
+#. Text in echo
+#: functions.php:161
+msgid "To disable flash header, a cookie will be set."
+msgstr ""
+
+#. Text in function
+#: 404.php:4
+msgid "Try this:"
+msgstr ""
+
+#. Text in echo
+#: functions.php:373
+msgid "Use a custom logo or the default blog title and description"
+msgstr ""
+
+#. Text in echo
+#: functions.php:347
+msgid "Use flash header"
+msgstr ""
+
+#. Text in echo
+#: header.php:72
+msgid "User"
+msgstr ""
+
+#. Text in function
+#: 404.php:4
+msgid "Visit the"
+msgstr ""
+
+#. Text in echo
+#: functions.php:383
+msgid "You can switch between: a personalized image to be used as a logo (must be saved as \"logo.png\" in images folder - ...themes\\tbcity\\images\\ - dim. width 330px height 200px), and the default text for blog title and description."
+msgstr ""
+
+#. Text in echo
+#. Text in function
+#: functions.php:383
+#: header.php:34
+msgid "click to disable/enable the Flash header animation"
+msgstr ""
+
+#. Text in echo
+#: functions.php:87
+msgid "system message"
+msgstr ""
+
+#. Text in echo
+#: functions.php:407
+msgid "Update Options"
+msgstr ""
+
+#. Text in echo
+#: functions.php:87
+msgid "by"
+msgstr ""
+
