@@ -1,49 +1,70 @@
-<?php get_header(); ?>
+<?php
+/**
+ * page.php
+ *
+ * The single page template file, used to display single pages.
+ *
+ * @package The Black City
+ * @since 1.00
+ */
 
-			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-			<div class="entry" id="entry-<?php the_ID(); ?>">
-				<div class="entrytitle_wrap">
-					<div class="entrydate"><?php edit_post_link(__('Edit'),'<span class="editthis">',' | </span>'); ?>
-						<span class="jumper"><a href="#" title="top">top</a></span>
-					</div>
-					<div class="entrytitle" style="padding:0 10px">
-						<h1><a href="<?php the_permalink() ?>" rel="bookmark">
-							<?php 
-								$post_title = the_title_attribute('echo=0');
-								if (!$post_title) {
-									_e('(no title)');
-								} else {
-									echo $post_title;
-								}
-							?>
-						</a></h1>
-						<span class="commentslink">
-							<?php comments_popup_link(__('No Comments'), __('1 Comment'), __('% Comments')); ?>
-						</span>
-					</div>
-					<?php tbcity_multipages(); ?>
+get_header(); ?>
+
+<?php tbcity_hook_content_before(); ?>
+
+<div id="posts_content">
+
+	<?php tbcity_hook_content_top(); ?>
+
+	<?php if ( have_posts() ) {
+
+		while ( have_posts() ) {
+
+			the_post(); ?>
+
+			<?php tbcity_hook_entry_before(); ?>
+
+			<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
+
+				<?php tbcity_hook_entry_top(); ?>
+
+				<?php tbcity_hook_post_title_before(); ?>
+
+				<?php tbcity_featured_title( array( 'featured' => true ) ); ?>
+
+				<?php tbcity_hook_post_title_after(); ?>
+
+				<div class="storycontent">
+
+					<?php tbcity_hook_entry_content_top(); ?>
+
+					<?php the_content(); ?>
+
+					<?php tbcity_hook_entry_content_bottom(); ?>
+
 				</div>
-				<div class="entrybody">
-					<?php if (post_password_required()) { 
-						tbcity_bot_msg(get_the_content());
-					} else { 
-						the_content(__('(more...)')); 
-					} ?>
-					<?php 
-					wp_link_pages(array('before'=>'				
-					<div class="entrytitle_wrap" style="min-height: 1px; margin-left: -25px; padding-bottom: 0pt;">
-					<div class="entrydate" style="height:30px; width:100%"></div>
-					<div class="pagelink">Pages:', 'after'=>'</div></div>','pagelink'=>'<span>%</span>')); 
-					?>
-				</div>
-				<div id="showcomments">
-					<?php comments_template(); ?>
-				</div>
+
+				<?php tbcity_hook_entry_bottom(); ?>
+
 			</div>
 
-			<?php endwhile; ?>
-			<?php endif; ?>
-		</div>
+			<?php tbcity_hook_entry_after(); ?>
+
+			<?php comments_template(); // Get wp-comments.php template ?>
+
+		<?php } //end while ?>
+
+	<?php } else { ?>
+
+		<?php get_template_part( 'loop/post-none' ); ?>
+
+	<?php } //endif ?>
+
+	<?php tbcity_hook_content_bottom(); ?>
+
+</div>
+
+<?php tbcity_hook_content_after(); ?>
 
 <?php get_footer(); ?>

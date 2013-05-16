@@ -1,69 +1,70 @@
-<?php get_header(); ?>
+<?php
+/**
+ * single.php
+ *
+ * The single blog post template file, used to display single blog posts.
+ *
+ * @package The Black City
+ * @since 1.00
+ */
 
-			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-			
-			<div class="entry">
-				<div class="entrytitle_wrap">
-					<div class="entrydate"><?php the_author(); ?> , <?php the_time(__('F j, Y')); ?>
-						<?php edit_post_link(__('Edit'),'<span class="editthis"> | ','</span>'); ?>
-						 | <span class="jumper"><a href="#" title="top">top</a></span>
-					</div>
-					<?php
-					//start gravatar
-					$email = get_the_author_meta('user_email');
-					echo get_avatar($email, 50, $default=get_bloginfo('stylesheet_directory').'/images/user.png');
-					//end gravatar
-					?>
-					<div class="entrytitle">
-						<h1><a href="<?php the_permalink() ?>" rel="bookmark">
-							<?php 
-								$post_title = the_title_attribute('echo=0');
-								if (!$post_title) {
-									_e('(no title)');
-								} else {
-									echo $post_title;
-								}
-							?>
-						</a></h1>
-						<span class="commentslink">
-							<?php comments_popup_link(__('No Comments'), __('1 Comment'), __('% Comments')); ?>
-						</span>
-					</div>
-					<div class="entrymeta">
-						<div class="postinfo">
-							<span><img src="<?php echo get_bloginfo('stylesheet_directory')."/images/star.png" ?>" /><?php echo __('Categories') . ': '; the_category(', ') ?></span>
-							<?php if (has_tag()) {?><span><img src="<?php echo get_bloginfo('stylesheet_directory')."/images/tag.png" ?>" /><?php the_tags( 'Tags: ', ', ', ''); ?></span><?php }?>
-						</div>
-					</div>
+get_header(); ?>
+
+<?php tbcity_hook_content_before(); ?>
+
+<div id="posts_content">
+
+	<?php tbcity_hook_content_top(); ?>
+
+	<?php if ( have_posts() ) {
+
+		while ( have_posts() ) {
+
+			the_post(); ?>
+
+			<?php tbcity_hook_entry_before(); ?>
+
+			<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
+
+				<?php tbcity_hook_entry_top(); ?>
+
+				<?php tbcity_hook_post_title_before(); ?>
+
+				<?php tbcity_featured_title( array( 'featured' => true ) ); ?>
+
+				<?php tbcity_hook_post_title_after(); ?>
+
+				<div class="storycontent">
+
+					<?php tbcity_hook_entry_content_top(); ?>
+
+					<?php the_content(); ?>
+
+					<?php tbcity_hook_entry_content_bottom(); ?>
+
 				</div>
-				<div class="entrybody">
-				<?php if (post_password_required()) { 
-					tbcity_bot_msg(get_the_content());
-				} else { 
-					the_content(__('(more...)')); 
-				} ?>
-					<?php 
-					wp_link_pages(array('before'=>'				
-					<div class="entrytitle_wrap" style="min-height: 1px; margin-left: -25px; padding-bottom: 0pt;">
-					<div class="entrydate" style="height:30px; width:100%"></div>
-					<div class="pagelink">Pages:', 'after'=>'</div></div>','pagelink'=>'<span>%</span>')); 
-					?>
-				</div>
-				<div id="showcomments">
-					<?php comments_template(); ?>
-				</div>
+
+				<?php tbcity_hook_entry_bottom(); ?>
+
 			</div>
-			<div id="nav-global"> <!-- start page navigator -->
-				<div class="nav-previous">
-					<?php next_post_link('&laquo; %link') ?>
-				</div>
-				<div class="nav-next">
-					<?php previous_post_link('%link &raquo;') ?>
-				</div>
-			</div> <!-- end page navigator -->
 
-			<?php endwhile; endif; ?>
-		</div>
+			<?php tbcity_hook_entry_after(); ?>
+
+			<?php comments_template(); // Get wp-comments.php template ?>
+
+		<?php } //end while ?>
+
+	<?php } else { ?>
+
+		<?php get_template_part( 'loop/post-none' ); ?>
+
+	<?php } //endif ?>
+
+	<?php tbcity_hook_content_bottom(); ?>
+
+</div>
+
+<?php tbcity_hook_content_after(); ?>
 
 <?php get_footer(); ?>

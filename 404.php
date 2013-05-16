@@ -1,16 +1,61 @@
-<?php get_header(); ?>
-	<div class="commentsblock"> <!-- Trackbacks -->
-		<h3 class="content_headings h_warning"><?php _e('Page not found'); ?></h3>
-		<?php tbcity_bot_msg('
-			<p>'. __('Sorry, but you are looking for something that isn&#8217;t here.','tbcity') . ' ' . __('Try this:','tbcity') . '</p>
-			<ul>
-				<li>'. __('Visit the','tbcity') . '  <a href="' . get_bloginfo('url') . ' ">home page</a></li>
-				<li>'. __('Search the site using the search box on the left','tbcity') . ' </li>
-				<li>'. __('Navigate through the blog by the menu on the top','tbcity') . ' </li>
-			</ul>
-		'); ?>
+<?php
+/**
+ * 404.php
+ *
+ * This file is the Error 404 Page template file, which is output whenever
+ * the server encounters a "404 - file not found" error.
+ *
+ * @package The Black City
+ * @since 1.00
+ */
+
+
+get_header(); ?>
+
+<?php tbcity_hook_content_before(); ?>
+
+<div id="posts_content">
+
+	<?php tbcity_hook_content_top(); ?>
+
+	<div class="hentry not-found" id="post-404-not-found">
+
+		<div class="post_meta_container"><span class="pmb_format btn"><i class="icon-placeholder"></i></span></div>
+
+		<h2 class="storytitle"><?php _e( 'Error 404','tbcity' ); ?> - <?php _e( 'Page not found', 'tbcity' ); ?></h2>
+
+		<div class="storycontent">
+
+			<p><?php _e( "Sorry, you're looking for something that isn't here", 'tbcity' ); ?>: <u><?php echo home_url() . esc_html( $_SERVER['REQUEST_URI'] ); ?></u></p>
+
+			<br />
+
+			<?php if ( is_active_sidebar( 'error404-widgets-area' ) ) { ?>
+
+				<p><?php _e( 'Here is something that might help:', 'tbcity' ); ?></p>
+
+				<?php get_sidebar( 'error404' ); ?>
+
+			<?php } else { ?>
+
+				<p><?php _e( "There are several links scattered around the page, maybe they can help you on finding what you're looking for.", 'tbcity' ); ?></p>
+
+				<p><?php _e( 'Perhaps using the search form will help too...', 'tbcity' ); ?></p>
+
+				<?php get_search_form(); ?>
+
+			<?php } ?>
+
+		</div>
+
+		<br class="fixfloat" />
 
 	</div>
-			<div id="nav-global"></div>
-		</div>
+
+	<?php tbcity_hook_content_bottom(); ?>
+
+</div>
+
+<?php tbcity_hook_content_after(); ?>
+
 <?php get_footer(); ?>
