@@ -188,25 +188,6 @@ if ( !function_exists( 'tbcity_custom_style' ) ) {
 		font-family: <?php echo tbcity_get_opt( 'google_font_family' ); ?>;
 	}
 <?php } ?>
-	a {
-		color: <?php echo tbcity_get_opt( 'colors_link' ); ?>;
-	}
-	a:hover,
-	.menu-item-parent:hover > a:after,
-	.current-menu-item a:hover,
-	.current_page_item a:hover,
-	.current-cat a:hover {
-		color: <?php echo tbcity_get_opt( 'colors_link_hover' ); ?>;
-	}
-	.current-menu-ancestor > a:after,
-	.current-menu-parent > a:after,
-	.current_page_parent > a:after,
-	.current_page_ancestor > a:after,
-	.current-menu-item > a,
-	.current_page_item > a,
-	.current-cat > a {
-		color: <?php echo tbcity_get_opt( 'colors_link_sel' ); ?>;
-	}	
 <?php if ( tbcity_get_opt( 'custom_css' ) ) echo tbcity_get_opt( 'custom_css' ); ?>
 
 </style>
@@ -424,8 +405,10 @@ if ( !function_exists( 'tbcity_entry_date' ) ) {
 	function tbcity_entry_date() {
 
 ?>
-	<div class="entrydate"><?php the_author(); ?> , <?php the_time(__('F j, Y')); ?>
-		<?php edit_post_link( '<i class="icon-pencil"></i>', ' | ', '' ); ?> | <a class="jump-to-top" href="#" title="top"><i class="icon-caret-up"></i></a>
+	<div class="entrydate">
+		<span><?php the_author(); ?> , <?php the_time(__('F j, Y')); ?></span>
+		<?php edit_post_link( '<i class="icon-pencil"></i>', '<span>', '</span>' ); ?>
+		<span><a class="jump-to-top" href="#" title="top"><i class="icon-caret-up"></i></a></span>
 	</div>
 <?php
 
@@ -449,11 +432,17 @@ if ( !function_exists( 'tbcity_extrainfo' ) ) {
 ?>
 	<div class="extra-info">
 
+			<div class="metafield">
+				<span class="meta-trigger-wrap">
+					<i class="collapse-post-trigger icon-sort hide-if-no-js meta-trigger" title="<?php _e( 'collapse/expand post', 'tbcity' ); ?>"></i>
+				</span>
+			</div>
+
 		<?php if ( $args['hiera'] ) { ?>
 			<?php tbcity_multipages(); ?>
 		<?php } ?>
 
-		<?php if ( $args['tags'] ) { ?>
+		<?php if ( $args['tags'] && ! is_page() ) { ?>
 			<div class="metafield">
 				<span class="meta-trigger-wrap"><i class="icon-tags meta-trigger"></i></span>
 				<div class="metafield_content">
@@ -463,7 +452,7 @@ if ( !function_exists( 'tbcity_extrainfo' ) ) {
 			</div>
 		<?php } ?>
 
-		<?php if ( $args['cats'] ) { ?>
+		<?php if ( $args['cats'] && ! is_page() ) { ?>
 			<div class="metafield">
 				<span class="meta-trigger-wrap"><i class="icon-folder-close meta-trigger"></i></span>
 				<div class="metafield_content">
@@ -484,7 +473,6 @@ if ( !function_exists( 'tbcity_extrainfo' ) ) {
 			</div>
 		<?php } ?>
 
-		<span class="collapse-post-trigger icon-sort hide-if-no-js" title="<?php _e( 'collapse/expand post', 'tbcity' ); ?>"></span>
 
 	</div>
 <?php
@@ -495,7 +483,7 @@ if ( !function_exists( 'tbcity_extrainfo' ) ) {
 
 // page hierarchy
 if ( !function_exists( 'tbcity_multipages' ) ) {
-	function tbcity_multipages( $r_pos ){
+	function tbcity_multipages(){
 		global $post;
 
 		$args = array(
@@ -602,9 +590,9 @@ if ( !function_exists( 'tbcity_get_header' ) ) {
 		if ( get_header_image() ) {
 
 			if ( display_header_text() )
-				$header .= '<img class="aligncenter" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" src="' . esc_url( get_header_image() ) . '" />';
+				$header .= '<div id="head-image-wrapper"><img class="aligncenter" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" src="' . esc_url( get_header_image() ) . '" /></div>';
 			else
-				$header .= '<a href="' . esc_url( home_url() ) . '/"><img class="aligncenter" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" src="' . esc_url( get_header_image() ) . '" /></a>';
+				$header .= '<div id="head-image-wrapper"><a href="' . esc_url( home_url() ) . '/"><img class="aligncenter" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" src="' . esc_url( get_header_image() ) . '" /></a></div>';
 
 		} else {
 
@@ -822,6 +810,10 @@ if ( !function_exists( 'tbcity_setup' ) ) {
 		if ( tbcity_get_opt( 'post_formats_video'		) ) $format[] = 'video';
 		add_theme_support( 'post-formats', apply_filters( 'tbcity_post_formats', $format ) );
 
+		add_theme_support( 'custom-background', array(
+			'default-color' => '222',
+		) );
+
 	}
 }
 
@@ -1021,18 +1013,18 @@ if ( !function_exists( 'tbcity_single_nav' ) ) {
 ?>
 	<div class="navigation-links nav-single fixfloat">
 		<?php if ( $prev ) { ?>
-			<a class="nav-previous btn" rel="prev" href="<?php echo get_permalink( $prev ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Previous Post', 'tbcity' ) . $prev_title ) ); ?>">
-				<i class="icon-angle-left"></i>
-				<?php _e( 'Previous Post', 'tbcity' ); ?>
+			<span class="nav-previous">
+				<a class="btn" rel="prev" href="<?php echo get_permalink( $prev ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Previous Post', 'tbcity' ) . $prev_title ) ); ?>"><i class="icon-angle-left"></i></a>
+				<?php _e( 'Previous', 'tbcity' ); ?>
 				<?php echo tbcity_get_the_thumb( array( 'id' => $prev->ID, 'size_w' => 32, 'class' => 'tb-thumb-format' ) ); ?>
-			</a>
+			</span>
 		<?php } ?>
 		<?php if ( $next ) { ?>
-			<a class="nav-next btn" rel="next" href="<?php echo get_permalink( $next ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Next Post', 'tbcity' ) . $next_title ) ); ?>">
+			<span class="nav-next">
 				<?php echo tbcity_get_the_thumb( array( 'id' => $next->ID, 'size_w' => 32, 'class' => 'tb-thumb-format' ) ); ?>
-				<?php _e( 'Next Post', 'tbcity' ); ?>
-				<i class="icon-angle-right"></i>
-			</a>
+				<?php _e( 'Next', 'tbcity' ); ?>
+				<a class="btn" rel="next" href="<?php echo get_permalink( $next ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Next Post', 'tbcity' ) . $next_title ) ); ?>"><i class="icon-angle-right"></i></a>
+			</span>
 		<?php } ?>
 	</div><!-- #nav-single -->
 <?php
@@ -1407,7 +1399,7 @@ function tbcity_get_credits() {
 
 	$credits = '&copy; ' . date( 'Y' ) . ' <strong>' . get_bloginfo( 'name' ) . '</strong>. ' . __( 'All rights reserved', 'tbcity' );
 
-	if ( tbcity_get_opt('tbcity_tbcred') )
+	if ( tbcity_get_opt('tbcred') )
 		$credits .= '<br />' . sprintf( __( 'Powered by %s and %s', 'tbcity' ), '<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>', '<a target="_blank" href="http://www.twobeers.net/" title="' . esc_attr( __( 'Visit theme authors homepage', 'tbcity' ) . ' @ twobeers.net' ) . '">' . esc_attr( __( 'tbcity theme', 'tbcity' ) ) . '</a>' );
 
 	$credits = apply_filters( 'tbcity_credits', $credits );

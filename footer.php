@@ -37,8 +37,6 @@
 
 			<?php tbcity_hook_footer_after(); ?>
 
-		<div id="print-links" class="hide_if_no_print"><a href="<?php the_permalink(); ?>"><?php echo __('Close','tbcity'); ?></a><span class="hide-if-no-js"> | <a href="javascript:window.print()"><?php _e( 'Print','tbcity' ); ?></a></span></div>
-
 		<?php tbcity_hook_body_bottom(); ?>
 
 		<?php wp_footer(); ?>

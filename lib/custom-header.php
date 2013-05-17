@@ -15,7 +15,7 @@ class Tbcity_Comment_Style {
 		add_action( 'after_setup_theme'							, array( $this, 'custom_header_support' ) );
 		add_action( 'custom_header_options'						, array( $this, 'custom_header_background' ) );
 		add_action( 'admin_init'								, array( $this, 'save_theme_mod' ) );
-		add_action( 'admin_head-appearance_page_custom-header'	, array( $this, 'admin_scripts' ) );
+		//add_action( 'admin_head-appearance_page_custom-header'	, array( $this, 'admin_scripts' ) );
 
 	}
 
@@ -37,7 +37,7 @@ class Tbcity_Comment_Style {
 					$default_color = '#222222';
 					$default_color_attr = ' data-default-color="' . esc_attr( $default_color ) . '"';
 
-					echo '<input type="text" name="background-color" id="background-color" value="#' . esc_attr( $header_background_color ) . '"' . $default_color_attr . ' />';
+					echo '<input type="text" name="header-background-color" id="background-color" value="#' . esc_attr( $header_background_color ) . '"' . $default_color_attr . ' />';
 
 					if ( $default_color )
 						echo ' <span class="description hide-if-js">' . sprintf( _x( 'Default: %s', 'color' ), $default_color ) . '</span>';
@@ -55,12 +55,12 @@ class Tbcity_Comment_Style {
 
 		function save_theme_mod() {
 
-			if( isset( $_POST['background-color'] ) ) {
+			if( isset( $_POST['header-background-color'] ) ) {
 
 				check_admin_referer( 'custom-header-options', '_wpnonce-custom-header-options' );
 
-				$_POST['background-color'] = str_replace( '#', '', $_POST['background-color'] );
-				$color = preg_replace('/[^0-9a-fA-F]/', '', $_POST['background-color']);
+				$_POST['header-background-color'] = str_replace( '#', '', $_POST['header-background-color'] );
+				$color = preg_replace('/[^0-9a-fA-F]/', '', $_POST['header-background-color']);
 				if ( strlen($color) == 6 || strlen($color) == 3 )
 					set_theme_mod('header_background_color', $color);
 
@@ -70,6 +70,8 @@ class Tbcity_Comment_Style {
 
 
 		function admin_scripts() {
+
+			if ( isset( $_GET['step'] ) &&  $_GET['step'] === 2 ) return;
 
 ?>
 	<script type="text/javascript">
@@ -175,7 +177,7 @@ class Tbcity_Comment_Style {
 		#head a {
 			color: #<?php header_textcolor(); ?>;
 		}
-		#head {
+		#head-image-wrapper {
 			background: #<?php echo get_theme_mod( 'header_background_color', '222222' ); ?>;
 		}
 	</style>

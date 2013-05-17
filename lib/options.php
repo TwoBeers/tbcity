@@ -568,9 +568,9 @@ function tbcity_get_coa( $option = false ) {
 		'google_font_family' => array(
 							'group'			=> 'other',
 							'type'			=> 'txt',
-							'default'		=> '',
+							'default'		=> 'Open Sans',
 							'description'	=> __( 'Google web font', 'tbcity' ),
-							'info'			=> __( 'Copy and paste <a href="http://www.google.com/webfonts" target="_blank"><strong>Google web font</strong></a> name here. Example: <code>Architects Daughter</code>', 'tbcity' ),
+							'info'			=> __( 'Copy and paste <a href="http://www.google.com/webfonts" target="_blank"><strong>Google web font</strong></a> name here. Example: <code>Open Sans</code>', 'tbcity' ),
 							'req'			=> '',
 							'sub'			=> array( 'google_font_body', 'google_font_post_title', 'google_font_post_content' )
 		),

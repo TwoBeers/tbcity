@@ -50,9 +50,10 @@
 	background-position: 400px 100px;
 }
 .site-title {
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
-    bottom: 0;
-    padding: 5px 2%;
-    position: absolute;
-    width: 96%;
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
+	bottom: 0;
+	padding: 5px 2%;
+	position: absolute;
+	width: 96%;
+	font-size: 1.2em;
 }
