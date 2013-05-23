@@ -9,13 +9,19 @@
  */
 ?>
 
+<?php if ( ! is_active_sidebar( 'error404-widgets-area' ) ) return; ?>
+
 <?php tbcity_hook_sidebars_before( 'error404' ); ?>
 
-<div class="ul_fwa">
+<div id="error404-widgets-area" class="sidebar">
 
 	<?php tbcity_hook_sidebar_top( 'error404' ); ?>
 
+	<p><?php _e( 'Here is something that might help:', 'tbcity' ); ?></p>
+
 	<?php dynamic_sidebar( 'error404-widgets-area' ); ?>
+
+	<br class="fixfloat" />
 
 	<?php tbcity_hook_sidebar_bottom( 'error404' ); ?>
 

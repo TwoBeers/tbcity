@@ -12,6 +12,13 @@ tbcityScripts = {
 
 			switch(modules[i]) {
 
+				case 'collapseposts':
+					tbcityScripts.collapse_posts();
+					$('body').on('post-load', function(event){
+						tbcityScripts.collapse_posts();
+					});
+					break;
+
 				case 'quotethis':
 					tbcityScripts.init_quote_this();
 					break;
@@ -22,10 +29,9 @@ tbcityScripts = {
 
 				case 'extrainfo':
 					tbcityScripts.extra_info();
-					break;
-
-				case 'collapseposts':
-					tbcityScripts.collapse_posts();
+					$('body').on('post-load', function(event){
+						tbcityScripts.extra_info();
+					});
 					break;
 
 				case 'quickbar':
@@ -34,16 +40,16 @@ tbcityScripts = {
 
 				case 'scrolltopbottom':
 					tbcityScripts.scroll_top_bottom();
-					$('body').on('post-load', tbcityScripts.scroll_top_bottom());
+					$('body').on('post-load', function(event){
+						tbcityScripts.scroll_top_bottom();
+					});
 					break;
 
 				case 'resizevideo':
 					tbcityScripts.resize_video();
-					$('body').on('post-load', tbcityScripts.resize_video());
-					break;
-
-				case 'tinynav':
-					tbcityScripts.tinynav();
+					$('body').on('post-load', function(event){
+						tbcityScripts.resize_video();
+					});
 					break;
 
 				default :
@@ -94,7 +100,7 @@ tbcityScripts = {
 			var $this = $(this);
 			var lists = $('.metafield_content',$this);
 			var opened = false;
-			$('.metafield',$this).each( function(){
+			$('.alternate',$this).each( function(){
 				var element = $(this);
 				var list = $('.metafield_content',element);
 				var trigger = $('.meta-trigger',element);
@@ -162,13 +168,22 @@ tbcityScripts = {
 
 	collapse_posts : function() {
 
-		$('#posts_content').find('.hentry').each( function() {
+		$('#posts_content').find('.hentry.expanded').removeClass('expanded').each( function() {
 			var element = $(this);
 			var list = $('.storycontent',element);
+			if (tbcity_l10n.posts_collapsed == '1') list.hide();
 			var trigger = $('.collapse-post-trigger',element);
 			trigger.click(
 				function(){
-						list.slideToggle( 400, function() { element.toggleClass('collapsed'); });
+					if ( element.hasClass('collapsed') ) {
+						element.removeClass('collapsed');
+						list.slideDown();
+					} else {
+						list.slideUp( 400, function() {
+							element.addClass('collapsed');
+						});
+					}
+
 				}
 			);
 		});
@@ -248,13 +263,6 @@ tbcityScripts = {
 			});
 		}).resize();
 	},
-
-	tinynav : function() {
-		$(".nav-menu").tinyNav({
-			label: '<i class="icon-align-justify"></i>', // String: Sets the <label> text for the <select> (if not set, no label will be added)
-			header: '' // String: Specify text for "header" and show header instead of the active item
-		});
-	}
 
 };
 

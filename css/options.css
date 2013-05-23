@@ -112,3 +112,46 @@
 	position: absolute;
 	z-index: 999;
 }
+
+
+/*!
+ * jQuery UI Slider 1.8.19
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Slider#theming
+ */
+.color_slider.ui-slider { position: relative; text-align: left; }
+.color_slider.ui-slider .ui-slider-handle { position: absolute; z-index: 2; width: 5px; height: 1.2em; cursor: default; }
+.color_slider.ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; background-position: 0 0; }
+
+.color_slider.ui-slider-horizontal { height: .8em; }
+.color_slider.ui-slider-horizontal .ui-slider-handle { top: -.35em; margin-left: -4px; }
+.color_slider.ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
+.color_slider.ui-slider-horizontal .ui-slider-range-min { left: 0; }
+.color_slider.ui-slider-horizontal .ui-slider-range-max { right: 0; }
+
+.color_slider.ui-slider {
+	background: url('../images/hue.png') no-repeat scroll left center transparent;
+	border: 1px solid #DDDDDD;
+	margin: 0.5em 0;
+	width: 245px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.color_slider.ui-slider .ui-slider-handle {
+	background: transparent;
+	cursor: pointer; 
+	border: 2px solid #ccc;
+}
+.color_slider.ui-corner-all {
+    border-radius: 3px;
+}
+.color_slider.ui-slider-range {
+	background: #EAF2FA;
+}
+.wp-color-result {
+	margin-bottom: 0;
+}

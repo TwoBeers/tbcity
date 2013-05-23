@@ -70,7 +70,7 @@ function tbcity_get_default_widget_args( $args = '' ) {
  */
 function tbcity_widget_area_init() {
 
-	// Area 0, in the left sidebar.
+	// Area 1, in the left sidebar.
 	register_sidebar( array_merge( 
 		array(
 			'name' => __( 'Primary Sidebar', 'tbcity' ),
@@ -80,32 +80,32 @@ function tbcity_widget_area_init() {
 		tbcity_get_default_widget_args()
 	) );
 
-	// Area 1, in the right sidebar.
-	register_sidebar( array_merge( 
-		array(
-			'name' => __( 'Secondary sidebar', 'tbcity' ),
-			'id' => 'fixed-widget-area',
-			'description' => __( 'The secondary sidebar widget area', 'tbcity' )
-		),
-		tbcity_get_default_widget_args()
-	) );
-
-	// Area 6, located in page 404.
-	register_sidebar( array_merge( 
-		array(
-			'name' => __( 'Page 404', 'tbcity' ),
-			'id' => 'error404-widgets-area',
-			'description' => __( 'Enrich the page 404 with some useful widgets', 'tbcity' )
-		),
-		tbcity_get_default_widget_args()
-	) );
-
-	// Area 7, located after the post body.
+	// Area 2, located after the post body.
 	register_sidebar( array_merge( 
 		array(
 			'name' => __( 'Post Widget Area', 'tbcity' ),
 			'id' => 'single-widgets-area',
 			'description' => __( 'a widget area located after the post body', 'tbcity' ),
+		),
+		tbcity_get_default_widget_args()
+	) );
+
+	// Area 2, located in the footer.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Footer Widget Area', 'tbcity' ),
+			'id' => 'footer-widgets-area',
+			'description' => __( 'a widget area located in the footer', 'tbcity' ),
+		),
+		tbcity_get_default_widget_args()
+	) );
+
+	// Area 3, located in page 404.
+	register_sidebar( array_merge( 
+		array(
+			'name' => __( 'Page 404', 'tbcity' ),
+			'id' => 'error404-widgets-area',
+			'description' => __( 'Enrich the page 404 with some useful widgets', 'tbcity' )
 		),
 		tbcity_get_default_widget_args()
 	) );

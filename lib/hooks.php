@@ -130,8 +130,7 @@ function tbcity_hook_comments_list_after() {
  *
  * currently supported $location:
  * - primary -> sidebar.php
- * - secondary -> sidebar-secondary.php
- * - header -> sidebar-header.php
+ * - single -> sidebar-single.php
  * - footer -> sidebar-footer.php
  * - error404 -> sidebar-error404.php
  */

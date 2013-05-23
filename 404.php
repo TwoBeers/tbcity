@@ -20,23 +20,15 @@ get_header(); ?>
 
 	<div class="hentry not-found" id="post-404-not-found">
 
-		<div class="post_meta_container"><span class="pmb_format btn"><i class="icon-placeholder"></i></span></div>
-
-		<h2 class="storytitle"><?php _e( 'Error 404','tbcity' ); ?> - <?php _e( 'Page not found', 'tbcity' ); ?></h2>
-
 		<div class="storycontent">
+
+			<h2><span class="pmb_format btn"><i class="icon-placeholder"></i></span> <?php _e( 'Error 404','tbcity' ); ?> - <?php _e( 'Page not found', 'tbcity' ); ?></h2>
 
 			<p><?php _e( "Sorry, you're looking for something that isn't here", 'tbcity' ); ?>: <u><?php echo home_url() . esc_html( $_SERVER['REQUEST_URI'] ); ?></u></p>
 
 			<br />
 
-			<?php if ( is_active_sidebar( 'error404-widgets-area' ) ) { ?>
-
-				<p><?php _e( 'Here is something that might help:', 'tbcity' ); ?></p>
-
-				<?php get_sidebar( 'error404' ); ?>
-
-			<?php } else { ?>
+			<?php if ( ! is_active_sidebar( 'error404-widgets-area' ) ) { ?>
 
 				<p><?php _e( "There are several links scattered around the page, maybe they can help you on finding what you're looking for.", 'tbcity' ); ?></p>
 
@@ -47,6 +39,8 @@ get_header(); ?>
 			<?php } ?>
 
 		</div>
+
+		<?php get_sidebar( 'error404' ); ?>
 
 		<br class="fixfloat" />
 

@@ -264,7 +264,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d555555', e
 }
 #cssmenu {
 	border-top: 1px solid #333;
-	box-shadow: 0 0 5px #222 inset;
+	box-shadow: 0 0 10px #222 inset;
 	clear: both;
 	padding-top: 3em;
 	position: relative;
@@ -324,10 +324,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d555555', e
 	left: 80%;
 }
 
-.ddmcontent ul li:hover
-{
-	background: #c8d9e7;
-}
 .ddmcontent ul
 {
 	margin: 0 20px;;
@@ -383,15 +379,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d555555', e
 /*****************
 +AVATAR
 *****************/
-
-img.avatar {
-	background-color:transparent;
-	clear:none;
-	display:inline;
-	float:left;
-	margin:5px 10px;
-	padding:3px;
-}
 
 #logged img.avatar {
 	background-color:transparent;
@@ -474,7 +461,9 @@ img.avatar {
 {
 	margin: 0 8px 8px 0;
 	padding: 0;
+	float:left;
 }
+
 .sticky .entrytitle
 {
 	border-left: 5px solid #0988d9;
@@ -503,7 +492,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5e686e', end
 .storytitle a:hover
 {
 	color: #222;
-	text-shadow:1px 1px 0 #87CEFA;
+	text-shadow:1px 1px 0 #87CEFB;
 }
 
 .entrydate
@@ -519,15 +508,31 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5e686e', end
 	padding-left: 1em;
 	margin-left: 1em;
 }
+.micro-title
+{
+	padding-bottom: 2.5em;
+}
+.tb-js .collapsed .micro-title
+{
+	border-bottom: 1px solid #333;
+}
 
+.micro-anchor {
+	position: absolute;
+	bottom: 0;
+}
 .storycontent
 {
 	border-bottom: 1px solid #333;
-	padding: 20px 15px 5px;
+	padding: 15px;
 	border-top: 1px solid #888;
 }
+.micro-title + .storycontent
+{
+	border-top: none;
+}
 
-.collapsed .storycontent
+.tb-js .collapsed .storycontent
 {
 	display: none;
 }
@@ -545,7 +550,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5e686e', end
 	margin:5px 13px 0;
 	padding:5px 0;
 	clear:both;
-	border-top: 2px groove #666;
+	border-top: 2px groove #888;
 	font-size: .9em;
 }
 
@@ -561,7 +566,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5e686e', end
 }
 a.more-link {
 	background: #0870b2;
-	border: 2px groove #666;
+	border: 2px groove #888;
 	color: #FFFFFF;
 	padding: 6px 10px;
 	display: inline-block;
@@ -569,7 +574,6 @@ a.more-link {
 }
 a.more-link:hover {
 	background: #ccc;
-	color: #333;
 	cursor: default;
 }
 
@@ -653,6 +657,12 @@ a.more-link:hover {
 	padding-bottom: 0.5em;
 	right: 0;
 }
+.micro-title .meta-trigger-wrap
+{
+	top: auto;
+	bottom: -2em;
+	padding-top: 0.5em;
+}
 .metafield_content {
 	display: none;
 	text-align: right;
@@ -685,13 +695,21 @@ a.more-link:hover {
 	border-bottom: 1px solid #333;
 	position: absolute;
 }
+.micro-title .extra-info .metafield:hover .metafield_content {
+	bottom: 0;
+}
 
 .extra-info-js {
 	clear: both;
 	position: relative;
 }
+.micro-title .extra-info,
+.micro-title .extra-info-js {
+	border-bottom: 1px solid #888;
+}
+
 .extra-info-js .metafield_content {
-	box-shadow: 0 0 5px #222 inset;
+	box-shadow: 0 0 10px #222 inset;
 	padding: 10px 1%;
 	width: 98%;
 	background: rgb(68,68,68); /* Old browsers */
@@ -746,8 +764,8 @@ a.more-link:hover {
 	margin: 20px 0 0 50px;
 	position:relative;
 	padding: 10px;
-	border-top: 2px groove #333;
-	border-left: 2px groove #333;
+	border-top: 2px groove #888;
+	border-left: 2px groove #888;
 }
 
 .bypostauthor > .comment-body  {
@@ -799,7 +817,7 @@ a.more-link:hover {
 #respond input#submit
 {
 	background: #0870b2;
-	border: 2px groove #666;
+	border: 2px groove #888;
 	color: #fff;
 	padding: 8px 10px;
 }
@@ -807,8 +825,8 @@ a.more-link:hover {
 #respond input#submit:hover,
 #respond input#submit:active
 {
-	background: #ccc;
-	color: #333;
+	background: #87CEFB;
+	color: #fff;
 }
 
 #respond #author,
@@ -841,8 +859,8 @@ a.more-link:hover {
 }
 .comment #respond
 {
-	border-top:2px groove #666;
-	border-bottom:2px groove #666;
+	border-top:2px groove #888;
+	border-bottom:2px groove #888;
 	padding: 5px;
 	margin: 20px 0 10px;
 }
@@ -858,13 +876,13 @@ a.more-link:hover {
 }
 a.comment-reply-link {
 	background: #0870b2;
-	border: 2px groove #666;
+	border: 2px groove #888;
 	color: #FFFFFF;
 	padding: 6px 10px;
 }
 a.comment-reply-link:hover {
-	background: #ccc;
-	color: #333;
+	background: #87CEFB;
+	color: #fff;
 	cursor: default;
 }
 
@@ -876,33 +894,6 @@ a.comment-reply-link:hover {
 /*************************************
 +SIDEBAR
 *************************************/
-
-.sidebar ul
-{
-	list-style-image:url(images/blogroll.png);
-	list-style-position: outside;
-	clear:both;
-	margin:0 0 0 20px;
-	padding:0;
-}
-
-.sidebar ul li
-{
-	padding:.1em;
-}
-
-.sidebar table
-{
-	clear:both;
-	margin:0;
-	padding:0;
-}
-
-.sidebar img
-{
-	max-width:140px;
-	border:0;
-}
 
 .sidebar select {
 	max-width: 100%;
@@ -918,6 +909,33 @@ a.comment-reply-link:hover {
 	font-weight: bold;
 }
 
+#single-widgets-area .widget,
+#error404-widgets-area .widget {
+	float: left;
+	padding: 0 2%;
+	width: 45.9%;
+}
+#single-widgets-area,
+#error404-widgets-area {
+	border-bottom: 1px solid #333;
+	border-top: 1px solid #888;
+	padding: 15px;
+}
+#footer-widgets-area {
+	margin: 15px;
+	border-bottom: 1px solid #888;
+}
+#footer-widgets-area .widget {
+	float: left;
+	padding: 0 1%;
+	width: 22.9%;
+}
+
+#error404-widgets-area .widget:nth-child(odd),
+#single-widgets-area .widget:nth-child(odd) {
+	clear: left;
+}
+
 /*************************************
 -SIDEBAR
 *************************************/
@@ -927,31 +945,16 @@ a.comment-reply-link:hover {
 +SEARCH FORM
 *************************************/
 
-.search-form {
-	background: transparent url(images/lens.png) left center no-repeat;
-	font-size:1.2em;
-	float:left;
-	padding: 0 0 0 35px;
-	height:33px;
-	width:90%;
-}
-.search-form  #s 
-{
-	background: transparent;
-	color: #404040;
-	padding:0;
-	border: 0;
-	width:80%;
-}
-
-.search-form  #s:focus 
-{
-	color: #CCC;
-}
-
 #searchform {
 	padding:5px 0;
 	margin:0;
+}
+
+#searchform input {
+	border: none;
+	margin: 0;
+	padding: 8px;
+	vertical-align: middle;
 }
 
 /*************************************
@@ -1032,7 +1035,7 @@ a.comment-reply-link:hover {
 
 a
 {
-	color:#87CEFA;
+	color:#87CEFB;
 	text-decoration:none;
 }
 
@@ -1135,14 +1138,17 @@ pre
 
 fieldset
 {
-	border: 2px groove #666;
+	border: 2px groove #888;
 	padding: 5px;
 }
 
 .fixfloat {
 	clear: both;
+}
+br.fixfloat {
 	line-height: 1px;
 }
+
 .tb-js .hide-if-js,
 .tb-no-js .hide-if-no-js {
 	display:none;
@@ -1154,15 +1160,37 @@ iframe
 {
 	max-width: 100%;
 }
-.storycontent object,
-.storycontent embed,
-.storycontent iframe
-{
-	box-shadow: 0 0 4px #000;
-}
 .screen-reader-text {
 	display: none;
 }
+
+
+
+
+input[type=button],
+input[type=submit],
+input[type=reset],
+button {
+	background: #0870b2;
+	border: 2px groove #888;
+	color: #fff;
+	padding: 8px 10px;
+}
+input[type=button]:hover,
+input[type=submit]:hover,
+input[type=reset]:hover,
+input[type=button]:focus,
+input[type=submit]:focus,
+input[type=reset]:focus,
+button:hover,
+button:focus {
+	background: #87CEFB;
+	color: #fff;
+}
+
+
+
+
 /*************************************
 -Various Tags & Classes
 *************************************/
@@ -1246,7 +1274,7 @@ iframe
 *************************************/
 
 .navigation-links {
-	border-top: 2px groove #666;
+	border-top: 2px groove #888;
 	padding: 20px;
 	text-align: center;
 }
@@ -1256,10 +1284,12 @@ iframe
 .navigation-links.navigate_page {
 	margin-top: 10px;
 }
-
+.infinite-scroll .navigate_archives {
+	display: none;
+}
 div.navigation-links a {
 	background: #0870b2;
-	border: 2px groove #666;
+	border: 2px groove #888;
 	color: #fff;
 	margin-right: 4px;
 	padding: 6px 10px;
@@ -1288,9 +1318,8 @@ div.navigation-links span.current {
 div.navigation-links a:hover,
 div.navigation-links a:active
 {
-	border: 2px groove #666;
-	background: #ccc;
-	color: #333;
+	background: #87CEFB;
+	color: #fff;
 }
 
 
@@ -1308,6 +1337,9 @@ div.navigation-links a:active
 }
 .nav-single img {
 	vertical-align: middle;
+}
+div.nav-single a {
+	margin: 0;
 }
 
 .nav-previous {
@@ -1446,15 +1478,38 @@ img.alignright,
 	margin-left: 24px;
 }
 
+#posts_content div.sharedaddy div.sd-block {
+	margin-top: 20px;
+}
 
 
+#posts_content #infinite-handle,
+#posts_content .infinite-loader {
+	border-top: 1px solid #888;
+	padding: 20px;
+	text-align: center;
+}
+#infinite-handle span {
+	background: #0870b2;
+	border: 2px groove #888;
+	color: #fff;
+	margin-right: 4px;
+	padding: 6px 10px;
+	text-align: center;
+	text-decoration: none;
+}
+#infinite-handle span:hover,
+#infinite-handle span:active
+{
+	background: #87CEFB;
+	color: #fff;
+}
 
-
-
-
-
-
-
+.infinite-loader .spinner {
+	left: 0;
+	width: 1px;
+	margin: 0 auto;
+}
 
 
 

@@ -110,7 +110,7 @@ function tbcity_widgets_style() {
 //add js script to the widgets page
 function tbcity_widgets_scripts() {
 
-	wp_enqueue_script( 'tbcity-widgets-scripts', get_template_directory_uri() . '/js/widgets.dev.js', array('jquery'), tbcity_get_info( 'version' ), true );
+	wp_enqueue_script( 'tbcity-widgets-scripts', get_template_directory_uri() . '/js/widgets.dev.js', array('jquery','jquery-ui-slider'), tbcity_get_info( 'version' ), true );
 
 }
 
@@ -118,8 +118,7 @@ function tbcity_widgets_scripts() {
 // the custon header page style
 function tbcity_theme_admin_styles() {
 
-	wp_enqueue_style( 'wp-color-picker' );
-	wp_enqueue_style( 'tbcity-options-style', get_template_directory_uri() . '/css/options.css', array('farbtastic','thickbox'), '', 'screen' );
+	wp_enqueue_style( 'tbcity-options-style', get_template_directory_uri() . '/css/options.css', array(), '', 'screen' );
 
 }
 
@@ -162,7 +161,7 @@ if ( !function_exists( 'tbcity_sanitize_options' ) ) {
 					$input[$key] = trim( strip_tags( $input[$key] ) );
 				}
 
-			} elseif( $the_coa[$key]['type'] == 'int' ) {						//INT
+			} elseif( ( $the_coa[$key]['type'] == 'int' ) || ( $the_coa[$key]['type'] == 'hue' ) ) {						//INT
 				if( !isset( $input[$key] ) ) {
 					$input[$key] = $the_coa[$key]['default'];
 				} else {
@@ -281,6 +280,9 @@ if ( !function_exists( 'tbcity_edit_options' ) ) {
 										<input class="type-txt" id="option_field_<?php echo $key; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
 								<?php } elseif ( $the_coa[$key]['type'] == 'int' ) { ?>
 										<input class="type-int" id="option_field_<?php echo $key; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
+								<?php } elseif ( $the_coa[$key]['type'] == 'hue' ) { ?>
+										<input class="type-int" id="option_field_<?php echo $key; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
+										<div class="color_slider" data-refers-to="option_field_<?php echo $key; ?>"></div>
 								<?php } elseif ( $the_coa[$key]['type'] == 'txtarea' ) { ?>
 										<textarea class="type-txtarea" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]"><?php echo $the_opt[$key]; ?></textarea>
 								<?php }	?>
@@ -315,13 +317,6 @@ if ( !function_exists( 'tbcity_edit_options' ) ) {
 											<?php } elseif ( $the_coa[$subval]['type'] == 'int' ) { ?>
 													<input class="type-int" id="option_field_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
 													<span><?php echo $the_coa[$subval]['info']; ?></span>
-											<?php } elseif ( $the_coa[$subval]['type'] == 'col' ) { ?>
-													<div class="type-col col-tools">
-														<span><?php echo $the_coa[$subval]['info']; ?></span>
-														<br />
-														<input class="tbcity_input tbcity_cp" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" id="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" data-default-color="<?php echo $the_coa[$subval]['default']; ?>" />
-														<span class="description hide-if-js"><?php _e( 'Default' , 'tbcity' ); ?>: <?php echo $the_coa[$subval]['default']; ?></span>
-													</div>
 											<?php } ?>
 												</div>
 										<?php } ?>

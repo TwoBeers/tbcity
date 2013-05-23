@@ -25,6 +25,9 @@
 			case 'post date':
 				tbcity_featured_title( array( 'alternative' => get_the_time( get_option( 'date_format' ) ) ) );
 				break;
+			case 'none':
+				tbcity_featured_title( array( 'micro' => true ) );
+				break;
 		}
 	?>
 

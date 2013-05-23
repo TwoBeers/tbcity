@@ -20,7 +20,7 @@ get_header(); ?>
 
 	<?php tbcity_hook_content_top(); ?>
 
-	<?php if ( have_posts() && ! tbcity_is_allcat() ) {
+	<?php if ( have_posts() && ( 1 === tbcity_is_allcat() ) ) {
 
 		while ( have_posts() ) {
 
@@ -28,9 +28,7 @@ get_header(); ?>
 
 			<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 
-				<div class="post_meta_container"><span class="pmb_format btn"><i class="icon-folder-close"></i></span></div>
-
-				<?php tbcity_featured_title(); ?>
+				<?php tbcity_featured_title( array( 'featured' => false, 'alternative' => '<i class="icon-folder-close"></i> ' . get_the_title() ) ); ?>
 
 				<div class="storycontent">
 
@@ -50,9 +48,7 @@ get_header(); ?>
 
 		<div class="hentry post">
 
-			<div class="post_meta_container"><span class="pmb_format btn"><i class="icon-folder-close"></i></span></div>
-
-			<h2 class="storytitle"><?php _e( 'Categories','tbcity' ); ?></h2>
+			<?php tbcity_featured_title( array( 'featured' => false, 'alternative' => '<i class="icon-folder-close"></i> ' . __( 'Categories','tbcity' ) ) ); ?>
 
 			<div class="storycontent">
 				<ul>

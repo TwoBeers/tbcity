@@ -10,7 +10,7 @@ tbcityOptions = {
 
 		var frame;
 
-		tbcityOptions.switchTab('colors');
+		tbcityOptions.switchTab('style');
 
 		$('#to-defaults').click (function () {
 			var answer = confirm(tbcity_options_l10n.confirm_to_defaults)
@@ -19,63 +19,25 @@ tbcityOptions = {
 			}
 		});
 
-		$('#choose-logo-from-library-link').click( function( event ) {
-			var $el = $(this);
-
-			event.preventDefault();
-
-			// If the media frame already exists, reopen it.
-			if ( frame ) {
-				frame.open();
-				return;
-			}
-
-			// Create the media frame.
-			frame = wp.media.frames.customLogo = wp.media({
-				// Set the title of the modal.
-				title: $el.data('choose'),
-
-				// Tell the modal to show only images.
-				library: {
-					type: 'image'
-				},
-
-				// Customize the submit button.
-				button: {
-					// Set the text of the button.
-					text: $el.data('update'),
-					// Tell the button not to close the modal, since we're
-					// going to refresh the page when the image is selected.
-					close: true
+		$( '.color_slider' ).each( function() {
+			var self = $(this);
+			var refers = $( '#' + self.attr('data-refers-to') );
+			var init_value = refers.val();
+			self.slider({
+				orientation: "horizontal",
+				range: "min",
+				max: 360,
+				value: 0,
+				slide: function( event, ui ) {
+					refers.val( ui.value );
 				}
 			});
-
-			// When an image is selected, run a callback.
-			frame.on( 'select', function() {
-				// Grab the selected attachment.
-				var attachment = frame.state().get('selection').first().toJSON();
-				$('#option_field_tbcity_logo').val(attachment.url);
-			});
-
-			// Finally, open the modal.
-			frame.open();
-		});
-
-		$('#theme-options .tbcity_cp').each(function() {
-			$this = $(this);
-			$this.wpColorPicker({
-				change: function( event, ui ) {
-					$this.val( $this.wpColorPicker('color') );
-				},
-				clear: function() {
-					$this.val( '' );
-				},
-				palettes: ['#21759b','#404040','#87ceeb','#000','#fff','#aaa','#ff7b0a','#f7009c']
-			});
+			self.slider( "value", init_value );
 		});
 
 	},
 
+	
 	//show only a set of rows
 	switchTab : function (thisset) {
 		if ( thisset != 'info' ) {

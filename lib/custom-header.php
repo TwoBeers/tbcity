@@ -4,7 +4,7 @@
  *
  * The custom header support
  *
- * @package tbcity
+ * @package The Black City
  * @since 2.04
  */
 
@@ -15,7 +15,7 @@ class Tbcity_Comment_Style {
 		add_action( 'after_setup_theme'							, array( $this, 'custom_header_support' ) );
 		add_action( 'custom_header_options'						, array( $this, 'custom_header_background' ) );
 		add_action( 'admin_init'								, array( $this, 'save_theme_mod' ) );
-		//add_action( 'admin_head-appearance_page_custom-header'	, array( $this, 'admin_scripts' ) );
+		add_action( 'admin_head-appearance_page_custom-header'	, array( $this, 'admin_scripts' ) );
 
 	}
 
@@ -71,7 +71,7 @@ class Tbcity_Comment_Style {
 
 		function admin_scripts() {
 
-			if ( isset( $_GET['step'] ) &&  $_GET['step'] === 2 ) return;
+			if ( isset( $_GET['step'] ) &&  $_GET['step'] == 2 ) return;
 
 ?>
 	<script type="text/javascript">
@@ -105,9 +105,17 @@ class Tbcity_Comment_Style {
 	// set up custom colors and header image
 	function custom_header_support() {
 
+		register_default_headers( array(
+			'the_city' => array(
+				'url'			=> '%s/images/headers/the_city.png',
+				'thumbnail_url'	=> '%s/images/headers/the_city_thumbnail.png',
+				'description'	=> 'the city'
+			),
+		) );
+
 		$args = array(
 			'width'						=> 1000, // Header image width (in pixels)
-			'height'					=> 288, // Header image height (in pixels)
+			'height'					=> 300, // Header image height (in pixels)
 			'default-image'				=> '', // Header image default
 			'header-text'				=> true, // Header text display default
 			'default-text-color'		=> 'FFFFFF', // Header text color default
@@ -169,9 +177,6 @@ class Tbcity_Comment_Style {
 	// included in the front head
 	function header_style_front() {
 
-		$color = get_header_textcolor();
-		if ( display_header_text() && $color && $color != 'blank' ) {
-
 ?>
 	<style type="text/css">
 		#head a {
@@ -183,7 +188,6 @@ class Tbcity_Comment_Style {
 	</style>
 <?php
 
-		}
 	}
 
 
