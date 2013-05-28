@@ -494,9 +494,9 @@ class Tbcity_Widget_Latest_Commentators extends WP_Widget {
 				if ( !in_array( $comment->comment_author_email, $post_array ) ) {
 
 					if ( $comment->comment_author_url == '' )
-						$avatar =  get_avatar( $comment, $icon_size, $default = get_option( 'avatar_default' ) );
+						$avatar =  get_avatar( $comment, $icon_size, $default = get_option( 'avatar_default' ) ) . ' ' . $comment->comment_author;
 					else
-						$avatar =  '<a target="_blank" href="' . $comment->comment_author_url . '">' . get_avatar( $comment, $icon_size, $default = get_option( 'avatar_default' ) ) . '</a>';
+						$avatar =  get_avatar( $comment, $icon_size, $default = get_option( 'avatar_default' ) ) . '<a target="_blank" href="' . $comment->comment_author_url . '">' . ' ' . $comment->comment_author . '</a>';
 
 					$output .=  '<li title="' .  esc_attr( $comment->comment_author ) . '">' . $avatar . '</li>';
 
@@ -749,46 +749,46 @@ class Tbcity_Widget_Social extends WP_Widget {
 
 		$this->follow_urls = array(
 			// SLUG => NAME
-			'Blogger'		=> 'Blogger',
+			'blogger'		=> 'Blogger',
 			'blurb'			=> 'Blurb',
-			'Delicious'		=> 'Delicious',
-			'Deviantart'	=> 'deviantART',
-			'Digg'			=> 'Digg',
-			'Dropbox'		=> 'Dropbox',
-			'Facebook'		=> 'Facebook',
-			'Flickr'		=> 'Flickr',
-			'Github'		=> 'GitHub',
-			'GooglePlus'	=> 'Google+',
-			'Hi5'			=> 'Hi5',
-			'LinkedIn'		=> 'LinkedIn',
+			'delicious'		=> 'Delicious',
+			'deviantart'	=> 'deviantART',
+			'digg'			=> 'Digg',
+			'dropbox'		=> 'Dropbox',
+			'facebook'		=> 'Facebook',
+			'flickr'		=> 'Flickr',
+			'github'		=> 'GitHub',
+			'googleplus'	=> 'Google+',
+			'hi5'			=> 'Hi5',
+			'linkedin'		=> 'LinkedIn',
 			'livejournal'	=> 'LiveJournal',
-			'Myspace'		=> 'Myspace',
-			'Odnoklassniki'	=> 'Odnoklassniki',
-			'Orkut'			=> 'Orkut',
+			'myspace'		=> 'Myspace',
+			'odnoklassniki'	=> 'Odnoklassniki',
+			'orkut'			=> 'Orkut',
 			'pengyou'		=> 'Pengyou',
-			'Picasa'		=> 'Picasa',
+			'picasa'		=> 'Picasa',
 			'pinterest'		=> 'Pinterest',
-			'Qzone'			=> 'Qzone',
-			'Reddit'		=> 'Reddit',
+			'qzone'			=> 'Qzone',
+			'reddit'		=> 'Reddit',
 			'renren'		=> 'Renren',
 			'scribd'		=> 'Scribd',
 			'slideshare'	=> 'SlideShare',
-			'StumbleUpon'	=> 'StumbleUpon',
+			'stumbleupon'	=> 'StumbleUpon',
 			'soundcloud'	=> 'SoundCloud',
-			'Technorati'	=> 'Technorati',
-			'Tencent'		=> 'Tencent',
-			'Twitter'		=> 'Twitter',
+			'technorati'	=> 'Technorati',
+			'tencent'		=> 'Tencent',
+			'twitter'		=> 'Twitter',
 			'tumblr'		=> 'Tumblr',
 			'ubuntuone'		=> 'Ubuntu One',
-			'Vimeo'			=> 'Vimeo',
-			'VKontakte'		=> 'VKontakte',
-			'Sina'			=> 'Weibo',
-			'WindowsLive'	=> 'Windows Live',
+			'vimeo'			=> 'Vimeo',
+			'vkontakte'		=> 'VKontakte',
+			'weibo'			=> 'Weibo',
+			'windowslive'	=> 'Windows Live',
 			'xing'			=> 'Xing',
 			'yfrog'			=> 'YFrog',
-			'Youtube'		=> 'Youtube',
-			'Mail'			=> 'mail',
-			'RSS'			=> 'RSS'
+			'youtube'		=> 'Youtube',
+			'mail'			=> 'mail',
+			'rss'			=> 'RSS'
 		);
 
 		$this->defaults = array(
@@ -843,7 +843,7 @@ class Tbcity_Widget_Social extends WP_Widget {
 			$onclick = '';
 			$class = '';
 			$target = '_blank';
-			if ( $follow_service == 'RSS' ) {
+			if ( $follow_service == 'rss' ) {
 				$account = $account? $account : get_bloginfo( 'rss2_url' );
 				$prefix = __( 'Keep updated with our RSS feed', 'tbcity' );
 			}
@@ -858,7 +858,7 @@ class Tbcity_Widget_Social extends WP_Widget {
 
 			if ( $show && ! empty( $account ) ) {
 				$icon = '<img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $follow_service ) . '.png" alt="' . $follow_service . '" style="width: ' . $icon_size . 'px; height: ' . $icon_size . 'px;" />';
-				$output .= '<a target="' . $target . '" href="' . $account . '"' . $onclick . ' class="tb-social-icon' . $class . '" title="' . esc_attr( sprintf( $prefix, $service_name ) ) . '">' . $icon . '</a>';
+				$output .= '<a target="' . $target . '" href="' . $account . '"' . $onclick . ' class="tb-social-icon' . $class . '" title="' . esc_attr( sprintf( $prefix, $service_name ) ) . '">' . $icon . '</a> ';
 			}
 
 		}
@@ -986,202 +986,6 @@ class Tbcity_Widget_Social extends WP_Widget {
 
 
 /**
- * Makes a custom Widget for displaying Aside and Status Posts
- *
- * Based on Twenty_Eleven_Ephemera_Widget
- *
- */
-
-class Tbcity_Widget_Besides extends WP_Widget {
-
-	function Tbcity_Widget_Besides() {
-
-		$widget_ops = array( 'classname' => 'tb_besides', 'description' => __( 'Use this widget to list your recent Aside and Status posts', 'tbcity' ) );
-		$this->WP_Widget( 'tb-widget-besides', __( 'besides...', 'tbcity' ), $widget_ops );
-		$this->alt_option_name = 'tb_besides';
-
-		add_action( 'save_post'		,array(&$this, 'flush_widget_cache' ) );
-		add_action( 'deleted_post'	,array(&$this, 'flush_widget_cache' ) );
-		add_action( 'switch_theme'	,array(&$this, 'flush_widget_cache' ) );
-
-		$this->defaults = array(
-			'title' => __( 'besides...', 'tbcity' ),
-			'number' => 5,
-			'type' => 'aside'
-		);
-
-		$this->alert = array();
-
-	}
-
-
-	function flush_widget_cache() {
-
-		wp_cache_delete( 'tb_besides', 'widget' );
-
-	}
-
-
-	function widget( $args, $instance ) {
-
-		$cache = wp_cache_get( 'tb_besides', 'widget' );
-
-		if ( !is_array( $cache ) )
-			$cache = array();
-
-		if ( ! isset( $args['widget_id'] ) )
-			$args['widget_id'] = null;
-
-		if ( isset( $cache[$args['widget_id']] ) ) {
-			echo $cache[$args['widget_id']];
-			return;
-		}
-
-		ob_start();
-		extract( $args, EXTR_SKIP );
-
-		$instance = wp_parse_args( (array)$instance, $this->defaults );
-
-		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base);
-		$title = $title ? $before_title . $title . $after_title : '';
-
-		$type = $instance['type'];
-
-		$number = (int) $instance['number'];
-
-		$query_args = array(
-			'order' => 'DESC',
-			'posts_per_page' => $number,
-			'nopaging' => 0,
-			'post_status' => 'publish',
-			'post__not_in' => get_option( 'sticky_posts' ),
-			'tax_query' => array(
-				array(
-					'taxonomy' => 'post_format',
-					'terms' => array( 'post-format-' . $type ),
-					'field' => 'slug',
-					'operator' => 'IN',
-				),
-			),
-		);
-		$besides = new WP_Query( $query_args );
-
-		if ( $besides->have_posts() ) :
-
-			echo $before_widget;
-
-			echo $title;
-
-?>
-	<?php while ( $besides->have_posts() ) : $besides->the_post(); ?>
-
-		<?php if ( $type == 'aside' ) { ?>
-		<div class="wentry-aside">
-			<?php the_content(); ?>
-			<div class="aside-meta fixfloat" style="font-style: italic; color: #999;"><?php the_author(); ?> - <a href="<?php the_permalink() ?>" rel="bookmark"><?php the_time( get_option( 'date_format' ) ); ?></a> - <?php comments_popup_link( '(0)', '(1)', '(%)' ); ?></div>
-		</div>
-		<?php } elseif ( $type == 'status' ) { ?>
-		<div class="wentry-status">
-			<?php echo get_avatar( get_the_author_meta( 'user_email' ), 24, $default=get_option( 'avatar_default' ), get_the_author() ); ?>
-			<a style="font-weight: bold;" href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>" title="<?php printf( 'View all posts by %s', esc_attr( get_the_author() ) ); ?>"><?php echo get_the_author(); ?></a>
-			<?php the_content(); ?>
-			<span style="color: #999;"><?php echo tbcity_friendly_date(); ?></span>
-		</div>
-		<?php } ?>
-
-	<?php endwhile; ?>
-<?php
-
-			echo $after_widget;
-
-		endif;
-
-		wp_reset_postdata();
-
-		$cache[$args['widget_id']] = ob_get_flush();
-		wp_cache_set( 'tb_besides', $cache, 'widget' );
-
-	}
-
-
-	function update( $new_instance, $old_instance ) {
-
-		$instance = $old_instance;
-
-		$instance['title'] = strip_tags( $new_instance['title'] );
-
-		$instance['number'] = (int) $new_instance['number'];
-		if ( ( $instance['number'] > 5 ) || ( $instance['number'] < 1 ) ) {
-			$instance['number'] = $this->defaults['number'];
-			$this->alert[] = 'number';
-		}
-
-		$instance['type'] = $new_instance['type'];
-		if ( ! in_array( $instance['type'], array( 'aside', 'status' ) ) ) {
-			$instance['type'] = $this->defaults['type'];
-			$this->alert[] = 'type';
-		}
-
-		$this->flush_widget_cache();
-
-		$alloptions = wp_cache_get( 'alloptions', 'options' );
-		if ( isset( $alloptions['tb_besides'] ) )
-			delete_option( 'tb_besides' );
-
-		return $instance;
-
-	}
-
-
-	function field_class( $field ) {
-
-		if ( in_array( $field , $this->alert ) ) echo ' class="invalid"';
-
-	}
-
-
-	function form( $instance ) {
-
-		$instance = wp_parse_args( (array) $instance, $this->defaults );
-
-		$title = esc_attr( $instance['title'] );
-		$number = (int) $instance['number'];
-		$type = $instance['type'];
-
-?>
-	<?php if ( $this->alert ) echo '<div class="error">' . __( 'Invalid value', 'tbcity' ) . '</div>'?>
-
-	<p>
-		<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title', 'tbcity' ); ?>:</label>
-		<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-	</p>
-
-	<p<?php $this->field_class( 'type' ); ?>>
-		<label for="<?php echo esc_attr( $this->get_field_id( 'type' ) ); ?>"><?php _e( 'Type of posts to show', 'tbcity' ); ?>:</label>
-		<select name="<?php echo esc_attr( $this->get_field_name( 'type' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'type' ) ); ?>" >
-			<?php
-				$type_array = array( 'aside', 'status' );
-				foreach($type_array as $avaible_type) {
-			?>
-				<option value="<?php echo $avaible_type; ?>" <?php selected( $type, $avaible_type ); ?>><?php echo $avaible_type; ?></option>
-			<?php
-				}
-			?>
-		</select>
-	</p>
-
-	<p<?php $this->field_class( 'number' ); ?>>
-		<label for="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>"><?php _e( 'Number of posts to show', 'tbcity' ); ?> [1-5]:</label>
-		<input id="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'number' ) ); ?>" type="text" value="<?php echo esc_attr( $number ); ?>" size="3" />
-	</p>
-<?php
-
-	}
-
-}
-
-
-/**
  * Recent Posts in Category widget class
  *
  */
@@ -1198,7 +1002,7 @@ class Tbcity_Widget_Recent_Posts extends WP_Widget {
 		add_action( 'switch_theme'	,array( &$this, 'flush_widget_cache' ) );
 
 		$this->defaults = array(
-			'title' => __( 'Recent Posts in %s', 'tbcity' ),
+			'title' => __( 'Recent Posts in "%s"', 'tbcity' ),
 			'number' => 5,
 			'category' => '',
 			'thumb' => 1,
@@ -1275,6 +1079,8 @@ class Tbcity_Widget_Recent_Posts extends WP_Widget {
 		$output = $before_widget . $title . $description . '<ul' . $ul_class . '>' . $output . '</ul>' . $after_widget;
 
 		}
+
+		echo $output;
 
 		wp_reset_postdata();
 
@@ -1461,11 +1267,10 @@ class Tbcity_Widget_Post_Details extends WP_Widget {
 
 		$author_net = ''; // author social networks
 		foreach ( array( 'twitter' => 'Twitter', 'facebook' => 'Facebook', 'googleplus' => 'Google+' ) as $s_key => $s_name ) {
-			if ( get_the_author_meta( $s_key, $author ) ) $author_net .= '<a target="_blank" class="url" title="' . esc_attr( sprintf( __('Follow %s on %s', 'tbcity'), $name, $s_name ) ) . '" href="'.get_the_author_meta( $s_key, $author ).'"><img alt="' . $s_key . '" class="avatar" width="24" height="24" src="' . get_template_directory_uri() . '/images/follow/' . $s_key . '.png" /></a>';
+			if ( get_the_author_meta( $s_key, $author ) ) $author_net .= '<a target="_blank" class="url" title="' . esc_attr( sprintf( __('Follow %s on %s', 'tbcity'), $name, $s_name ) ) . '" href="'.get_the_author_meta( $s_key, $author ).'"><img alt="' . $s_key . '" class="avatar" width="24" height="24" src="' . get_template_directory_uri() . '/images/follow/' . $s_key . '.png" /></a> ';
 		}
 
-		$output = '<li class="author-avatar">' . $avatar . '</li>';
-		$output .= '<li class="author-name"><a class="fn" href="' . $author_link . '" >' . $name . '</a></li>';
+		$output = '<li class="author-avatar">' . $avatar . ' <a class="fn author-name" href="' . $author_link . '" >' . $name . '</a></li>';
 		$output .= $description ? '<li class="author-description note">' . $description . '</li>' : '';
 		$output .= $author_net ? '<li class="author-social">' . $author_net . '</li>' : '';
 
@@ -1632,14 +1437,14 @@ class Tbcity_Widget_Post_Formats extends WP_Widget {
 					$count = $c ? ' (' . $post_format->count . ')' : '';
 					$text = ( $i != '2' ) ? $string : '';
 					$icon = ( $i != '1' ) ? tbcity_get_the_thumb( array( 'default' => $slug, 'size_w' => 32, 'class' => 'tb-thumb-format' ) ) : '';
-					$class = ( $i == '2' ) ? ' compact' : '';
+					$class = ( $i == '2' ) ? ' class="compact"' : '';
 					$sep = ( $text && $icon ) ? ' ' : '';
-					$output .= '<li class="post-format-item' . $class . '"><a href="' . get_post_format_link($slug) . '">' . $icon . $sep . $text . '</a>' . $count . '</li>';
+					$output .= '<li class="post-format-item"><a title="' . $string . '" href="' . get_post_format_link($slug) . '">' . $icon . $sep . $text . '</a>' . $count . '</li>';
 				}
 			}
 		}
 
-		$output = $before_widget . $title . '<ul>' . $output . '</ul><br class="fixfloat" />' . $after_widget;
+		$output = $before_widget . $title . '<ul' . $class . '>' . $output . '</ul><br class="fixfloat" />' . $after_widget;
 
 		echo $output;
 
@@ -1682,7 +1487,7 @@ class Tbcity_Widget_Post_Formats extends WP_Widget {
 
 	<p>
 		<label for="<?php echo $this->get_field_id( 'icon' ); ?>"><?php _e( 'Show', 'tbcity' ); ?>:</label><br />
-		<select name="<?php echo esc_attr( $this->get_field_name( 'icon' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'icon' ) ); ?>" >
+		<select name="<?php echo $this->get_field_name( 'icon' ); ?>" id="<?php echo $this->get_field_id( 'icon' ); ?>" >
 			<option value="3" <?php selected( '3', $icon ); ?>><?php echo __( 'icons & text', 'tbcity' ); ?></option>
 			<option value="2" <?php selected( '2', $icon ); ?>><?php echo __( 'icons', 'tbcity' ); ?></option>
 			<option value="1" <?php selected( '1', $icon ); ?>><?php echo __( 'text', 'tbcity' ); ?></option>
@@ -1690,7 +1495,7 @@ class Tbcity_Widget_Post_Formats extends WP_Widget {
 	</p>
 
 	<p>
-		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>"<?php checked( $count ); ?> />
+		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'count' ); ?>" value="1" name="<?php echo $this->get_field_name( 'count' ); ?>"<?php checked( $count ); ?> />
 		<label for="<?php echo $this->get_field_id( 'count' ); ?>"><?php _e( 'Show posts count', 'tbcity' ); ?></label><br />
 	</p>
 <?php
@@ -2176,7 +1981,7 @@ class Tbcity_Widget_Share_This extends WP_Widget {
 		$outer = '';
 		foreach( $services as $key => $service ) {
 			$href = rawurlencode( sprintf( $service[1], $enc_title, $enc_href, $enc_pict, $enc_xerpt, $enc_source, $enc_long_url ) );
-			if ( $instance[$key] ) $outer .= '<a class="share-item" rel="nofollow" target="_blank" id="tb-share-with-' . esc_attr( $key ) . '" href="' . $href . '"><img src="' . esc_url( get_template_directory_uri() . '/images/follow/' . $key . '.png' ) . '" width="' . $icon_size . '" height="' . $icon_size . '" alt="' . esc_attr( $service[0] ) . ' Button"  title="' . esc_attr( sprintf( __( 'Share with %s', 'tbcity' ), $service[0] ) ) . '" /></a>';
+			if ( $instance[$key] ) $outer .= '<a class="share-item" rel="nofollow" target="_blank" id="tb-share-with-' . esc_attr( $key ) . '" href="' . $href . '"><img src="' . esc_url( get_template_directory_uri() . '/images/follow/' . $key . '.png' ) . '" width="' . $icon_size . '" height="' . $icon_size . '" alt="' . esc_attr( $service[0] ) . ' Button"  title="' . esc_attr( sprintf( __( 'Share with %s', 'tbcity' ), $service[0] ) ) . '" /></a> ';
 		}
 
 ?>
@@ -2320,7 +2125,7 @@ class Tbcity_Widget_Clean_Archives extends WP_Widget {
 			for ( $month = 1; $month <= 12; $month++ ) {
 
 				if ( (int) $wpdb->get_var( "SELECT COUNT(ID) FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' AND year(post_date) = '$year->year' AND month(post_date) = '$month'" ) > 0 ) {
-					$output .= '<a class="month-link" href="' . get_month_link( $year->year, $month ) . '">' . $months_short[$month] . '</a>';
+					$output .= ' <a class="month-link" href="' . get_month_link( $year->year, $month ) . '">' . $months_short[$month] . '</a>';
 				}
 
 			}
@@ -2392,9 +2197,9 @@ function Tbcity_Widget_font_resize($args) {
 
 	echo $before_widget;
 	echo '<a class="fontresizer_minus" href="javascript:void(0)" title="' . esc_attr( __( 'Decrease font size', 'tbcity' ) ) . '">A</a>';
-	echo '<i class="icon-angle-right"></i>';
+	echo ' <i class="icon-angle-right"></i> ';
 	echo '<a class="fontresizer_reset" href="javascript:void(0)" title="' . esc_attr( __( 'Reset font size', 'tbcity' ) ) . '">A</a>';
-	echo '<i class="icon-angle-right"></i>';
+	echo ' <i class="icon-angle-right"></i> ';
 	echo '<a class="fontresizer_plus" href="javascript:void(0)" title="' . esc_attr( __( 'Increase font size', 'tbcity' ) ) . '">A</a>';
 	echo $after_widget;
 
@@ -2423,8 +2228,6 @@ function tbcity_widgets_init() {
 	register_widget( 'Tbcity_Widget_Pop_Categories' );
 
 	register_widget( 'Tbcity_Widget_Social' );
-
-	register_widget( 'Tbcity_Widget_Besides' );
 
 	register_widget( 'Tbcity_Widget_Recent_Posts' );
 

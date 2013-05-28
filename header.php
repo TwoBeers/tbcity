@@ -19,6 +19,8 @@
 
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 
+		<meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;" />
+
 		<title><?php wp_title( '&laquo;', true, 'right' ); ?></title>
 
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />

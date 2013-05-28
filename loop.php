@@ -16,7 +16,8 @@
 
 		the_post();
 
-		get_template_part( 'loop/post', tbcity_get_post_format( $post->ID ) );
+		if ( ! apply_filters( 'tbcity_filter_get_template', false, tbcity_get_post_format( $post->ID ) ) )
+			get_template_part( 'loop/post', tbcity_get_post_format( $post->ID ) );
 
 	} //end while ?>
 

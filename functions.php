@@ -122,7 +122,7 @@ require_once( 'lib/header/parallax-header.php' ); // load the custom header modu
 
 require_once( 'lib/custom-header.php' ); // load the custom header module
 
-//require_once( 'lib/breadcrumb.php' ); // load the breadcrumb module
+require_once( 'lib/breadcrumb.php' ); // load the breadcrumb module
 
 //require_once( 'lib/audio-player/audio-player.php' ); // load the audio player module
 
@@ -315,8 +315,6 @@ if ( !function_exists( 'tbcity_get_js_modules' ) ) {
 			$modules[] = 'extrainfo';
 		if ( tbcity_get_opt( 'js_basic_quickbar' ) )
 			$modules[] = 'quickbar';
-		if ( tbcity_get_opt( 'js_basic_collapse_posts' ) )
-			$modules[] = 'collapseposts';
 		if ( tbcity_get_opt( 'js_basic_menu' ) )
 			$modules[] = 'animatemenu';
 		if ( tbcity_get_opt( 'js_basic_autoscroll' ) )
@@ -491,7 +489,7 @@ if ( !function_exists( 'tbcity_entry_date' ) ) {
 
 ?>
 	<div class="entrydate">
-		<?php if ( ! is_page() ) { ?><span><?php the_author(); ?> , <?php the_time(__('F j, Y')); ?></span><?php } ?>
+		<?php if ( ! is_page() ) { ?><span><?php the_author(); ?> , <?php the_time( get_option( 'date_format' ) ); ?></span><?php } ?>
 		<?php edit_post_link( '<i class="icon-pencil"></i>', '<span>', '</span>' ); ?>
 		<span><a class="jump-to-top" href="#" title="top"><i class="icon-caret-up"></i></a></span>
 	</div>
@@ -518,12 +516,6 @@ if ( !function_exists( 'tbcity_extrainfo' ) ) {
 
 ?>
 	<div class="extra-info">
-
-			<div class="metafield collapser">
-				<span class="meta-trigger-wrap">
-					<i class="collapse-post-trigger icon-sort hide-if-no-js meta-trigger" title="<?php _e( 'collapse/expand post', 'tbcity' ); ?>"></i>
-				</span>
-			</div>
 
 		<?php if ( $args['hiera'] ) { ?>
 			<?php tbcity_multipages(); ?>
@@ -729,14 +721,17 @@ if ( !function_exists( 'tbcity_navigate_attachments' ) ) {
 	function tbcity_navigate_attachments() {
 		global $post;
 
-		if ( is_attachment() && wp_attachment_is_image() ) {
-			$attachments = array_values( get_children( array( 'post_parent' => $post->post_parent, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID' ) ) );
-			foreach ( $attachments as $k => $attachment ) {
-				if ( $attachment->ID == $post->ID )
-					break;
-			}
-			$nextk = $k + 1;
-			$prevk = $k - 1;
+		if ( ! is_attachment() || ! wp_attachment_is_image() ) return;
+
+		$attachments = array_values( get_children( array( 'post_parent' => $post->post_parent, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => 'ASC', 'orderby' => 'menu_order ID' ) ) );
+		foreach ( $attachments as $k => $attachment ) {
+			if ( $attachment->ID == $post->ID )
+				break;
+		}
+		$nextk = $k + 1;
+		$prevk = $k - 1;
+
+		if ( ! isset( $attachments[ $prevk ] ) && ! isset( $attachments[ $nextk ] ) ) return;
 
 ?>
 	<div class="nav-single">
@@ -758,7 +753,6 @@ if ( !function_exists( 'tbcity_navigate_attachments' ) ) {
 	</div><!-- #nav-single -->
 <?php
 
-		} 
 	}
 }
 
@@ -909,89 +903,6 @@ function tbcity_addgravatar( $avatar_defaults ) {
 
 	return $avatar_defaults;
 
-}
-
-
-// Get first image of a post
-if ( !function_exists( 'tbcity_get_first_image' ) ) {
-	function tbcity_get_first_image() {
-		global $post;
-
-		$first_info = array( 'img' => '', 'title' => '', 'src' => '' );
-		//search the images in post content
-		preg_match_all( '/<img[^>]+>/i',$post->post_content, $result );
-		//grab the first one
-		if ( isset( $result[0][0] ) ){
-			$first_info['img'] = $result[0][0];
-			$first_img = $result [0][0];
-			//get the title (if any)
-			preg_match_all( '/(title)=("[^"]*")/i',$first_img, $img_title );
-			if ( isset( $img_title[2][0] ) ){
-				$first_info['title'] = str_replace( '"','',$img_title[2][0] );
-			}
-			//get the path
-			preg_match_all( '/(src)=("[^"]*")/i',$first_img, $img_src );
-			if ( isset( $img_src[2][0] ) ){
-				$first_info['src'] = str_replace( '"','',$img_src[2][0] );
-			}
-			return $first_info;
-		} else {
-			return false;
-		}
-
-	}
-}
-
-
-// Get first link of a post
-if ( !function_exists( 'tbcity_get_first_link' ) ) {
-	function tbcity_get_first_link() {
-		global $post;
-
-		$first_info = array( 'anchor' => '', 'title' => '', 'href' => '', 'text' => '' );
-		//search the link in post content
-		preg_match_all( "/<a\b[^>]*>(.*?)<\/a>/i",$post->post_content, $result );
-		//grab the first one
-		if ( isset( $result[0][0] ) ){
-			$first_info['anchor'] = $result[0][0];
-			$first_info['text'] = isset( $result[1][0] ) ? $result[1][0] : '';
-			//get the title (if any)
-			preg_match_all( '/(title)=(["\'][^"]*["\'])/i',$first_info['anchor'], $link_title );
-			$first_info['title'] = isset( $link_title[2][0] ) ? str_replace( array('"','\''),'',$link_title[2][0] ) : '';
-			//get the path
-			preg_match_all( '/(href)=(["\'][^"]*["\'])/i',$first_info['anchor'], $link_href );
-			$first_info['href'] = isset( $link_href[2][0] ) ? str_replace( array('"','\''),'',$link_href[2][0] ) : '';
-			return $first_info;
-		} else {
-			return false;
-		}
-
-	}
-}
-
-
-// Get first blockquote words
-if ( !function_exists( 'tbcity_get_blockquote' ) ) {
-	function tbcity_get_blockquote() {
-		global $post;
-
-		$first_quote = array( 'quote' => '', 'cite' => '' );
-		//search the blockquote in post content
-		preg_match_all( '/<blockquote\b[^>]*>([\w\W]*?)<\/blockquote>/',$post->post_content, $blockquote );
-		//grab the first one
-		if ( isset( $blockquote[0][0] ) ){
-			$first_quote['quote'] = strip_tags( $blockquote[0][0] );
-			$words = explode( " ", $first_quote['quote'], 6 );
-			if ( count( $words ) == 6 ) $words[5] = '...';
-			$first_quote['quote'] = implode( ' ', $words );
-			preg_match_all( '/<cite>([\w\W]*?)<\/cite>/',$blockquote[0][0], $cite );
-			$first_quote['cite'] = ( isset( $cite[1][0] ) ) ? $cite[1][0] : '';
-			return $first_quote;
-		} else {
-			return false;
-		}
-
-	}
 }
 
 
@@ -1346,9 +1257,6 @@ function tbcity_body_classes($classes) {
 
 // Add specific CSS class by filter
 function tbcity_post_classes($classes) {
-
-	$classes[] = 'expanded';
-	if ( tbcity_get_opt( 'post_collapse' ) && ! is_singular() ) $classes[] = 'collapsed';
 
 	return $classes;
 

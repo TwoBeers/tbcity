@@ -12,13 +12,6 @@ tbcityScripts = {
 
 			switch(modules[i]) {
 
-				case 'collapseposts':
-					tbcityScripts.collapse_posts();
-					$('body').on('post-load', function(event){
-						tbcityScripts.collapse_posts();
-					});
-					break;
-
 				case 'quotethis':
 					tbcityScripts.init_quote_this();
 					break;
@@ -67,24 +60,17 @@ tbcityScripts = {
 
 		return $('#mainmenu').children('.menu-item-parent').each(function() {
 
-			$this = $(this);
-
+			var $this = $(this);
 			var d = $this.children('ul'); //for each main item, get the sub list
 
 			d.css( {'opacity' : 0 } );
 
 			$this.hoverIntent(
-
 				function(){ //when mouse enters, slide down the sub list
-
 					d.css( {'display' : 'block' } ).animate( { 'opacity' : 0.95 } );
-
 				},
-
 				function(){ //when mouse leaves, hide the sub list
-
 					d.stop().animate( { 'opacity' : 0 }, 200, 'swing', function(){ d.css( {'display' : '' } ); } );
-
 				}
 			);
 
@@ -132,61 +118,50 @@ tbcityScripts = {
 
 	quickbar : function() {
 
-		//meta animation
-		$('#dropdown').removeClass('css').addClass('animated');
-		$('#dropper').click(function() {$('#cssmenu').slideToggle();});
+		//quickbar animation
+		var dropdown = $('#dropdown');
+		var dropper = $('#dropper');
+		var menuitems = $('.menuitem',dropdown);
 		var opened = false;
-		$('#dropdown').find('.menuitem').each( function(){
+
+		dropdown.removeClass('css').addClass('animated');
+
+		dropper.click( function(){
+			if ( opened ) {
+				$('#cssmenu').slideUp( 400, function() {
+					menuitems.removeClass('open');
+					opened = false;
+					$('.ddmcontent',dropdown).hide();
+				});
+			} else {
+				$('#cssmenu').slideToggle();
+			}
+		});
+
+		menuitems.each( function(){
 			var element = $(this);
 			var list = $('.ddmcontent',element);
 			var trigger = $('.menuitem-trigger',element);
-			trigger.click(
-				function(){
-					if ( element.hasClass('open') ) {
-						element.removeClass('open');
-						list.slideUp();
-					} else {
-						if ( opened ) {
-							opened.removeClass('open');
-							$('.ddmcontent',opened).slideUp( 400, function() {
-								element.addClass('open');
-								list.slideDown();
-							});
-						} else {
+			trigger.click( function(){
+				if ( element.hasClass('open') ) {
+					element.removeClass('open');
+					list.slideUp();
+				} else {
+					if ( opened ) {
+						opened.removeClass('open');
+						$('.ddmcontent',opened).slideUp( 400, function() {
 							element.addClass('open');
 							list.slideDown();
-						}
-						opened  = element;
-					}
-				}
-			);
-		});
-
-
-	},
-
-
-	collapse_posts : function() {
-
-		$('#posts_content').find('.hentry.expanded').removeClass('expanded').each( function() {
-			var element = $(this);
-			var list = $('.storycontent',element);
-			if (tbcity_l10n.posts_collapsed == '1') list.hide();
-			var trigger = $('.collapse-post-trigger',element);
-			trigger.click(
-				function(){
-					if ( element.hasClass('collapsed') ) {
-						element.removeClass('collapsed');
-						list.slideDown();
-					} else {
-						list.slideUp( 400, function() {
-							element.addClass('collapsed');
 						});
+					} else {
+						element.addClass('open');
+						list.slideDown();
 					}
-
+					opened  = element;
 				}
-			);
+			});
 		});
+
 
 	},
 

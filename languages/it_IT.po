@@ -1,0 +1,1505 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: The Black City v2.00\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-05-28 16:01:42+0000\n"
+"Last-Translator: TwoBeers Crew <light@twobeers.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: \n"
+"X-Poedit-Country: \n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: 404.php:25
+#: temp/mobile/core-mobile.php:315
+#@ tbcity
+msgid "Error 404"
+msgstr "Errore 404"
+
+#: 404.php:25
+#@ tbcity
+msgid "Page not found"
+msgstr "Pagina non trovata"
+
+#: 404.php:27
+#@ tbcity
+msgid "Sorry, you're looking for something that isn't here"
+msgstr "Spiacente, stai cercando qualcosa che non esiste"
+
+#: 404.php:33
+#@ tbcity
+msgid "There are several links scattered around the page, maybe they can help you on finding what you're looking for."
+msgstr "Ci sono parecchi link sparsi per la pagina, forse puoi trovare quello che fa per te"
+
+#: 404.php:35
+#@ tbcity
+msgid "Perhaps using the search form will help too..."
+msgstr "Forse il modulo di ricerca ti potrebbe tornare utile..."
+
+#: allcat.php:51
+#: functions.php:538
+#: lib/quickbar.php:77
+#: lib/widgets.php:1240
+#: lib/widgets.php:1369
+#@ tbcity
+msgid "Categories"
+msgstr "Categorie"
+
+#: attachment.php:37
+#@ tbcity
+msgid "View full size"
+msgstr "Dimensione originale"
+
+#: comments.php:18
+#: temp/mobile/comments-mobile.php:14
+#@ tbcity
+msgid "Enter your password to view comments."
+msgstr "Inserire la password corretta per visualizzare i commenti."
+
+#: comments.php:26
+#: comments.php:32
+#: functions.php:550
+#@ tbcity
+msgid "No Comments"
+msgstr "Nessun Commento"
+
+#: comments.php:26
+#: comments.php:32
+#: functions.php:550
+#@ tbcity
+msgid "1 Comment"
+msgstr "1 Commento"
+
+#: comments.php:26
+#: comments.php:32
+#: functions.php:550
+#@ tbcity
+msgid "% Comments"
+msgstr "% Commenti"
+
+#: comments.php:26
+#: temp/mobile/core-mobile.php:349
+#@ tbcity
+msgid "Leave a comment"
+msgstr "Lascia un commento"
+
+#: functions.php:389
+#@ tbcity
+msgid "Add selected text as a quote"
+msgstr "Aggiungi il testo selezionato sottoforma di citazione"
+
+#: functions.php:390
+#@ tbcity
+msgid "Quote"
+msgstr "Cita"
+
+#: functions.php:391
+#@ tbcity
+msgid "Nothing to quote. First of all you should select some text..."
+msgstr "Nulla da citare. Prima di tutto dovresti selezionare un testo..."
+
+#: functions.php:528
+#: lib/widgets.php:1244
+#: lib/widgets.php:1364
+#@ tbcity
+msgid "Tags"
+msgstr "Tag"
+
+#: functions.php:529
+#: lib/widgets.php:1243
+#@ tbcity
+msgid "No Tags"
+msgstr "Nessun tag"
+
+#: functions.php:549
+#: lib/quickbar.php:49
+#: lib/widgets.php:1865
+#: temp/mobile/comments-mobile.php:21
+#@ tbcity
+msgid "Comments"
+msgstr "Commenti"
+
+#: functions.php:589
+#@ tbcity
+msgid "Upper page: "
+msgstr "Pagina superiore: "
+
+#: functions.php:598
+#@ tbcity
+msgid "Lower pages: "
+msgstr "Pagine inferiori: "
+
+#: functions.php:638
+#@ tbcity
+msgid "last comments"
+msgstr "ultimi commenti"
+
+#: functions.php:708
+#: temp/mobile/core-mobile.php:215
+#, php-format
+#@ tbcity
+msgid "page %1$s of %2$s"
+msgstr "pagina %1$s di %2$s"
+
+#: functions.php:765
+#: temp/mobile/loop-front-page-mobile.php:23
+#: temp/mobile/loop-single-mobile.php:24
+#@ tbcity
+msgid "Pages"
+msgstr "Pagine"
+
+#: functions.php:863
+#@ tbcity
+msgid "Main Navigation Menu"
+msgstr "Men&ugrave; Principale"
+
+#: functions.php:864
+#@ tbcity
+msgid "Secondary Navigation Menu #1"
+msgstr "Menu di navigazione secondario #1"
+
+#: functions.php:865
+#@ tbcity
+msgid "Secondary Navigation Menu #2"
+msgstr "Menu di navigazione secondario #2"
+
+#: functions.php:902
+#@ tbcity
+msgid "tbcity Default Gravatar"
+msgstr "gravatar predefinito di The Black City"
+
+#: functions.php:974
+#, php-format
+#@ tbcity
+msgid "This gallery contains <a %1$s><strong>%2$s</strong> image</a>"
+msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"
+msgstr[0] "Questa galleria contiene <a %1$s><strong>%2$s</strong> immagine</a>"
+msgstr[1] "Questa galleria contiene <a %1$s><strong>%2$s</strong> immagini</a>"
+
+#: functions.php:975
+#@ tbcity
+msgid "View gallery"
+msgstr "Guarda la galleria"
+
+#: functions.php:1009
+#@ tbcity
+msgid "Previous Post"
+msgstr "Articolo precedente"
+
+#: functions.php:1012
+#@ tbcity
+msgid "Next Post"
+msgstr "Articolo successivo"
+
+#: functions.php:1038
+#@ tbcity
+msgid "quite a long while ago..."
+msgstr "tempo fa..."
+
+#: functions.php:1042
+#@ tbcity
+msgid "over a year ago"
+msgstr "pi&ugrave; di un anno fa"
+
+#: functions.php:1047
+#, php-format
+#@ tbcity
+msgid "%s months ago"
+msgstr "%s mesi fa"
+
+#: functions.php:1051
+#@ tbcity
+msgid "a month ago"
+msgstr "un mese fa"
+
+#: functions.php:1056
+#, php-format
+#@ tbcity
+msgid "%s ago"
+msgstr "%s fa"
+
+#: functions.php:1079
+#: lib/admin.php:30
+#: lib/admin.php:238
+#@ tbcity
+msgid "Theme Options"
+msgstr "Opzioni del Tema"
+
+#: functions.php:1116
+#@ tbcity
+msgid "Comments are closed."
+msgstr "Commenti chiusi."
+
+#: functions.php:1141
+#: temp/mobile/core-mobile.php:332
+#@ tbcity
+msgid "Name"
+msgstr "Nome"
+
+#: functions.php:1143
+#: temp/mobile/core-mobile.php:334
+#@ tbcity
+msgid "Email"
+msgstr "Email"
+
+#: functions.php:1145
+#: temp/mobile/core-mobile.php:336
+#@ tbcity
+msgid "Website"
+msgstr "Sito web"
+
+#: functions.php:1156
+#: temp/mobile/core-mobile.php:347
+#@ tbcity
+msgid "Say It!"
+msgstr "Dillo!"
+
+#: functions.php:1376
+#@ tbcity
+msgid "Missing Attachment"
+msgstr "Allegato Mancante"
+
+#: functions.php:1401
+#@ tbcity
+msgid "All rights reserved"
+msgstr "Tutti i diritti riservati"
+
+#: functions.php:1404
+#: temp/mobile/footer-mobile.php:27
+#, php-format
+#@ tbcity
+msgid "Powered by %s and %s"
+msgstr "Utilizza %s e %s"
+
+#: functions.php:1404
+#: temp/mobile/footer-mobile.php:27
+#@ tbcity
+msgid "Visit theme authors homepage"
+msgstr "Visita il sito dell'autore del tema"
+
+#: functions.php:1404
+#@ tbcity
+msgid "tbcity theme"
+msgstr "tema The Black City"
+
+#: functions.php:1461
+#@ tbcity
+msgid "quoted on"
+msgstr "citato in"
+
+#: functions.php:1481
+#: lib/options.php:77
+#@ tbcity
+msgid "(no title)"
+msgstr "(senza titolo)"
+
+#: functions.php:1482
+#@ tbcity
+msgid "Post"
+msgstr "Articolo"
+
+#: functions.php:1623
+#@ tbcity
+msgid "Reply to comment"
+msgstr "Rispondi al commento"
+
+#: functions.php:1623
+#@ tbcity
+msgid "Reply"
+msgstr "Rispondi"
+
+#: functions.php:1698
+#: functions.php:1699
+#@ tbcity
+msgid "Home"
+msgstr "Home"
+
+#: lib/admin.php:82
+#, php-format
+#@ tbcity
+msgid "%s theme says: \"Dont forget to set <a href=\"%s\">my options</a>!\""
+msgstr "%s dice: \"Non ti dimenticare di impostare le <a href=\"%s\">mie opzioni</a>!\""
+
+#: lib/admin.php:95
+#@ tbcity
+msgid "Are you really sure you want to set all the options to their default values?"
+msgstr "Sei veramente sicuro di voler ripristinare i valori predefiniti?"
+
+#: lib/admin.php:227
+#@ tbcity
+msgid "Options saved."
+msgstr "Opzioni salvate."
+
+#: lib/admin.php:232
+#@ tbcity
+msgid "Defaults values loaded."
+msgstr "Valori predefiniti impostati"
+
+#: lib/admin.php:247
+#: lib/admin.php:251
+#: lib/admin.php:349
+#@ tbcity
+msgid "Theme Info"
+msgstr "Informazioni del tema"
+
+#: lib/admin.php:250
+#: lib/admin.php:256
+#@ tbcity
+msgid "Options"
+msgstr "Opzioni"
+
+#: lib/admin.php:326
+#@ tbcity
+msgid "requires"
+msgstr "richiede"
+
+#: lib/admin.php:332
+#@ tbcity
+msgid "Update Options"
+msgstr "Aggiorna Opzioni"
+
+#: lib/admin.php:333
+#@ tbcity
+msgid "Undo Changes"
+msgstr "Annulla Modifiche"
+
+#: lib/admin.php:335
+#@ tbcity
+msgid "Back to defaults"
+msgstr "Ripristina predefiniti"
+
+#: lib/admin.php:340
+#@ tbcity
+msgid "If you like/dislike this theme, or if you encounter any issues using it, please let us know it."
+msgstr "Se hai riscontrato dei problemi o se semplicemente ti piace/non ti piace questo tema , per favore faccelo sapere."
+
+#: lib/admin.php:341
+#@ tbcity
+msgid "Leave a feedback"
+msgstr "Lascia un feedback"
+
+#: lib/admin.php:363
+#: lib/widgets.php:1335
+#@ tbcity
+msgid "thumbnail"
+msgstr "miniatura"
+
+#: lib/custom-header.php:26
+#@ tbcity
+msgid "Header Background"
+msgstr "Sfondo Testata"
+
+#: lib/custom-header.php:31
+#@ tbcity
+msgid "Background Color"
+msgstr "Colore Sfondo"
+
+#: lib/options.php:16
+#@ tbcity
+msgid "Style"
+msgstr "Stile"
+
+#: lib/options.php:17
+#@ tbcity
+msgid "Contents"
+msgstr "Contenuti"
+
+#: lib/options.php:18
+#@ tbcity
+msgid "Javascript"
+msgstr "Javascript"
+
+#: lib/options.php:19
+#@ tbcity
+msgid "Header Animation"
+msgstr "Animazione Testata"
+
+#: lib/options.php:20
+#@ tbcity
+msgid "Other"
+msgstr "Altro"
+
+#: lib/options.php:31
+#@ tbcity
+msgid "hue [0-360]"
+msgstr "tonalità [0-360]"
+
+#: lib/options.php:38
+#@ tbcity
+msgid "Posts archives"
+msgstr "Archivi"
+
+#: lib/options.php:47
+#@ tbcity
+msgid "title"
+msgstr "titolo"
+
+#: lib/options.php:50
+#@ tbcity
+msgid "post title"
+msgstr "titolo dell&#39;articolo"
+
+#: lib/options.php:50
+#@ tbcity
+msgid "post date"
+msgstr "data dell&#39;articolo"
+
+#: lib/options.php:50
+#: lib/options.php:61
+#@ tbcity
+msgid "none"
+msgstr "nessuno"
+
+#: lib/options.php:58
+#: lib/options.php:61
+#@ tbcity
+msgid "content"
+msgstr "contenuto"
+
+#: lib/options.php:61
+#: lib/options.php:87
+#@ tbcity
+msgid "excerpt"
+msgstr "riassunto"
+
+#: lib/options.php:69
+#@ tbcity
+msgid "blank titles"
+msgstr "titoli vuoti"
+
+#: lib/options.php:70
+#@ tbcity
+msgid "set the standard text for blank titles"
+msgstr "imposta il testo predefinito per i titoli vuoti"
+
+#: lib/options.php:78
+#@ tbcity
+msgid "default text"
+msgstr "testo predefinito"
+
+#: lib/options.php:79
+#, php-format
+#@ tbcity
+msgid "<br />you may use these codes:<br /><code>%d</code> for post date<br /><code>%f</code> for post format (if any)<br /><code>%n</code> for post id"
+msgstr "<br>puoi usare i seguenti codici:<br><code>%d</code>data di pubblicazione<br><code>%f</code>formato (se impostato)<br><code>%n</code> id"
+
+#: lib/options.php:96
+#@ tbcity
+msgid "excerpt length"
+msgstr "lunghezza riassunto"
+
+#: lib/options.php:105
+#@ tbcity
+msgid "<em>excerpt more</em> string"
+msgstr "testo dell'<em>excerpt more</em>"
+
+#: lib/options.php:114
+#@ tbcity
+msgid "<em>excerpt more</em> linked"
+msgstr "<em>excerpt more</em> collegato"
+
+#: lib/options.php:115
+#@ tbcity
+msgid "use the <em>excerpt more</em> string as a link to the full post"
+msgstr "usa l'<em>excerpt more</em> come collegamento all'articolo completo"
+
+#: lib/options.php:122
+#@ tbcity
+msgid "(more...)"
+msgstr "(continua...)"
+
+#: lib/options.php:123
+#@ tbcity
+msgid "\"more\" tag string"
+msgstr "tag \"more\""
+
+#: lib/options.php:124
+#, php-format
+#@ tbcity
+msgid "only plain text. use <code>%t</code> as placeholder for the post title"
+msgstr "solo testo semplice. puoi usare <code>%t</code> per inserire il titolo dell'articolo"
+
+#: lib/options.php:131
+#@ tbcity
+msgid "quick browsing links"
+msgstr "link rapidi di navigazione"
+
+#: lib/options.php:132
+#@ tbcity
+msgid "show navigation links before post content"
+msgstr "visualizza i link di navigazione prima del contenuto del articolo"
+
+#: lib/options.php:139
+#: lib/widgets.php:1198
+#: lib/widgets.php:1202
+#@ tbcity
+msgid "Post details"
+msgstr "Dettagli dell&#39;articolo"
+
+#: lib/options.php:140
+#@ tbcity
+msgid "show post details after the title"
+msgstr "visualizza i dettagli dell'articolo dopo il titolo"
+
+#: lib/options.php:148
+#@ tbcity
+msgid "comments"
+msgstr "commenti"
+
+#: lib/options.php:157
+#@ tbcity
+msgid "categories"
+msgstr "categorie"
+
+#: lib/options.php:166
+#@ tbcity
+msgid "tags"
+msgstr "tag"
+
+#: lib/options.php:175
+#@ tbcity
+msgid "enhanced post title"
+msgstr "titolo del articolo potenziato"
+
+#: lib/options.php:178
+#@ tbcity
+msgid "author avatar"
+msgstr "avatar dell'autore"
+
+#: lib/options.php:178
+#@ tbcity
+msgid "post thumbnail"
+msgstr "miniature articoli"
+
+#: lib/options.php:178
+#@ tbcity
+msgid "nothing"
+msgstr "niente"
+
+#: lib/options.php:185
+#@ tbcity
+msgid "custom widgets"
+msgstr "widget speciali"
+
+#: lib/options.php:186
+#@ tbcity
+msgid "add a lot of new usefull widgets"
+msgstr "aggiungi un sacco di nuovi e utili widget"
+
+#: lib/options.php:193
+#@ tbcity
+msgid "javascript features"
+msgstr "funzionalità javascript"
+
+#: lib/options.php:194
+#@ tbcity
+msgid "try disable all javascript features if you encountered problems with javascript"
+msgstr "se hai riscontrato problemi con i javascript, prova a disabilitare tutte le funzioni"
+
+#: lib/options.php:201
+#@ tbcity
+msgid "basic animations"
+msgstr "animazioni di base"
+
+#: lib/options.php:210
+#@ tbcity
+msgid "main menu"
+msgstr "menu principale"
+
+#: lib/options.php:211
+#@ tbcity
+msgid "fade in/out menu subitems"
+msgstr "dissolvenza in entrata/uscita dei sottogruppi"
+
+#: lib/options.php:219
+#@ tbcity
+msgid "post details"
+msgstr "dettagli dell'articolo"
+
+#: lib/options.php:220
+#@ tbcity
+msgid "slide up/down post details"
+msgstr "visualizza/nascondi i dettagli dell'articolo"
+
+#: lib/options.php:228
+#@ tbcity
+msgid "quickbar"
+msgstr "quickbar"
+
+#: lib/options.php:229
+#@ tbcity
+msgid "animate the quickbar"
+msgstr "animazione quickbar"
+
+#: lib/options.php:237
+#@ tbcity
+msgid "scroll"
+msgstr "scorri"
+
+#: lib/options.php:238
+#@ tbcity
+msgid "smooth scroll to top/bottom when click top/bottom buttons"
+msgstr "scorrimento morbido della pagina quando vengono cliccati i pulsanti su/giù"
+
+#: lib/options.php:246
+#@ tbcity
+msgid "video resize"
+msgstr "ridimensiona video"
+
+#: lib/options.php:247
+#@ tbcity
+msgid "resize embeded video when window resizes"
+msgstr "ridimensiona i video incorporati quando la pagina viene ridimensionata"
+
+#: lib/options.php:255
+#@ tbcity
+msgid "quote link"
+msgstr "link per la citazione"
+
+#: lib/options.php:256
+#@ tbcity
+msgid "show a link for easily add the selected text as a quote inside the comment form"
+msgstr "visualizza un link per aggiungere facilmente un testo, selezionato all&#39;interno della pagina, sottoforma di citazione nel del modulo di risposta"
+
+#: lib/options.php:263
+#@ tbcity
+msgid "Blog's geographical location"
+msgstr "Localizzazione geografica del blog"
+
+#: lib/options.php:273
+#@ tbcity
+msgid "latitude"
+msgstr "latitudine"
+
+#: lib/options.php:274
+#@ tbcity
+msgid "Default to North (46), use a negative value for South. Must be between -90 to 90"
+msgstr "Predefinito a 46° Nord, usa valori negativi per il Sud. Deve essere compreso tra -90 e 90"
+
+#: lib/options.php:283
+#@ tbcity
+msgid "longitude"
+msgstr "longitudine"
+
+#: lib/options.php:284
+#@ tbcity
+msgid "Default to East (13), use a negative value for West. Must be between -180 to 180"
+msgstr "Predefinita a 13° Est, usa valori negativi per l'Ovest. Deve essere compresa tra -180 e 180"
+
+#: lib/options.php:288
+#@ tbcity
+msgid "font family"
+msgstr "font"
+
+#: lib/options.php:292
+#@ tbcity
+msgid "font size"
+msgstr "dimensione del testo"
+
+#: lib/options.php:300
+#@ tbcity
+msgid "Google web font"
+msgstr "Google web font"
+
+#: lib/options.php:301
+#@ tbcity
+msgid "Copy and paste <a href=\"http://www.google.com/webfonts\" target=\"_blank\"><strong>Google web font</strong></a> name here. Example: <code>Open Sans</code>"
+msgstr "Copia e incolla qui il nome della <a href=\"http://www.google.com/webfonts\" target=\"_blank\"><strong>Google web font</strong></a>. Ad esempio: <code>Open Sans</code>"
+
+#: lib/options.php:309
+#@ tbcity
+msgid "for whole site"
+msgstr "per tutto il sito"
+
+#: lib/options.php:318
+#@ tbcity
+msgid "for posts/pages title"
+msgstr "per il titolo degli articoli/pagine"
+
+#: lib/options.php:327
+#@ tbcity
+msgid "for posts/pages content"
+msgstr "per il contenuto degli articoli/pagine"
+
+#: lib/options.php:332
+#@ tbcity
+msgid "editor style"
+msgstr "stile dell&#39;editor"
+
+#: lib/options.php:332
+#@ tbcity
+msgid "add style to the editor in order to write the post exactly how it will appear on the site"
+msgstr "applica lo stile all&#39;editor per scrivere gli articoli esattamente come appariranno nel sito"
+
+#: lib/options.php:338
+#@ tbcity
+msgid "custom CSS code"
+msgstr "codice CSS personalizzato"
+
+#: lib/options.php:339
+#@ tbcity
+msgid "<strong>For advanced users only</strong>: paste here your custom css code. it will be added after the defatult style"
+msgstr "<strong>Solo per utenti esperti</strong>: incolla qui il tuo codice CSS personalizzato. verrà aggiunto a quello predefinito"
+
+#: lib/options.php:342
+#@ tbcity
+msgid "theme credits"
+msgstr "crediti del tema"
+
+#: lib/options.php:342
+#@ tbcity
+msgid "It is completely optional, but if you like the Theme we would appreciate it if you keep the credit link at the bottom"
+msgstr "Sarebbe carino se manteneste visibili i crediti del tema. Grazie"
+
+#: lib/quickbar.php:21
+#@ tbcity
+msgid "User"
+msgstr "Utente"
+
+#: lib/quickbar.php:30
+#, php-format
+#@ tbcity
+msgid "Logged in as %s"
+msgstr "Collegato come %s"
+
+#: lib/quickbar.php:33
+#@ tbcity
+msgid "Not logged in"
+msgstr "Non collegato"
+
+#: lib/quickbar.php:40
+#: lib/widgets.php:1856
+#@ tbcity
+msgid "Your Profile"
+msgstr "Il tuo profilo"
+
+#: lib/quickbar.php:42
+#: lib/widgets.php:1858
+#@ tbcity
+msgid "Add New Post"
+msgstr "Nuovo Articolo"
+
+#: lib/quickbar.php:59
+#@ tbcity
+msgid "Recent Posts"
+msgstr "Articoli Recenti"
+
+#: lib/quickbar.php:68
+#@ tbcity
+msgid "Recent Comments"
+msgstr "Commenti Recenti"
+
+#: lib/quickbar.php:86
+#: lib/widgets.php:2070
+#@ tbcity
+msgid "Archives"
+msgstr "Archivi"
+
+#: lib/quickbar.php:110
+#@ tbcity
+msgid "someone"
+msgstr "un tizio"
+
+#: lib/quickbar.php:116
+#, php-format
+#@ tbcity
+msgid "%s in %s"
+msgstr "%s in %s"
+
+#: lib/quickbar.php:119
+#@ tbcity
+msgid "No comments yet"
+msgstr "Ancora nessun commento"
+
+#: lib/quickbar.php:137
+#, php-format
+#@ tbcity
+msgid "%s by %s"
+msgstr "%s di %s"
+
+#: lib/quickbar.php:141
+#@ tbcity
+msgid "No posts yet"
+msgstr "Ancora nessun articolo"
+
+#: lib/widgets.php:76
+#@ tbcity
+msgid "Primary Sidebar"
+msgstr "Barra laterale principale"
+
+#: lib/widgets.php:78
+#@ tbcity
+msgid "The primary sidebar widget area"
+msgstr "L'area widget all'interno della barra laterale principale"
+
+#: lib/widgets.php:86
+#@ tbcity
+msgid "Post Widget Area"
+msgstr "Area Widget degli articoli"
+
+#: lib/widgets.php:88
+#@ tbcity
+msgid "a widget area located after the post body"
+msgstr "un&#39;area widget sotto il corpo degli articoli"
+
+#: lib/widgets.php:96
+#@ tbcity
+msgid "Footer Widget Area"
+msgstr "Fondo pagina: area widget"
+
+#: lib/widgets.php:98
+#@ tbcity
+msgid "a widget area located in the footer"
+msgstr "un'area widget a fondo pagina"
+
+#: lib/widgets.php:106
+#@ tbcity
+msgid "Page 404"
+msgstr "Pagina 404"
+
+#: lib/widgets.php:108
+#@ tbcity
+msgid "Enrich the page 404 with some useful widgets"
+msgstr "Arricchisci la pagina 404 con alcuni widget utili"
+
+#: lib/widgets.php:123
+#@ tbcity
+msgid "The most commented posts on your site"
+msgstr "Gli articoli pi&ugrave; commentati del tuo sito"
+
+#: lib/widgets.php:124
+#: lib/widgets.php:132
+#@ tbcity
+msgid "Popular Posts"
+msgstr "Articoli pi&ugrave; popolari"
+
+#: lib/widgets.php:247
+#: lib/widgets.php:404
+#: lib/widgets.php:577
+#: lib/widgets.php:709
+#: lib/widgets.php:924
+#: lib/widgets.php:980
+#: lib/widgets.php:1140
+#@ tbcity
+msgid "Invalid value"
+msgstr "Valore non valido"
+
+#: lib/widgets.php:250
+#: lib/widgets.php:407
+#: lib/widgets.php:580
+#: lib/widgets.php:712
+#: lib/widgets.php:927
+#: lib/widgets.php:1143
+#: lib/widgets.php:1329
+#: lib/widgets.php:1484
+#: lib/widgets.php:1549
+#: lib/widgets.php:1597
+#: lib/widgets.php:1898
+#: lib/widgets.php:2031
+#: lib/widgets.php:2173
+#@ tbcity
+msgid "Title"
+msgstr "Titolo"
+
+#: lib/widgets.php:255
+#: lib/widgets.php:412
+#: lib/widgets.php:1176
+#@ tbcity
+msgid "Number of posts to show"
+msgstr "Numero di articoli da visualizzare"
+
+#: lib/widgets.php:261
+#: lib/widgets.php:418
+#: lib/widgets.php:1182
+#@ tbcity
+msgid "Show post thumbnails"
+msgstr "Visualizza miniature articoli"
+
+#: lib/widgets.php:277
+#@ tbcity
+msgid "The latest commented posts/pages of your site"
+msgstr "Gli ultimi articoli/pagine commentati del tuo sito"
+
+#: lib/widgets.php:278
+#: lib/widgets.php:285
+#@ tbcity
+msgid "Latest activity"
+msgstr "Attivit&agrave; recente"
+
+#: lib/widgets.php:354
+#: lib/widgets.php:513
+#@ tbcity
+msgid "no comments yet"
+msgstr "ancora nessun commento"
+
+#: lib/widgets.php:434
+#@ tbcity
+msgid "The latest comment authors"
+msgstr "Gli ultimi autori dei commenti"
+
+#: lib/widgets.php:435
+#: lib/widgets.php:442
+#@ tbcity
+msgid "Latest comment authors"
+msgstr "Autori dei commenti recenti"
+
+#: lib/widgets.php:572
+#, php-format
+#@ tbcity
+msgid "Comment authors <strong>must</strong> use a name and a valid e-mail in order to use this widget. Check the <a href=\"%1$s\">Discussion settings</a>"
+msgstr "Per poter utilizzare questo widget, gli autori dei commenti <strong>devono</strong> impostare un nome e una e-mail valida. Controlla le <a href=\"%1$s\">Impostazioni di discussione</a>"
+
+#: lib/widgets.php:585
+#@ tbcity
+msgid "Number of users to show"
+msgstr "Numero di utenti da visualizzare"
+
+#: lib/widgets.php:590
+#: lib/widgets.php:964
+#@ tbcity
+msgid "Select your icon size"
+msgstr "Seleziona la dimensione delle icone"
+
+#: lib/widgets.php:616
+#@ tbcity
+msgid "A list of popular categories"
+msgstr "Una lista delle categorie più popolari"
+
+#: lib/widgets.php:618
+#: lib/widgets.php:621
+#@ tbcity
+msgid "Popular Categories"
+msgstr "Categorie pi&ugrave; popolari"
+
+#: lib/widgets.php:660
+#@ tbcity
+msgid "View all categories"
+msgstr "Vedi tutte le Categorie"
+
+#: lib/widgets.php:660
+#@ tbcity
+msgid "View all"
+msgstr "Visualizza tutte"
+
+#: lib/widgets.php:717
+#@ tbcity
+msgid "Number of categories to show"
+msgstr "Numero di categorie da visualizzare"
+
+#: lib/widgets.php:722
+#@ tbcity
+msgid "ID of the page created using the \"List of Categories\" template (if any)"
+msgstr "ID della pagina creata usando il tamplate \"List of Categories\" (se esistente)"
+
+#: lib/widgets.php:744
+#@ tbcity
+msgid "This widget lets visitors of your blog to subscribe to it and follow you on popular social networks like Twitter, FaceBook etc."
+msgstr "Questo widget permette ai visitatori di abbonarsi al tuo blog e di seguirti sui più popolari social network quali Twitter, Facebook etc."
+
+#: lib/widgets.php:748
+#: lib/widgets.php:795
+#@ tbcity
+msgid "Follow Me"
+msgstr "Seguimi"
+
+#: lib/widgets.php:842
+#, php-format
+#@ tbcity
+msgid "Follow us on %s"
+msgstr "Seguici su %s"
+
+#: lib/widgets.php:848
+#@ tbcity
+msgid "Keep updated with our RSS feed"
+msgstr "Resta aggiornato con i nostri feed RSS"
+
+#: lib/widgets.php:852
+#@ tbcity
+msgid "Contact us"
+msgstr "Contattaci"
+
+#: lib/widgets.php:933
+#@ tbcity
+msgid "NOTE: Enter the <strong>full</strong> addresses ( with <em>http://</em> )"
+msgstr "NOTA: inserisci l'indirizzo <strong>completo</strong> ( con <em>http://</em> )"
+
+#: lib/widgets.php:947
+#, php-format
+#@ tbcity
+msgid "Enter your %1$s account link"
+msgstr "Inserisci il link al tuo profilo su %1$s"
+
+#: lib/widgets.php:949
+#@ tbcity
+msgid "Enter email address"
+msgstr "Inserisci l'indirizzo email"
+
+#: lib/widgets.php:951
+#@ tbcity
+msgid "Enter your feed service address. Leave it blank for using the default WordPress feed"
+msgstr "Inserisci l'indirizzo del tuo servizio di feed. Lascia vuoto per utilizzare i feed predefiniti di WordPress"
+
+#: lib/widgets.php:996
+#@ tbcity
+msgid "The most recent posts in a single category"
+msgstr "Gli articoli pi&ugrave; recenti in una singola categoria"
+
+#: lib/widgets.php:997
+#@ tbcity
+msgid "Recent Posts in Category"
+msgstr "Articoli Recenti nella singola Categoria"
+
+#: lib/widgets.php:1005
+#, php-format
+#@ tbcity
+msgid "Recent Posts in \"%s\""
+msgstr "Articoli Recenti in \"%s\""
+
+#: lib/widgets.php:1148
+#: temp/mobile/core-mobile.php:289
+#@ tbcity
+msgid "Category"
+msgstr "Categoria"
+
+#: lib/widgets.php:1166
+#@ tbcity
+msgid "(current post category)"
+msgstr "(categoria del articolo corrente)"
+
+#: lib/widgets.php:1167
+#@ tbcity
+msgid "by selecting \"(current post category)\", the widget will be visible ONLY in single posts"
+msgstr "selezionando \"(categoria del articolo corrente)\", il widget sarà visibile SOLAMENTE nei singoli articoli"
+
+#: lib/widgets.php:1172
+#@ tbcity
+msgid "Show category description"
+msgstr "Visualizza la descrizione della categoria"
+
+#: lib/widgets.php:1197
+#@ tbcity
+msgid "Show some details and links related to the current post. It's visible ONLY in single posts"
+msgstr "Visualizza i dettagli ed alcuni link relativi al articolo corrente. Questo wdget è visibile SOLAMENTE negli articoli"
+
+#: lib/widgets.php:1247
+#@ tbcity
+msgid "Published"
+msgstr "Pubblicato"
+
+#: lib/widgets.php:1270
+#, php-format
+#@ tbcity
+msgid "Follow %s on %s"
+msgstr "Segui %s su %s"
+
+#: lib/widgets.php:1340
+#: temp/mobile/core-mobile.php:303
+#@ tbcity
+msgid "Author"
+msgstr "Autore"
+
+#: lib/widgets.php:1344
+#@ tbcity
+msgid "Select avatar size"
+msgstr "Seleziona la dimensione dell&#39;avatar"
+
+#: lib/widgets.php:1359
+#: temp/mobile/core-mobile.php:294
+#@ tbcity
+msgid "Date"
+msgstr "Data"
+
+#: lib/widgets.php:1385
+#@ tbcity
+msgid "A list of Post Formats"
+msgstr "una lista dei Formati degli Articoli"
+
+#: lib/widgets.php:1386
+#: lib/widgets.php:1394
+#@ tbcity
+msgid "Post Formats"
+msgstr "Formato degli articoli"
+
+#: lib/widgets.php:1489
+#@ tbcity
+msgid "Show"
+msgstr "Visualizza"
+
+#: lib/widgets.php:1491
+#@ tbcity
+msgid "icons & text"
+msgstr "icone e testo"
+
+#: lib/widgets.php:1492
+#@ tbcity
+msgid "icons"
+msgstr "icone"
+
+#: lib/widgets.php:1493
+#@ tbcity
+msgid "text"
+msgstr "testo"
+
+#: lib/widgets.php:1499
+#@ tbcity
+msgid "Show posts count"
+msgstr "Visualizza il numero di articoli"
+
+#: lib/widgets.php:1515
+#@ tbcity
+msgid "Display image EXIF details. It's visible ONLY in single attachments"
+msgstr "Visualizza le informazioni EXIF delle immagini. Questo wdget è visibile SOLAMENTE negli allegati"
+
+#: lib/widgets.php:1516
+#: lib/widgets.php:1520
+#@ tbcity
+msgid "Image EXIF details"
+msgstr "Dettagli Immagine"
+
+#: lib/widgets.php:1544
+#@ tbcity
+msgid "Width"
+msgstr "Larghezza"
+
+#: lib/widgets.php:1545
+#@ tbcity
+msgid "Height"
+msgstr "Altezza"
+
+#: lib/widgets.php:1546
+#@ tbcity
+msgid "Date Taken"
+msgstr "Data di Acquisizione"
+
+#: lib/widgets.php:1547
+#@ tbcity
+msgid "Copyright"
+msgstr "Copyright"
+
+#: lib/widgets.php:1548
+#@ tbcity
+msgid "Credit"
+msgstr "Crediti"
+
+#: lib/widgets.php:1550
+#@ tbcity
+msgid "Caption"
+msgstr "Didascalia"
+
+#: lib/widgets.php:1551
+#@ tbcity
+msgid "Camera"
+msgstr "Fotocamera"
+
+#: lib/widgets.php:1552
+#@ tbcity
+msgid "Focal Length"
+msgstr "Lunghezza Focale"
+
+#: lib/widgets.php:1553
+#@ tbcity
+msgid "Aperture"
+msgstr "Apertura"
+
+#: lib/widgets.php:1554
+#@ tbcity
+msgid "ISO"
+msgstr "ISO"
+
+#: lib/widgets.php:1555
+#@ tbcity
+msgid "Shutter Speed"
+msgstr "Velocit&agrave; Otturatore"
+
+#: lib/widgets.php:1555
+#, php-format
+#@ tbcity
+msgid "%s seconds"
+msgstr "% secondi"
+
+#: lib/widgets.php:1614
+#@ tbcity
+msgid "Some useful links for users. It's a kind of enhanced meta widget"
+msgstr "Alcuni utili link per gli utenti. Consideralo come un widget meta potenziato"
+
+#: lib/widgets.php:1615
+#@ tbcity
+msgid "User quick links"
+msgstr "Link rapidi per l&#39;utente"
+
+#: lib/widgets.php:1619
+#, php-format
+#@ tbcity
+msgid "Welcome %s"
+msgstr "Benvenuto %s"
+
+#: lib/widgets.php:1836
+#@ tbcity
+msgid "guest"
+msgstr "ospite"
+
+#: lib/widgets.php:1900
+#, php-format
+#@ tbcity
+msgid "default: \"Welcome %s\" , where %s is the user name"
+msgstr "predefinito: \"Benvenuto %s\" , dove %s &egrave; il nome dell&#39;utente"
+
+#: lib/widgets.php:1905
+#@ tbcity
+msgid "Create a random nick for not-logged users"
+msgstr "Crea un nick casuale per gli utenti non collegati"
+
+#: lib/widgets.php:1910
+#@ tbcity
+msgid "Show user gravatar"
+msgstr "Visualizza l&#39;avatar dell&#39;utente"
+
+#: lib/widgets.php:1949
+#@ tbcity
+msgid "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments"
+msgstr "Visualizza i link di alcuni tra i più diffusi servizi di sharing. Questo widget è visibile SOLAMENTE negli articoli, pagine e allegati."
+
+#: lib/widgets.php:1950
+#: lib/widgets.php:2021
+#@ tbcity
+msgid "Share this"
+msgstr "Condividilo"
+
+#: lib/widgets.php:1984
+#, php-format
+#@ tbcity
+msgid "Share with %s"
+msgstr "Condividi con %s"
+
+#: lib/widgets.php:2035
+#@ tbcity
+msgid "Select icon size"
+msgstr "Seleziona la dimensione delle icone"
+
+#: lib/widgets.php:2061
+#@ tbcity
+msgid "Show archives in a cleaner way"
+msgstr "Visualizza gli archivi in modo  semplice"
+
+#: lib/widgets.php:2062
+#@ tbcity
+msgid "Clean Archives"
+msgstr "Archivi Semplici"
+
+#: lib/widgets.php:2117
+#@ tbcity
+msgid "jan"
+msgstr "gen"
+
+#: lib/widgets.php:2117
+#@ tbcity
+msgid "feb"
+msgstr "feb"
+
+#: lib/widgets.php:2117
+#@ tbcity
+msgid "mar"
+msgstr "mar"
+
+#: lib/widgets.php:2117
+#@ tbcity
+msgid "apr"
+msgstr "apr"
+
+#: lib/widgets.php:2117
+#@ tbcity
+msgid "may"
+msgstr "mag"
+
+#: lib/widgets.php:2117
+#@ tbcity
+msgid "jun"
+msgstr "giu"
+
+#: lib/widgets.php:2117
+#@ tbcity
+msgid "jul"
+msgstr "lug"
+
+#: lib/widgets.php:2117
+#@ tbcity
+msgid "aug"
+msgstr "ago"
+
+#: lib/widgets.php:2117
+#@ tbcity
+msgid "sep"
+msgstr "set"
+
+#: lib/widgets.php:2117
+#@ tbcity
+msgid "oct"
+msgstr "ott"
+
+#: lib/widgets.php:2117
+#@ tbcity
+msgid "nov"
+msgstr "nov"
+
+#: lib/widgets.php:2117
+#@ tbcity
+msgid "dec"
+msgstr "dic"
+
+#: lib/widgets.php:2178
+#@ tbcity
+msgid "Select month style"
+msgstr "Seleziona lo stile del mese"
+
+#: lib/widgets.php:2180
+#@ tbcity
+msgid "number"
+msgstr "numero"
+
+#: lib/widgets.php:2181
+#@ tbcity
+msgid "acronym"
+msgstr "acronimo"
+
+#: lib/widgets.php:2199
+#@ tbcity
+msgid "Decrease font size"
+msgstr "Riduci la dimensione dei caratteri"
+
+#: lib/widgets.php:2201
+#@ tbcity
+msgid "Reset font size"
+msgstr "Ripristina la dimensione dei caratteri"
+
+#: lib/widgets.php:2203
+#@ tbcity
+msgid "Increase font size"
+msgstr "Aumenta la dimensione dei caratteri"
+
+#: lib/widgets.php:2249
+#@ tbcity
+msgid "Simple javascript-based font resizer"
+msgstr "Semplice strumento per modificare la dimensione dei caratteri (usa javascript)"
+
+#: loop/post-none.php:15
+#@ tbcity
+msgid "Nothing Found"
+msgstr "Nessun articolo trovato"
+
+#: loop/post-none.php:16
+#: temp/mobile/loop-front-page-mobile.php:30
+#: temp/mobile/loop-index-mobile.php:40
+#: temp/mobile/loop-single-mobile.php:35
+#@ tbcity
+msgid "Sorry, no posts matched your criteria."
+msgstr "Spiacente, nessun articolo corrispondente ai criteri di ricerca"
+
+#: sidebar-error404.php:20
+#@ tbcity
+msgid "Here is something that might help:"
+msgstr "Ecco qualcosa che ti potrebbe aiutare:"
+
+#: temp/_post-status.php:21
+#, php-format
+#@ tbcity
+msgid "View all posts by %s"
+msgstr "Visualizza tutti gli articoli di %s"
+
+#: temp/audio-player/audio-player.php:35
+#@ tbcity
+msgid "unknown media format"
+msgstr "formato media sconosciuto"
+
+#: temp/audio-player/audio-player.php:71
+#@ tbcity
+msgid "this audio type is not supported by your browser"
+msgstr "questo tipo di file audio non è supportato dal tuo browser"
+
+#: temp/mobile/core-mobile.php:123
+#@ tbcity
+msgid "Navigation Menu for mobiles<br /><small>only supports the first level of hierarchy</small>"
+msgstr "Menu di navigazione per mobile<br /><small>supporta unicamente il primo livello</small>"
+
+#: temp/mobile/core-mobile.php:132
+#@ tbcity
+msgid "Mobile Widget Area"
+msgstr "Area widget Mobile"
+
+#: temp/mobile/core-mobile.php:224
+#@ tbcity
+msgid "Previous page"
+msgstr "Pagina precedente"
+
+#: temp/mobile/core-mobile.php:225
+#@ tbcity
+msgid "Next page"
+msgstr "Pagina successiva "
+
+#: temp/mobile/core-mobile.php:253
+#@ tbcity
+msgid "Child pages"
+msgstr "Pagine discendenti"
+
+#: temp/mobile/core-mobile.php:269
+#@ tbcity
+msgid "Parent page"
+msgstr "Pagina superiore"
+
+#: temp/mobile/core-mobile.php:281
+#@ tbcity
+msgid "Posts"
+msgstr "Articoli"
+
+#: temp/mobile/core-mobile.php:290
+#@ tbcity
+msgid "Tag"
+msgstr "Tag"
+
+#: temp/mobile/core-mobile.php:291
+#@ tbcity
+msgid "Taxonomy"
+msgstr "Tassonomia"
+
+#: temp/mobile/core-mobile.php:311
+#, php-format
+#@ tbcity
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "Risultati della ricerca per &#8220;%s&#8221;"
+
+#: temp/mobile/core-mobile.php:350
+#, php-format
+#@ tbcity
+msgid "Leave a Reply to %s"
+msgstr "Replica al commento di %s"
+
+#: temp/mobile/footer-mobile.php:15
+#@ tbcity
+msgid "Menu"
+msgstr "Menu"
+
+#: temp/mobile/footer-mobile.php:29
+#@ tbcity
+msgid "Desktop View"
+msgstr "Modalità Desktop"
+
+#: temp/post-expander/post_expander.php:30
+#@ tbcity
+msgid "Post loading, please wait..."
+msgstr "Articolo in caricamento, attendi..."
+
+#: lib/custom-header.php:43
+#, php-format
+#@ tbcity
+msgid "Default: %s"
+msgstr "Predefinito: %s"
+

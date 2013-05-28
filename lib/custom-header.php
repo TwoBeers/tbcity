@@ -23,12 +23,12 @@ class Tbcity_Comment_Style {
 	function custom_header_background() {
 
 ?>
-	<h3><?php _e( 'Header Background' ); ?></h3>
+	<h3><?php _e( 'Header Background', 'tbcity' ); ?></h3>
 
 	<table class="form-table">
 		<tbody>
 			<tr valign="top" class="displaying-header-background">
-				<th scope="row"><?php _e( 'Background Color' ); ?></th>
+				<th scope="row"><?php _e( 'Background Color', 'tbcity' ); ?></th>
 				<td>
 					<p>
 					
@@ -40,7 +40,7 @@ class Tbcity_Comment_Style {
 					echo '<input type="text" name="header-background-color" id="background-color" value="#' . esc_attr( $header_background_color ) . '"' . $default_color_attr . ' />';
 
 					if ( $default_color )
-						echo ' <span class="description hide-if-js">' . sprintf( _x( 'Default: %s', 'color' ), $default_color ) . '</span>';
+						echo ' <span class="description hide-if-js">' . sprintf( __( 'Default: %s', 'tbcity' ), $default_color ) . '</span>';
 				?>
 					</p>
 				</td>

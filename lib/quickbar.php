@@ -13,65 +13,83 @@ function tbcity_quickbar() {
 
 ?>
 	<div id="dropdown" class="css"> <!-- start dropdown menu -->
-			<div id="dropper"><span><i class="icon-reorder"></i> Menu</span></div>
-			<div id="cssmenu">
-				<div class="menuitem"><span class="menuitem-trigger"><i class="icon-user"></i> <?php _e('User','tbcity'); //user ?> </span>
-					<div id="mainContainer1" class="ddmcontent">
-						<ul id="usertools">
-							<li id="logged">
-								<?php
-								if (is_user_logged_in()) {
-									global $current_user;
-									get_currentuserinfo();
-									echo get_avatar($current_user->user_email, 50, $default=get_bloginfo('stylesheet_directory').'/images/user.png');
-									printf(__('Logged in as %s','tbcity'), '<strong>'.$current_user->display_name.'</strong>');
-								}else{
-									echo get_avatar('', 50, $default=get_bloginfo('stylesheet_directory').'/images/user.png');
-									echo __('Not logged in','tbcity');
-								}
+		<div id="dropper">
+			<span><i class="icon-reorder"></i> Menu</span>
+		</div>
+		<div id="cssmenu">
+			<div class="menuitem">
+				<span class="menuitem-trigger"><i class="icon-user"></i> <?php _e( 'User', 'tbcity' ); //user ?> </span>
+				<div class="ddmcontent">
+					<ul id="usertools">
+						<li id="logged">
+							<?php
+							if ( is_user_logged_in() ) {
+								global $current_user;
+								get_currentuserinfo();
+								echo get_avatar( sanitize_email( $current_user->user_email ), 50, $default = get_bloginfo( 'stylesheet_directory' ) . '/images/user.png', 'user-avatar' );
+								printf( __( 'Logged in as %s', 'tbcity' ), '<strong>' . $current_user->display_name . '</strong>' );
+							}else{
+								echo get_avatar( '', 50, $default = get_bloginfo( 'stylesheet_directory' ) . '/images/user.png', 'user-avatar' );
+								echo __( 'Not logged in', 'tbcity' );
+							}
+							?>
+						</li>
+						<?php wp_register(); ?>
+						<?php if (is_user_logged_in()) { ?>
+							<?php if ( current_user_can( 'read' ) ) { ?>
+								<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile', 'tbcity' ); ?></a></li>
+								<?php if ( current_user_can( 'publish_posts' ) ) { ?>
+									<li><a title="<?php _e( 'Add New Post', 'tbcity' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post', 'tbcity' ); ?></a></li>
+								<?php } ?>
+								<?php if ( current_user_can( 'moderate_comments' ) ) {
+									$awaiting_mod = wp_count_comments();
+									$awaiting_mod = $awaiting_mod->moderated;
+									$awaiting_mod = $awaiting_mod ? ' (' . number_format_i18n( $awaiting_mod ) . ')' : '';
 								?>
-							</li>
-							<?php wp_register(); ?>
-							<?php if (is_user_logged_in()) {?>
-							<li><a href="<?php echo get_option('siteurl')?>/wp-admin/profile.php"><?php _e('Your Profile'); ?></a></li>
-							<li><a title="<?php _e('Add New Post'); ?>" href="<?php bloginfo("url")?>/wp-admin/post-new.php"><?php _e('New Post'); ?></a></li>
+									<li><a title="<?php _e( 'Comments', 'tbcity' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'tbcity' ); ?></a><?php echo $awaiting_mod; ?></li>
+								<?php } ?>
 							<?php } ?>
-							<li><?php wp_loginout(); ?></li>
-						</ul>
-						<br class="fixfloat" />
-					</div>
-				</div>
-				<div class="menuitem"><span class="menuitem-trigger"><i class="icon-file-alt"></i> <?php _e('Recent Posts'); //Recent Posts ?></span>
-					<div id="mainContainer3" class="ddmcontent">
-						<ul>
-							<?php tbcity_recent_entries(); ?>
-						</ul>
-						<br class="fixfloat" />
-					</div>
-				</div>
-				<div class="menuitem"><span class="menuitem-trigger"><i class="icon-comment"></i> <?php _e('Recent Comments'); // Recent Comments ?></span>
-					<div id="mainContainer" class="ddmcontent">
-						<ul>
-							<?php tbcity_recent_comments(); ?>
-						</ul>
-						<br class="fixfloat" />
-					</div>
-				</div>
-				<div class="menuitem"><span class="menuitem-trigger"><i class="icon-folder-close"></i> <?php _e('Categories'); //Categories ?></span>
-					<div id="mainContainer4" class="ddmcontent">
-						<ul>
-							<?php wp_list_categories('orderby=count&title_li=&hide_empty=1&show_count=1&number=10&hierarchical=0&order=DESC') ?>
-						</ul>
-						<br class="fixfloat" />
-					</div>
-				</div>
-				<div class="menuitem"><span class="menuitem-trigger"><i class="icon-inbox"></i> <?php _e('Archives'); //Archives ?></span>
-					<div id="mainContainer2" class="ddmcontent">
-						<ul><?php wp_get_archives('type=monthly&format=custom&before=<li class="ddmcontent-item">&after=</li>&limit=10&show_post_count=true'); ?></ul>
-						<br class="fixfloat" />
-					</div>
+						<?php } ?>
+						<li><?php wp_loginout(); ?></li>
+					</ul>
+					<br class="fixfloat" />
 				</div>
 			</div>
+			<div class="menuitem">
+				<span class="menuitem-trigger"><i class="icon-file-alt"></i> <?php _e( 'Recent Posts', 'tbcity' ); //Recent Posts ?></span>
+				<div class="ddmcontent">
+					<ul>
+						<?php tbcity_recent_entries(); ?>
+					</ul>
+					<br class="fixfloat" />
+				</div>
+			</div>
+			<div class="menuitem">
+				<span class="menuitem-trigger"><i class="icon-comment"></i> <?php _e( 'Recent Comments', 'tbcity' ); // Recent Comments ?></span>
+				<div class="ddmcontent">
+					<ul>
+						<?php tbcity_recent_comments(); ?>
+					</ul>
+					<br class="fixfloat" />
+				</div>
+			</div>
+			<div class="menuitem">
+				<span class="menuitem-trigger"><i class="icon-folder-close"></i> <?php _e( 'Categories', 'tbcity' ); //Categories ?></span>
+				<div class="ddmcontent">
+					<ul>
+						<?php wp_list_categories( 'orderby=count&title_li=&hide_empty=1&show_count=1&number=10&hierarchical=0&order=DESC' ) ?>
+					</ul>
+					<br class="fixfloat" />
+				</div>
+			</div>
+			<div class="menuitem">
+				<span class="menuitem-trigger"><i class="icon-inbox"></i> <?php _e( 'Archives', 'tbcity' ); //Archives ?></span>
+				<div class="ddmcontent">
+					<ul><?php wp_get_archives( 'type=monthly&limit=10&show_post_count=true' ); ?></ul>
+					<br class="fixfloat" />
+				</div>
+			</div>
+		</div>
 	</div> <!-- end dropdown menu -->
 <?php
 }
@@ -82,18 +100,23 @@ function tbcity_recent_comments() {
 
 	$comments = get_comments('status=approve&number=10&type=comment');
 
-	if ($comments) {
-		foreach ($comments as $comment) {
-			$post_title = get_the_title($comment->comment_post_ID);
+	if ( $comments ) {
+		foreach ( $comments as $comment ) {
+			//if ( post_password_required( get_post( $comment->comment_post_ID ) ) ) continue; // uncomment to skip comments on protected posts
 
-			if ( ! $post_title )
-				$post_title = __('(no title)');
+			$post_id = $comment->comment_post_ID;
 
-			echo '<li><span class="intr">'. $comment->comment_author . ' in </span><a href="' . get_permalink($comment->comment_post_ID) . '#comment-' . $comment->comment_ID . '">' . $post_title . '</a></li>';
+			if ( post_password_required( $post_id ) )
+				$comment_author = __( 'someone', 'tbcity' ); //hide comment author in protected posts
+			else
+				$comment_author = $comment->comment_author;
+
+			$post_title = get_the_title( $post_id );
+
+			echo '<li>' . sprintf( __( '%s in %s', 'tbcity' ), $comment->comment_author, '<a href="' . get_permalink( $post_id ) . '#comment-' . $comment->comment_ID . '">' . $post_title . '</a>' ) . '</li>';
 		}
-	}
-	else{
-		_e('<li>No comments yet</li>','tbcity');
+	} else {
+		echo '<li>' . __( 'No comments yet', 'tbcity' ) . '</li>';
 	}
 
 }
@@ -101,21 +124,23 @@ function tbcity_recent_comments() {
 
 // Get Recent Entries
 function tbcity_recent_entries() {
+	global $post;
 
 	$lastposts = get_posts('numberposts=10');
+
 	if ($lastposts) {
-		 foreach($lastposts as $post) :
-			setup_postdata($post);
-			$post_title = get_the_title($post->ID);
+		foreach( $lastposts as $post ) {
+			//if ( post_password_required( $post ) ) continue; // uncomment to skip protected posts
 
-			if ( ! $post_title )
-				$post_title = __('(no title)');
+			setup_postdata( $post );
 
-			echo "<li><a href=\"".get_permalink($post->ID)."\" title=\"$post_title\">$post_title</a><span class=\"intr\"> " . __('by','tbcity') . " ".get_the_author().'</span></li>';
-		endforeach;
+			echo '<li>' . sprintf( __( '%s by %s', 'tbcity' ), '<a href="' . get_permalink() . '" title="' . the_title_attribute( 'echo=0' ) . '">' . get_the_title() . '</a>', get_the_author() ) . '</li>';
+
+		}
+	} else {
+		echo '<li>' . __( 'No posts yet', 'tbcity' ) . '</li>';
 	}
-	else{
-		_e('<li>No posts yet</li>','tbcity');
-	}
+
+	wp_reset_postdata();
 
 }
