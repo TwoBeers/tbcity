@@ -22,7 +22,7 @@ get_header(); ?>
 
 		<div class="storycontent">
 
-			<h2><span class="pmb_format btn"><i class="icon-placeholder"></i></span> <?php _e( 'Error 404','tbcity' ); ?> - <?php _e( 'Page not found', 'tbcity' ); ?></h2>
+			<h2><i class="icon-32 icon-placeholder"></i> <?php _e( 'Error 404','tbcity' ); ?> - <?php _e( 'Page not found', 'tbcity' ); ?></h2>
 
 			<p><?php _e( "Sorry, you're looking for something that isn't here", 'tbcity' ); ?>: <u><?php echo home_url() . esc_html( $_SERVER['REQUEST_URI'] ); ?></u></p>
 

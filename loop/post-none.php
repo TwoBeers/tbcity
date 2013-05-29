@@ -12,7 +12,7 @@
 <div class="hentry not-found" id="post-404-not-found">
 
 	<div class="storycontent">
-		<h2><span class="pmb_format btn"><i class="icon-placeholder"></i></span> <?php _e( 'Nothing Found', 'tbcity' ); ?></h2>
+		<h2><i class="icon-32 icon-placeholder"></i> <?php _e( 'Nothing Found', 'tbcity' ); ?></h2>
 		<p><?php _e( 'Sorry, no posts matched your criteria.','tbcity' ); ?></p>
 	</div>
 

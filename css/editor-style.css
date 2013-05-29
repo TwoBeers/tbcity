@@ -1,136 +1,146 @@
-/* tbcity - Editor style */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td {
+	background: none repeat scroll 0 0 transparent;
+	border: 0 none;
+	vertical-align: baseline;
+	margin: 0;
+	padding: 0;
+}
 
 html .mceContentBody {
-	font-family: monospace;
-	font-size: 15px;
+	background: #444444; /* Old browsers */
+	background: -moz-linear-gradient(left,  #444444 0%, #666666 50%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#444444), color-stop(50%,#666666)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left,  #444444 0%,#666666 50%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left,  #444444 0%,#666666 50%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left,  #444444 0%,#666666 50%); /* IE10+ */
+	background: linear-gradient(to right,  #444444 0%,#666666 50%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', endColorstr='#666666',GradientType=1 ); /* IE6-9 */
+	font-size: 14px;
+	font-family: Verdana, Geneva, sans-serif;
+	color: #ddd;
+	padding: 15px;
 }
-a img {
-	border: none;
-}
-a {
-	text-decoration: none;
-	color: #21759b;
-}
-a:hover {
-	color: #464646;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
+
 p {
-	margin: .5em 0;
+	margin: 10px 0;
 }
-p {
-	line-height: 1.3em;
-	margin: 0 0 1em 0;
+
+h1,h2,h3,h4,h5,h6 {
+	letter-spacing:-.1px;
+	margin:5px 0;
+	font-weight: bold;
 }
+
+h1 {
+	font-size: 2.5em;
+}
+
+h2 {
+	font-size: 2em;
+}
+
+h3 {
+	font-size: 1.5em;
+}
+
 ul {
-	list-style: none outside none;
+	list-style: square outside none;
 	margin-left: 15px;
 }
+
 ol {
 	list-style: decimal inside none;
 }
+
 ol ul, ol ol, ul ul, ul ol {
 	margin: 0 0 0 15px;
 }
-ul li {
-	list-style: disc outside url('../images/litem.png');
+
+input {
+	font-size:1em;
 }
-dt {
-	font-weight: bold;
+
+acronym, abbr, span.caps {
+	cursor: help;
 }
-dd {
-	margin: 0 0 .5em 40px;
+
+acronym, abbr {
+	border-bottom: 1px dashed #888;
 }
-fieldset {
-	border: 1px solid #ddd;
-	padding: 8px;
-}
-legend {
-	color: #999;
-}
+
 blockquote {
-	border-left: 5px solid #ddd;
-	margin-left: 15px;
-	padding-left: 15px;
-	font-style: italic;
+	background:transparent url(images/quotes.png) no-repeat scroll left top;
+	font-style:italic;
+	margin:10px 0 10px 10px;
+	padding:5px 0 0 30px;
+	clear:both;
+	min-height:30px;
 }
-pre,
-code,
-tt,
-kbd {
-	font: 1.1em "Courier New", monospace;
-	letter-spacing: 1px;
-	padding: 0 8px;
-	background-color: #eee;
-}
-pre {
-	background-color: #fff;
-	border: 1px solid #ddd;
+
+blockquote cite {
+	margin: 5px 0 0;
 	display: block;
+	font-style: oblique;
+}
+
+pre {
+	border: 1px solid #888888;
+	box-shadow: 0 0 10px #333333 inset;
+	font-family: verdana;
+	margin: 10px auto;
 	overflow: auto;
-	white-space: pre;
-	max-width: 100%;
-	margin: 5px auto;
 	padding: 5px;
 }
-table {
-	border-collapse: collapse;
-	text-align: left;
-	max-width: 100%;
-	border: 1px solid #ddd;
+
+fieldset {
+	border: 2px groove #888;
+	padding: 5px;
 }
-td {
-	padding: 3px;
+
+.fixfloat {
+	clear: both;
 }
-th {
-	border-bottom: 4px solid #ddd;
-	padding: 3px;
+
+br.fixfloat {
+	line-height: 1px;
 }
-input {
-	font-size: 1.1em;
-}
-select {
-	max-width: 100%;
-	background-color: #fff;
-	border: 1px solid #ddd;
-}
+
 object,
-embed {
+embed,
+iframe {
 	max-width: 100%;
 }
-textarea,
-input[type=text],
-input[type=password] {
-	border: 1px solid #464646;
+
+.screen-reader-text {
+	display: none;
 }
-input[type=password] {
-	background: #fff url('images/lock.png') right center no-repeat;
-	min-height: 20px;
+
+input[type=button],
+input[type=submit],
+input[type=reset],
+button {
+	background: #0870b2;
+	border: 2px groove #888;
+	color: #fff;
+	padding: 8px 10px;
 }
+
 input[type=button]:hover,
 input[type=submit]:hover,
 input[type=reset]:hover,
-textarea:hover,
-input[type=text]:hover,
-input[type=password]:hover,
-textarea:focus,
-input[type=text]:focus,
-input[type=password]:focus {
-	border: 1px solid #21759b;
-}
-input[type=button]:hover,
-input[type=submit]:hover,
-input[type=reset]:hover {
-	cursor: pointer;
+input[type=button]:focus,
+input[type=submit]:focus,
+input[type=reset]:focus,
+button:hover,
+button:focus {
+	background: #87CEFB;
+	color: #fff;
 }
 
-/* Captions & aligment
-----------------------------------------------------------*/
+.details {
+	color: #aaa;
+}
+
 .aligncenter,
 div.aligncenter,
 img.aligncenter {
@@ -139,85 +149,25 @@ img.aligncenter {
 	margin-left: auto;
 	margin-right: auto;
 }
+
 img.alignleft,
 .alignleft {
 	display: inline;
 	float: left;
 	margin-right: 24px;
 }
+
 img.alignright,
 .alignright {
 	display: inline;
 	float: right;
 	margin-left: 24px;
 }
-img.alignleft,
-img.alignright,
-img.aligncenter {
-	margin-bottom: 12px;
+
+a {
+	color: #87CEFB;
+	text-decoration:none;
 }
-.wp-caption {
-max-width: 100%;
-}
-img {
-	max-width: 100%;
-	height: auto;
-	margin: 0;
-}
-input[type=button],
-input[type=submit],
-input[type=reset] {
-    background-color: #404040;
-    border: 1px solid #ddd;
-    border-radius: 2px 2px 2px 2px;
-    color: #eee;
-    cursor: pointer;
-    font-size: 11px;
-    font-weight: bold;
-    height: 29px;
-    line-height: 27px;
-    margin: 11px 6px;
-    min-width: 54px;
-    padding: 0 8px;
-    text-align: center;
-}
-input[type=button]:hover,
-input[type=submit]:hover,
-input[type=reset]:hover {
-    background-color: #F5F5F5;
-    color: #666;
-}
-.fixfloat {
-	clear: both;
-}
-.wp-caption {
-	border: 1px solid #ddd;
-	padding: 5px;
-	text-align: center;
-	margin: 10px;
-	max-width: 94%;
-    background: #fff;
-	border-radius: 0;
-}
-.wp-caption img {
-	border: 0 none;
-	margin: 0;
-	padding: 0;
-}
-.wp-caption .wp-caption-inside {
-	position: relative;
-}
-.wp-caption .wp-caption-text {
-	font-size: 11px;
-	line-height: 17px;
-	margin: 0;
-	width: 100%;
-	padding: 0 0 5px;
-	background-color: rgba(255, 255, 255, 0.5);
-	position: absolute;
-	bottom: 0;
-	left: 0;
-}
-.wp-caption:hover .wp-caption-text {
-	display: none;
+a:hover {
+	color: #fff;
 }

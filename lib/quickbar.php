@@ -44,7 +44,7 @@ function tbcity_quickbar() {
 								<?php if ( current_user_can( 'moderate_comments' ) ) {
 									$awaiting_mod = wp_count_comments();
 									$awaiting_mod = $awaiting_mod->moderated;
-									$awaiting_mod = $awaiting_mod ? ' (' . number_format_i18n( $awaiting_mod ) . ')' : '';
+									$awaiting_mod = $awaiting_mod ? ' <span class="details">(' . number_format_i18n( $awaiting_mod ) . ')</span>' : '';
 								?>
 									<li><a title="<?php _e( 'Comments', 'tbcity' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'tbcity' ); ?></a><?php echo $awaiting_mod; ?></li>
 								<?php } ?>

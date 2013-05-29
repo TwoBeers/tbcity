@@ -76,6 +76,7 @@ add_filter( 'the_content_more_link'					, 'tbcity_more_link', 10, 2 );
 add_filter( 'wp_title'								, 'tbcity_filter_wp_title' );
 add_filter( 'avatar_defaults'						, 'tbcity_addgravatar' );
 add_filter( 'wp_list_categories'					, 'tbcity_wrap_categories_count' );
+add_filter( 'get_archives_link'						, 'tbcity_wrap_categories_count' );
 add_filter( 'comment_reply_link'					, 'tbcity_comment_reply_link' );
 add_filter( 'wp_nav_menu_items'						, 'tbcity_add_home_link', 10, 2 );
 add_filter( 'wp_nav_menu_objects'					, 'tbcity_add_menu_parent_class' );
@@ -174,7 +175,7 @@ if ( !function_exists( 'tbcity_custom_style' ) ) {
 ?>
 <style type="text/css">
 	body {
-		font-size: <?php echo tbcity_get_opt( 'font_size' ); ?>;
+		font-size: <?php echo tbcity_get_opt( 'font_size' ); ?>px;
 <?php if ( tbcity_get_opt( 'google_font_family' ) && tbcity_get_opt( 'google_font_body' ) ) { ?>
 		font-family: <?php echo tbcity_get_opt( 'google_font_family' ); ?>;
 <?php } else { ?>
@@ -284,8 +285,6 @@ if ( !function_exists( 'tbcity_custom_style' ) ) {
 
 <?php } ?>
 
-<?php if ( tbcity_get_opt( 'custom_css' ) ) echo tbcity_get_opt( 'custom_css' ); ?>
-
 </style>
 <!-- InternetExplorer really sucks! -->
 <!--[if lte IE 8]>
@@ -325,7 +324,6 @@ if ( !function_exists( 'tbcity_get_js_modules' ) ) {
 			$modules[] = 'quotethis';
 		if ( tbcity_get_opt( 'js_basic_video_resize' ) )
 			$modules[] = 'resizevideo';
-
 
 		$modules = implode(',', $modules);
 
@@ -385,11 +383,11 @@ if ( !function_exists( 'tbcity_scripts' ) ) {
 		wp_enqueue_script( 'tbcity-script', get_template_directory_uri() . '/js/animations.dev.js', $deps, tbcity_get_info( 'version' ), true );
 
 		$data = array(
-			'script_modules' => tbcity_get_js_modules(),
-			'quote_tip' => esc_js( __( 'Add selected text as a quote', 'tbcity' ) ),
-			'quote' => esc_js( __( 'Quote', 'tbcity' ) ),
-			'quote_alert' => esc_js( __( 'Nothing to quote. First of all you should select some text...', 'tbcity' ) ),
-			'posts_collapsed' => tbcity_get_opt( 'post_collapse' ),
+			'script_modules'	=> tbcity_get_js_modules(),
+			'quote_tip'			=> esc_js( __( 'Add selected text as a quote', 'tbcity' ) ),
+			'quote'				=> esc_js( __( 'Quote', 'tbcity' ) ),
+			'quote_alert'		=> esc_js( __( 'Nothing to quote. First of all you should select some text...', 'tbcity' ) ),
+			'posts_collapsed'	=> tbcity_get_opt( 'post_collapse' ),
 		);
 
 		wp_localize_script( 'tbcity-script', 'tbcity_l10n', $data );
@@ -423,7 +421,7 @@ if ( !function_exists( 'tbcity_featured_title' ) ) {
 
 		<?php tbcity_hook_post_title_wrap_top(); ?>
 
-		<?php echo '<a class="micro-anchor" title="' . esc_attr( $args['title'] ) . '" href="' . $args['href'] . '">' . tbcity_get_the_thumb( array( 'id' => $post->ID, 'class' => 'icon-placeholder', 'only_icon' => true ) ) . '</a>'; ?>
+		<?php echo '<a class="micro-anchor" title="' . esc_attr( $args['title'] ) . '" href="' . esc_url( $args['href'] ) . '">' . tbcity_get_the_thumb( array( 'id' => $post->ID, 'class' => 'icon-placeholder', 'only_icon' => true ) ) . '</a>'; ?>
 
 		<?php tbcity_hook_post_title_wrap_bottom(); ?>
 
@@ -437,7 +435,7 @@ if ( !function_exists( 'tbcity_featured_title' ) ) {
 		$post_title = $args['alternative'] ? $args['alternative'] : get_the_title();
 		$post_title = $post_title ? $post_title : $args['fallback'];
 		$link_target = $args['target'] ? ' target="'.$args['target'].'"' : '';
-		$title_content = is_singular() ? $post_title : '<a title="' . esc_attr( $args['title'] ) . '" href="' . $args['href'] . '"' . $link_target . ' rel="bookmark">' . $post_title . '</a>';
+		$title_content = is_singular() ? $post_title : '<a title="' . esc_attr( $args['title'] ) . '" href="' . esc_url( $args['href'] ) . '"' . $link_target . ' rel="bookmark">' . $post_title . '</a>';
 		if ( $post_title ) $post_title = '<h2 class="storytitle">' . $title_content . '</h2>';
 
 		$thumb = '';
@@ -585,14 +583,14 @@ if ( !function_exists( 'tbcity_multipages' ) ) {
 		<div class="metafield_content">
 			<?php
 			if ( $the_parent_page ) {
-				$the_parent_link = '<a href="' . get_permalink( $the_parent_page ) . '" title="' . get_the_title( $the_parent_page ) . '">' . get_the_title( $the_parent_page ) . '</a>';
+				$the_parent_link = '<a href="' . esc_url( get_permalink( $the_parent_page ) ) . '" title="' . esc_attr( strip_tags( get_the_title( $the_parent_page ) ) ) . '">' . get_the_title( $the_parent_page ) . '</a>';
 				echo __( 'Upper page: ', 'tbcity' ) . $the_parent_link ; // echoes the parent
 			}
 			if ( ( $childrens ) && ( $the_parent_page ) ) { echo ' - '; } // if parent & child, echoes the separator
 			if ( $childrens ) {
 				$the_child_list = '';
 				foreach ( $childrens as $children ) {
-					$the_child_list[] = '<a href="' . get_permalink( $children ) . '" title="' . get_the_title( $children ) . '">' . get_the_title( $children ) . '</a>';
+					$the_child_list[] = '<a href="' . esc_url( get_permalink( $children ) ) . '" title="' . esc_attr( strip_tags( get_the_title( $children ) ) ) . '">' . get_the_title( $children ) . '</a>';
 				}
 				$the_child_list = implode( ', ' , $the_child_list );
 				echo __( 'Lower pages: ', 'tbcity' ) . $the_child_list; // echoes the childs
@@ -664,7 +662,7 @@ if ( !function_exists( 'tbcity_get_header' ) ) {
 		$header = '';
 
 		if ( display_header_text() )
-			$header .= '<h1 class="on-top"><a href="' . esc_url( home_url() ) . '/">' . get_bloginfo( 'name' ) . '</a></h1>';
+			$header .= '<div id="head-title" class="on-top"><h1><a href="' . esc_url( home_url() ) . '/">' . get_bloginfo( 'name' ) . '</a></h1><span>' . get_bloginfo( 'description' ) . '</span></div>';
 
 		if ( get_header_image() ) {
 
@@ -739,13 +737,13 @@ if ( !function_exists( 'tbcity_navigate_attachments' ) ) {
 		<?php if ( isset( $attachments[ $prevk ] ) ) { ?>
 			<span class="nav-previous ">
 				<i class="icon-angle-left"></i>
-				<a rel="prev" title="" href="<?php echo get_attachment_link( $attachments[ $prevk ]->ID ); ?>"><?php echo wp_get_attachment_image( $attachments[ $prevk ]->ID, array( 70, 70 ) ); ?></a>
+				<a rel="prev" href="<?php echo esc_url( get_attachment_link( $attachments[ $prevk ]->ID ) ); ?>"><?php echo wp_get_attachment_image( $attachments[ $prevk ]->ID, array( 70, 70 ) ); ?></a>
 			</span>
 		<?php } ?>
 
 		<?php if ( isset( $attachments[ $nextk ] ) ) { ?>
 			<span class="nav-next">
-				<a rel="next" title="" href="<?php echo get_attachment_link( $attachments[ $nextk ]->ID ); ?>"><?php echo wp_get_attachment_image( $attachments[ $nextk ]->ID, array( 70, 70 ) ); ?></a>
+				<a rel="next" href="<?php echo esc_url( get_attachment_link( $attachments[ $nextk ]->ID ) ); ?>"><?php echo wp_get_attachment_image( $attachments[ $nextk ]->ID, array( 70, 70 ) ); ?></a>
 				<i class="icon-angle-right"></i>
 			</span>
 		<?php } ?>
@@ -760,9 +758,18 @@ if ( !function_exists( 'tbcity_navigate_attachments' ) ) {
 // displays page-links for paginated posts
 function tbcity_link_pages() {
 
+	if ( ! is_singular() && tbcity_get_opt( 'post_formats_standard_content' ) != 'content' ) return;
 ?>
 	<div class="fixfloat">
-		<?php echo wp_link_pages( 'before=<div class="navigation-links navigate_page">' . '<span>' . __( 'Pages','tbcity' ) . ':</span>' . '&after=</div>&echo=0' ); ?>
+		<?php
+			echo wp_link_pages( array(
+				'before' => '<div class="navigation-links navigate_page"><span>' . __( 'Pages','tbcity' ) . ':</span>',
+				'after' => '</div>',
+				'link_before' => '<span>',
+				'link_after' => '</span>',
+				'echo' => 0,
+			) );
+		?>
 	</div>
 <?php
 
@@ -972,7 +979,7 @@ if ( !function_exists( 'tbcity_gallery_preview_walker' ) ) {
 		$output .= '
 			<p class="info">
 				<em>' . sprintf( _n( 'This gallery contains <a %1$s><strong>%2$s</strong> image</a>', 'This gallery contains <a %1$s><strong>%2$s</strong> images</a>', $images_count, 'tbcity' ),
-				'href="' . get_permalink() . '" title="' . esc_attr ( __( 'View gallery', 'tbcity' ) ) . '" rel="bookmark"',
+				'href="' . esc_url( get_permalink() ) . '" title="' . esc_attr ( __( 'View gallery', 'tbcity' ) ) . '" rel="bookmark"',
 				number_format_i18n( $images_count )
 				) . '</em>
 			</p>
@@ -1006,10 +1013,10 @@ if ( !function_exists( 'tbcity_single_nav' ) ) {
 ?>
 	<div class="navigation-links nav-single fixfloat">
 		<?php if ( $prev ) { ?>
-			<a class="btn nav-previous" rel="prev" href="<?php echo get_permalink( $prev ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Previous Post', 'tbcity' ) . $prev_title ) ); ?>"><i class="icon-angle-left"></i></a>
+			<a class="btn nav-previous" rel="prev" href="<?php echo esc_url( get_permalink( $prev ) ); ?>" title="<?php echo esc_attr( strip_tags( __( 'Previous Post', 'tbcity' ) . $prev_title ) ); ?>"><i class="icon-angle-left"></i></a>
 		<?php } ?>
 		<?php if ( $next ) { ?>
-			<a class="btn nav-next" rel="next" href="<?php echo get_permalink( $next ); ?>" title="<?php echo esc_attr(strip_tags( __( 'Next Post', 'tbcity' ) . $next_title ) ); ?>"><i class="icon-angle-right"></i></a>
+			<a class="btn nav-next" rel="next" href="<?php echo esc_url( get_permalink( $next ) ); ?>" title="<?php echo esc_attr( strip_tags( __( 'Next Post', 'tbcity' ) . $next_title ) ); ?>"><i class="icon-angle-right"></i></a>
 		<?php } ?>
 	</div><!-- #nav-single -->
 <?php
@@ -1074,11 +1081,11 @@ if ( !function_exists( 'tbcity_admin_bar_plus' ) ) {
 		);
 
 		$wp_admin_bar->add_menu( array(
-			'id'	=> 'tbcity_theme_options',
-			'parent'    => 'appearance',
-			'title'     => __( 'Theme Options','tbcity' ),
-			'href'	=> get_admin_url() . 'themes.php?page=tbcity_functions',
-			'meta'	=> $add_menu_meta
+			'id'		=> 'tbcity_theme_options',
+			'parent'	=> 'appearance',
+			'title'		=> esc_attr( __( 'Theme Options','tbcity' ) ),
+			'href'		=> get_admin_url() . 'themes.php?page=tbcity_functions',
+			'meta'		=> $add_menu_meta
 		) );
 
 	}
@@ -1376,7 +1383,7 @@ function tbcity_get_attachment_link( $markup = '', $id = 0, $size = 'thumbnail',
 		return __( 'Missing Attachment','tbcity' );
 
 	if ( $permalink )
-		$url = get_attachment_link( $_post->ID );
+		$url = esc_url( get_attachment_link( $_post->ID ) );
 
 	$post_title = esc_attr( $_post->post_excerpt ? $_post->post_excerpt : $_post->post_title );
 
@@ -1508,7 +1515,7 @@ function tbcity_excerpt_more( $more ) {
 		$more = tbcity_get_opt( 'excerpt_more_txt' );
 
 	if ( tbcity_get_opt( 'excerpt_more_link' ) )
-		$more = '<a href="' . get_permalink() . '">' . $more . '</a>';
+		$more = '<a href="' . esc_url( get_permalink() ) . '">' . $more . '</a>';
 
 	return $more;
 
@@ -1592,8 +1599,8 @@ function tbcity_add_selected_class_to_menu_item( $classes, $item ) {
 
 // wrap the categories count with a span
 function tbcity_wrap_categories_count( $output ) {
-	$pattern = '/<\/a>\s(\(\d+\))/i';
-	$replacement = ' <span class="details">$1</span></a>';
+	$pattern = '/<\/a>(\s|&nbsp;)(\(\d+\))/i';
+	$replacement = ' <span class="details">$2</span></a>';
 	return preg_replace( $pattern, $replacement, $output );
 }
 
@@ -1695,7 +1702,7 @@ function tbcity_add_home_link( $items = '', $args = null ) {
 		$homeMenuItem =
 				'<li class="navhome' . $class . '">' .
 				$args['before'] .
-				'<a href="' . home_url( '/' ) . '" title="' . esc_attr__( 'Home', 'tbcity' ) . '">' .
+				'<a href="' . esc_url( home_url( '/' ) ) . '" title="' . esc_attr__( 'Home', 'tbcity' ) . '">' .
 				$args['link_before'] . __( 'Home', 'tbcity' ) . $args['link_after'] .
 				'</a>' .
 				$args['after'] .

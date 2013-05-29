@@ -19,10 +19,10 @@
 
 	<?php
 		switch ( tbcity_get_opt( 'post_formats_standard_title' ) ) {
-			case 'post title':
+			case 'title':
 				tbcity_featured_title();
 				break;
-			case 'post date':
+			case 'date':
 				tbcity_featured_title( array( 'alternative' => get_the_time( get_option( 'date_format' ) ) ) );
 				break;
 			case 'none':
@@ -33,24 +33,7 @@
 
 	<?php tbcity_hook_post_title_after(); ?>
 
-	<div class="storycontent">
-
-		<?php tbcity_hook_entry_content_top(); ?>
-
-		<?php
-			switch ( tbcity_get_opt( 'post_formats_standard_content' ) ) {
-				case 'content':
-					the_content();
-					break;
-				case 'excerpt':
-					the_excerpt();
-					break;
-			}
-		?>
-
-		<?php tbcity_hook_entry_content_bottom(); ?>
-
-	</div>
+	<?php get_template_part( 'content', 'standard' ); ?>
 
 	<?php tbcity_hook_entry_bottom(); ?>
 

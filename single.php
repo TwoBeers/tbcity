@@ -35,15 +35,7 @@ get_header(); ?>
 
 				<?php tbcity_hook_post_title_after(); ?>
 
-				<div class="storycontent">
-
-					<?php tbcity_hook_entry_content_top(); ?>
-
-					<?php the_content(); ?>
-
-					<?php tbcity_hook_entry_content_bottom(); ?>
-
-				</div>
+				<?php get_template_part( 'content', 'standard' ); ?>
 
 				<?php tbcity_hook_entry_bottom(); ?>
 
@@ -51,7 +43,7 @@ get_header(); ?>
 
 			<?php tbcity_hook_entry_after(); ?>
 
-			<?php comments_template(); // Get wp-comments.php template ?>
+			<?php comments_template(); // Get comments.php template ?>
 
 		<?php } //end while ?>
 

@@ -149,8 +149,8 @@ tbcityScripts = {
 				} else {
 					if ( opened ) {
 						opened.removeClass('open');
+						element.addClass('open');
 						$('.ddmcontent',opened).slideUp( 400, function() {
-							element.addClass('open');
 							list.slideDown();
 						});
 					} else {
