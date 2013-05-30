@@ -1964,23 +1964,25 @@ class Tbcity_Widget_Share_This extends WP_Widget {
 
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
-		$enc_title		= $post->post_title;
-		$enc_href		= home_url() . '/?p=' . get_the_ID(); //shorturl
-		$enc_pict		= wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) );
-		$enc_source		= get_bloginfo( 'name' );
-		$enc_long_url	= get_permalink( $post->ID );
+		$enc_title		= rawurlencode( $post->post_title );
+		$enc_href		= rawurlencode( home_url() . '/?p=' . get_the_ID() ); //shorturl
+		$enc_pict		= rawurlencode( wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) ) );
+		$enc_source		= rawurlencode( get_bloginfo( 'name' ) );
+		$enc_long_url	= rawurlencode( get_permalink( $post->ID ) );
 		if ( !empty( $post->post_password ) )
 			$enc_xerpt	= '';
 		elseif ( has_excerpt() )
 			$enc_xerpt	= get_the_excerpt();
 		else
 			$enc_xerpt	= wp_trim_words( $post->post_content, apply_filters('excerpt_length', 55), '[...]' );
+		$enc_xerpt		= rawurlencode( $enc_xerpt );
+
 
 		$services = $this->default_services;
 
 		$outer = '';
 		foreach( $services as $key => $service ) {
-			$href = rawurlencode( sprintf( $service[1], $enc_title, $enc_href, $enc_pict, $enc_xerpt, $enc_source, $enc_long_url ) );
+			$href = sprintf( $service[1], $enc_title, $enc_href, $enc_pict, $enc_xerpt, $enc_source, $enc_long_url );
 			if ( $instance[$key] ) $outer .= '<a class="share-item" rel="nofollow" target="_blank" id="tb-share-with-' . esc_attr( $key ) . '" href="' . $href . '"><img src="' . esc_url( get_template_directory_uri() . '/images/follow/' . $key . '.png' ) . '" width="' . $icon_size . '" height="' . $icon_size . '" alt="' . esc_attr( $service[0] ) . ' Button"  title="' . esc_attr( sprintf( __( 'Share with %s', 'tbcity' ), $service[0] ) ) . '" /></a> ';
 		}
 

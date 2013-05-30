@@ -40,5 +40,3 @@
 </div>
 
 <?php tbcity_hook_entry_after(); ?>
-
-<?php tbcity_last_comments( get_the_ID() ); ?>

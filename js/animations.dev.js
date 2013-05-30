@@ -12,10 +12,6 @@ tbcityScripts = {
 
 			switch(modules[i]) {
 
-				case 'quotethis':
-					tbcityScripts.init_quote_this();
-					break;
-
 				case 'animatemenu':
 					tbcityScripts.animate_menu();
 					break;
@@ -42,6 +38,13 @@ tbcityScripts = {
 					tbcityScripts.resize_video();
 					$('body').on('post-load', function(event){
 						tbcityScripts.resize_video();
+					});
+					break;
+
+				case 'lastcomments':
+					tbcityScripts.last_comments();
+					$('body').on('post-load', function(event){
+						tbcityScripts.last_comments();
 					});
 					break;
 
@@ -182,39 +185,6 @@ tbcityScripts = {
 	},
 
 
-	init_quote_this : function() {
-		if ( document.getElementById('reply-title') && document.getElementById("comment") ) {
-			bz_qdiv = document.createElement('small');
-			bz_qdiv.innerHTML = ' - <a id="bz-quotethis" href="#" onclick="tbcityScripts.quote_this(); return false" title="' + tbcity_l10n.quote_tip + '" >' + tbcity_l10n.quote + '</a>';
-			bz_replink = document.getElementById('reply-title');
-			bz_replink.appendChild(bz_qdiv);
-		}
-	},
-
-
-	quote_this : function() {
-		var posttext = '';
-		if (window.getSelection){
-			posttext = window.getSelection();
-		}
-		else if (document.getSelection){
-			posttext = document.getSelection();
-		}
-		else if (document.selection){
-			posttext = document.selection.createRange().text;
-		}
-		else {
-			return true;
-		}
-		posttext = posttext.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-		if ( posttext.length !== 0 ) {
-			document.getElementById("comment").value = document.getElementById("comment").value + '<blockquote>' + posttext + '</blockquote>';
-		} else {
-			alert( tbcity_l10n.quote_alert );
-		}
-	},
-
-
 	resize_video : function() {
 		// https://github.com/chriscoyier/Fluid-Width-Video
 		var $fluidEl = $("#posts_content").find(".storycontent");
@@ -238,6 +208,33 @@ tbcityScripts = {
 			});
 		}).resize();
 	},
+
+
+	last_comments : function() {
+		$('#posts_content').find('.last-comments.css').removeClass('css').find('.tooltip').each( function(){  //get every last-comments element
+
+			var p = $(this).parent();
+			var self = $(this);
+
+			self.hide();
+
+			p.hoverIntent(
+
+				function(){
+
+					self.stop().css({opacity: 0, display: 'block'}).animate({opacity: 0.9});
+
+				},
+
+				function(){
+
+					self.fadeOut();
+
+				}
+			);
+
+		});
+	}
 
 };
 

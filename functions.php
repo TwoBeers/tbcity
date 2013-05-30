@@ -45,6 +45,7 @@ add_action( 'tbcity_hook_content_before'			, 'tbcity_quickbar' );
 add_action( 'tbcity_hook_entry_before'				, 'tbcity_navigate_attachments' );
 add_action( 'tbcity_hook_entry_before'				, 'tbcity_single_nav' );
 add_action( 'tbcity_hook_entry_after'				, 'tbcity_single_widgets_area', 99 );
+add_action( 'tbcity_hook_entry_content_bottom'		, 'tbcity_last_comments', 999 );
 add_action( 'tbcity_hook_entry_content_bottom'		, 'tbcity_link_pages' );
 add_action( 'tbcity_hook_comments_list_before'		, 'tbcity_navigate_comments' );
 add_action( 'tbcity_hook_comments_list_after'		, 'tbcity_navigate_comments' );
@@ -318,12 +319,9 @@ if ( !function_exists( 'tbcity_get_js_modules' ) ) {
 			$modules[] = 'animatemenu';
 		if ( tbcity_get_opt( 'js_basic_autoscroll' ) )
 			$modules[] = 'scrolltopbottom';
-		if ( tbcity_get_opt( 'tinynav' ) )
-			$modules[] = 'tinynav';
-		if ( ( tbcity_get_opt( 'quotethis' ) ) && is_singular() )
-			$modules[] = 'quotethis';
 		if ( tbcity_get_opt( 'js_basic_video_resize' ) )
 			$modules[] = 'resizevideo';
+			$modules[] = 'lastcomments';
 
 		$modules = implode(',', $modules);
 
@@ -384,10 +382,6 @@ if ( !function_exists( 'tbcity_scripts' ) ) {
 
 		$data = array(
 			'script_modules'	=> tbcity_get_js_modules(),
-			'quote_tip'			=> esc_js( __( 'Add selected text as a quote', 'tbcity' ) ),
-			'quote'				=> esc_js( __( 'Quote', 'tbcity' ) ),
-			'quote_alert'		=> esc_js( __( 'Nothing to quote. First of all you should select some text...', 'tbcity' ) ),
-			'posts_collapsed'	=> tbcity_get_opt( 'post_collapse' ),
 		);
 
 		wp_localize_script( 'tbcity-script', 'tbcity_l10n', $data );
@@ -610,11 +604,8 @@ if ( !function_exists( 'tbcity_multipages' ) ) {
 
 // the last commenters of a post
 if ( !function_exists( 'tbcity_last_comments' ) ) {
-	function tbcity_last_comments( $id = null ) {
+	function tbcity_last_comments( $id = 0 ) {
 		global $post;
-
-		//TODO
-		return;
 
 		$num = apply_filters( 'tbcity_last_comments_number', 6 );
 		if ( !$id ) $id = $post->ID;
@@ -623,31 +614,28 @@ if ( !function_exists( 'tbcity_last_comments' ) ) {
 
 		$ellipsis = '';
 		if ( count( $comments ) > 5 ) {
-			$ellipsis = '<span class="item-label">...</span>';
+			$ellipsis = '<li>...</li>';
 			$comments = array_slice( $comments, 0, 5 );
 		}
 
 		$comments = array_reverse( $comments );
 
 		if ( $comments ) {
-
 ?>
-	<div class="bz-last-cop fixfloat">
-		<span class="item-label"><?php _e('last comments','tbcity'); ?></span>
-		<span class="item-label"><i class="icon-angle-right"></i></span>
+	<ul class="last-comments fixfloat css">
+		<li><?php _e('last comments','tbcity'); ?> <i class="icon-angle-right"></i></li>
 		<?php echo $ellipsis; ?>
 		<?php foreach ( $comments as $comment ) { ?>
-			<div class="item no-grav">
+			<li class="no-grav">
 				<?php echo get_avatar( $comment, 32, $default = get_option( 'avatar_default' ), $comment->comment_author );?>
-				<div class="bz-tooltip bz-300"><div class="bz-tooltip-inner">
-					<?php echo $comment->comment_author; ?>
-					<br /><br />
+				<span class="tooltip">
+					<span class="comment-author"><?php echo $comment->comment_author; ?></span>
+					<br />
 					<?php comment_excerpt( $comment->comment_ID ); ?>
-				</div></div>
-			</div>
+				</span>
+			</li>
 		<?php } ?>
-		<br class="fixfloat" />
-	</div>
+	</ul>
 <?php
 		}
 
@@ -660,16 +648,17 @@ if ( !function_exists( 'tbcity_get_header' ) ) {
 	function tbcity_get_header() {
 
 		$header = '';
+		$header_title = '';
 
 		if ( display_header_text() )
-			$header .= '<div id="head-title" class="on-top"><h1><a href="' . esc_url( home_url() ) . '/">' . get_bloginfo( 'name' ) . '</a></h1><span>' . get_bloginfo( 'description' ) . '</span></div>';
+			$header_title = '<div id="head-title" class="on-top"><h1><a href="' . esc_url( home_url() ) . '/">' . get_bloginfo( 'name' ) . '</a></h1><span>' . get_bloginfo( 'description' ) . '</span></div>';
 
 		if ( get_header_image() ) {
 
 			if ( display_header_text() )
-				$header .= '<div id="head-image-wrapper"><img class="aligncenter" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" src="' . esc_url( get_header_image() ) . '" /></div>';
+				$header .= '<img class="aligncenter" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" src="' . esc_url( get_header_image() ) . '" />';
 			else
-				$header .= '<div id="head-image-wrapper"><a href="' . esc_url( home_url() ) . '/"><img class="aligncenter" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" src="' . esc_url( get_header_image() ) . '" /></a></div>';
+				$header .= '<a href="' . esc_url( home_url() ) . '/"><img class="aligncenter" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" src="' . esc_url( get_header_image() ) . '" /></a>';
 
 		} else {
 
@@ -677,7 +666,10 @@ if ( !function_exists( 'tbcity_get_header' ) ) {
 
 		}
 
-		return $header;
+		$header = $header ? '<div id="head-image-wrapper">' . $header . '</div>' : '';
+
+
+		return $header_title . $header;
 
 	}
 }

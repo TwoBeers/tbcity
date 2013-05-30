@@ -248,14 +248,6 @@ function tbcity_get_coa( $option = false ) {
 							'req'			=> 'jsani',
 							'sub'			=> false,
 		),
-		'quotethis' => array(
-							'group'			=> 'javascript',
-							'type'			=> 'chk',
-							'default'		=> 1,
-							'description'	=> __( 'quote link', 'tbcity' ),
-							'info'			=> __( 'show a link for easily add the selected text as a quote inside the comment form', 'tbcity' ),
-							'req'			=> 'jsani',
-		),
 		'geo_location' => array(
 							'group'			=> 'header',
 							'type'			=> '',

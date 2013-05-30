@@ -74,7 +74,7 @@ class Tbcity_Parallax_Header {
 		} else {
 			$nightpos = ( $data['time_decimal'] < $data['sunrise_decimal'] ) ? 24 + $data['time_decimal'] : $data['time_decimal'];
 			$percent = ( $nightpos - $data['sunset_decimal'] ) / ( 24 - $data['sunset_decimal'] + $data['sunrise_decimal'] );
-			$style = 'background-position: ' . round( 5 + 90 * $percent ) . '% ' . round( -150 * pow( sin( deg2rad( 180 * $percent ) ), 3 ) + 180 ) . 'px;';
+			$style = 'background-position: ' . round( 5 + 90 * $percent ) . '% ' . round( -180 * pow( sin( deg2rad( 180 * $percent ) ), 3 ) + 150 ) . 'px;';
 		}
 
 		$output .= '.moon {'.$style.'}';
@@ -116,27 +116,26 @@ class Tbcity_Parallax_Header {
 
 		$output .= '.parallax {'.$style.'}';
 
-		echo '<style>' . $output . '</style>';
+		$ie_fix = '<!--[if lte IE 8]><style type="text/css">.parallax .clouds {display: none;}</style><![endif]-->';
+
+		echo '<style type="text/css">' . $output . '</style>' . $ie_fix;
 
 	}
 
 	function parallax_header() {
 
-		$site_title = '<h1><a href="' . home_url() . '/">' . get_bloginfo( 'name' ) . '</a></h1>';
+	$output = '
+		<div class="parallax">
+			<div class="stars"></div>
+			<div class="sun"></div>
+			<div class="moon"></div>
+			<div class="clouds"></div>
+			<div class="mouse-move city city-layer1"></div>
+			<div class="mouse-move city city-layer2"></div>
+		</div>
+	';
 
-?>
-	<div class="parallax">
-		<div class="stars"></div>
-		<div class="sun"></div>
-		<div class="moon"></div>
-		<div class="mouse-move clouds"></div>
-		<div class="mouse-move city city-layer1"></div>
-		<div class="mouse-move city city-layer2"></div>
-		<div class="site-title"><?php echo $site_title; ?></div>
-	</div>
-<?php
-
-	return '';
+	return $output;
 
 	}
 }
