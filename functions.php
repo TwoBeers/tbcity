@@ -51,8 +51,8 @@ add_action( 'tbcity_hook_comments_list_before'		, 'tbcity_navigate_comments' );
 add_action( 'tbcity_hook_comments_list_after'		, 'tbcity_navigate_comments' );
 add_action( 'tbcity_hook_body_top'					, 'tbcity_initialize_scripts' );
 add_action( 'tbcity_hook_post_title_top'			, 'tbcity_entry_date' );
-add_action( 'tbcity_hook_post_title_wrap_bottom'	, 'tbcity_extrainfo' );
-
+add_action( 'tbcity_hook_post_title_wrap_after'		, 'tbcity_extrainfo' );
+add_action( 'tbcity_hook_post_title_wrap_top'		, 'tbcity_entry_thumb' );
 
 
 /* Custom filters - WP hooks */
@@ -130,7 +130,7 @@ require_once( 'lib/breadcrumb.php' ); // load the breadcrumb module
 
 require_once( 'lib/jetpack.php' ); // load the jetpack support module
 
-//require_once( 'lib/post-expander/post_expander.php' ); // load the post_expander support module
+require_once( 'lib/bbpress-functions.php' ); // load the bbpress support module
 
 require_once( 'lib/quickbar.php' ); // load the quickbar module
 
@@ -249,7 +249,7 @@ if ( !function_exists( 'tbcity_custom_style' ) ) {
 	#mainmenu > li a {
 		border-left:3px solid <?php echo tbcity_get_colors(2); ?>;
 	}
-	.sticky .entrytitle {
+	.sticky .entrytitle_wrap {
 		border-left: 5px solid <?php echo tbcity_get_colors(2); ?>;
 		background: <?php echo tbcity_get_colors(3); ?>; /* Old browsers */
 		background: -moz-linear-gradient(left, <?php echo tbcity_get_colors(3); ?> 0%, #666666 50%); /* FF3.6+ */
@@ -321,6 +321,7 @@ if ( !function_exists( 'tbcity_get_js_modules' ) ) {
 			$modules[] = 'scrolltopbottom';
 		if ( tbcity_get_opt( 'js_basic_video_resize' ) )
 			$modules[] = 'resizevideo';
+		if ( tbcity_get_opt( 'js_basic_comment_tooltip' ) )
 			$modules[] = 'lastcomments';
 
 		$modules = implode(',', $modules);
@@ -378,7 +379,7 @@ if ( !function_exists( 'tbcity_scripts' ) ) {
 
 		$deps = array( 'jquery', 'hoverIntent' );
 
-		wp_enqueue_script( 'tbcity-script', get_template_directory_uri() . '/js/animations.dev.js', $deps, tbcity_get_info( 'version' ), true );
+		wp_enqueue_script( 'tbcity-script', get_template_directory_uri() . '/js/animations.js', $deps, tbcity_get_info( 'version' ), true );
 
 		$data = array(
 			'script_modules'	=> tbcity_get_js_modules(),
@@ -398,56 +399,34 @@ if ( !function_exists( 'tbcity_featured_title' ) ) {
 		if ( is_front_page() && get_option('show_on_front') == "page" && ! tbcity_is_allcat() ) return;
 
 		$defaults = array(
-			'alternative' => '',
-			'fallback' => '',
-			'featured' => true,
-			'href' => get_permalink(),
-			'target' => '',
-			'title' => the_title_attribute( array('echo' => 0 ) ),
-			'micro' => false,
+			'alternative'	=> '',
+			'fallback'		=> '',
+			'href'			=> get_permalink(),
+			'target'		=> '',
+			'title'			=> the_title_attribute( array('echo' => 0 ) ),
+			'micro'			=> false,
+			'featured'		=> true,
 		);
 		$args = wp_parse_args( $args, $defaults );
-
-		if ( $args['micro'] ) {
-
-?>
-	<div class="entrytitle_wrap micro-title">
-
-		<?php tbcity_hook_post_title_wrap_top(); ?>
-
-		<?php echo '<a class="micro-anchor" title="' . esc_attr( $args['title'] ) . '" href="' . esc_url( $args['href'] ) . '">' . tbcity_get_the_thumb( array( 'id' => $post->ID, 'class' => 'icon-placeholder', 'only_icon' => true ) ) . '</a>'; ?>
-
-		<?php tbcity_hook_post_title_wrap_bottom(); ?>
-
-	</div>
-<?php
-
-			return;
-
-		}
 
 		$post_title = $args['alternative'] ? $args['alternative'] : get_the_title();
 		$post_title = $post_title ? $post_title : $args['fallback'];
 		$link_target = $args['target'] ? ' target="'.$args['target'].'"' : '';
 		$title_content = is_singular() ? $post_title : '<a title="' . esc_attr( $args['title'] ) . '" href="' . esc_url( $args['href'] ) . '"' . $link_target . ' rel="bookmark">' . $post_title . '</a>';
+		if ( $args['featured'] && tbcity_get_opt( 'featured_title' ) == 'avatar' && ! is_page() ) $title_content = get_avatar( get_the_author_meta( 'user_email' ), 50, $default = get_option( 'avatar_default' ) ) . $title_content;
 		if ( $post_title ) $post_title = '<h2 class="storytitle">' . $title_content . '</h2>';
 
-		$thumb = '';
-		if ( $args['featured'] ) {
-			if ( ( tbcity_get_opt( 'featured_title' ) == 'thumbnail' ) && has_post_thumbnail( $post->ID ) ) {
-				$thumb = get_the_post_thumbnail( $post->ID, array( 50, 50 ) );
-			} elseif ( tbcity_get_opt( 'featured_title' ) == 'avatar' && ! is_page() ) {
-				$email = get_the_author_meta('user_email');
-				$thumb = get_avatar( $email, 50, $default = get_option( 'avatar_default' ) );
-			}
-		}
-
-		if ( post_password_required() ) {
-			$thumb = '';
+		if ( post_password_required() )
 			$post_title = '<h2 class="storytitle">' . get_the_title() . '</h2>';
-		}
+
+		if ( $args['micro'] )
+			$post_title = '<a class="micro-anchor" title="' . esc_attr( $args['title'] ) . '" href="' . esc_url( $args['href'] ) . '">' . tbcity_get_the_thumb( array( 'id' => $post->ID, 'class' => 'icon-placeholder', 'only_icon' => true ) ) . '</a>';
+
+		$post_title = apply_filters( 'tbcity_featured_title', $post_title, $args );
 
 ?>
+	<?php tbcity_hook_post_title_wrap_before(); ?>
+
 	<div class="entrytitle_wrap">
 
 		<?php tbcity_hook_post_title_wrap_top(); ?>
@@ -456,17 +435,17 @@ if ( !function_exists( 'tbcity_featured_title' ) ) {
 
 			<?php tbcity_hook_post_title_top(); ?>
 
-			<?php echo $thumb; ?>
-
 			<?php echo $post_title; ?>
 
 			<?php tbcity_hook_post_title_bottom(); ?>
 
 		</div>
 
-			<?php tbcity_hook_post_title_wrap_bottom(); ?>
+		<?php tbcity_hook_post_title_wrap_bottom(); ?>
 
 	</div>
+
+	<?php tbcity_hook_post_title_wrap_after(); ?>
 <?php
 
 	}
@@ -481,13 +460,38 @@ if ( !function_exists( 'tbcity_entry_date' ) ) {
 
 ?>
 	<div class="entrydate">
+
 		<?php if ( ! is_page() ) { ?><span><?php the_author(); ?> , <?php the_time( get_option( 'date_format' ) ); ?></span><?php } ?>
+
 		<?php edit_post_link( '<i class="icon-pencil"></i>', '<span>', '</span>' ); ?>
+
 		<span><a class="jump-to-top" href="#" title="top"><i class="icon-caret-up"></i></a></span>
+
 	</div>
 <?php
 
 	}
+}
+
+
+// print entry thumbnail
+function tbcity_entry_thumb() {
+
+	$thumb = '';
+
+	if ( post_password_required() )
+
+		$thumb = '';
+
+	elseif ( ( tbcity_get_opt( 'featured_title' ) == 'thumbnail' ) )
+
+		$thumb = ( $src = tbcity_get_the_thumb_url( 0 , 4) ) ? '<img class="feaured-image" src="' . esc_url( $src ) . '" alt="thumbnail" />' : '';//get_the_post_thumbnail( $post->ID, array( 50, 50 ) );
+
+	$thumb = apply_filters( 'tbcity_entry_thumb', $thumb );
+
+	if ( $thumb )
+		echo $thumb;
+
 }
 
 
@@ -606,6 +610,8 @@ if ( !function_exists( 'tbcity_multipages' ) ) {
 if ( !function_exists( 'tbcity_last_comments' ) ) {
 	function tbcity_last_comments( $id = 0 ) {
 		global $post;
+
+		if( is_singular() ) return;
 
 		$num = apply_filters( 'tbcity_last_comments_number', 6 );
 		if ( !$id ) $id = $post->ID;
@@ -792,6 +798,119 @@ if ( !function_exists( 'tbcity_default_widgets' ) ) {
 
 		foreach ( apply_filters( 'tbcity_default_widgets', $default_widgets ) as $widget => $class ) {
 			the_widget( $widget, '', tbcity_get_default_widget_args( 'id=&class=' . $class ) );
+		}
+
+	}
+}
+
+
+//get a thumb for a post/page
+if ( !function_exists( 'tbcity_get_the_thumb_url' ) ) {
+	function tbcity_get_the_thumb_url( $post_id = 0, $step = 999 ){
+		global $post;
+
+		if ( !$post_id ) $post_id = $post->ID;
+
+		// step #0  - has featured image
+		if ( get_post_thumbnail_id( $post_id ) )
+			return wp_get_attachment_thumb_url( get_post_thumbnail_id( $post_id ) );
+
+		$attachments = get_children( array(
+			'post_parent'		=> $post_id,
+			'post_status'		=> 'inherit',
+			'post_type'			=> 'attachment',
+			'post_mime_type'	=> 'image',
+			'orderby'			=> 'menu_order',
+			'order'				=> 'ASC',
+			'numberposts'		=> 1,
+		) );
+
+		// step #1  - has attachments
+		if ( ( $step > 1 ) && $attachments )
+			return wp_get_attachment_thumb_url( key($attachments) );
+
+		// step #2  - has gallery shortcode
+		$pattern = get_shortcode_regex();
+
+		if (
+			( $step > 2 )
+			&& preg_match_all( '/'. $pattern .'/s', $post->post_content, $matches )
+			&& array_key_exists( 2, $matches )
+			&& in_array( 'gallery', $matches[2] )
+		) {
+
+			$key = array_search( 'gallery', $matches[2] );
+
+			$attr = shortcode_parse_atts( $matches['3'][$key] );
+
+			if ( ! empty( $attr['ids'] ) ) {
+				if ( empty( $attr['orderby'] ) )
+					$attr['orderby'] = 'post__in';
+				$attr['include'] = $attr['ids'];
+			}
+
+			extract( shortcode_atts( array(
+				'order'			=> 'ASC',
+				'orderby'		=> 'menu_order ID',
+				'include'		=> '',
+			), $attr) );
+
+			if ( 'RAND' == $order )
+				$orderby = 'none';
+
+			if ( ! empty( $include ) )
+				$attachments = get_posts( array( 'include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby ) );
+
+			if ( isset( $attachments[0] ) )
+				return wp_get_attachment_thumb_url( $attachments[0]->ID );
+		}
+
+
+		// step #3  - has an hardcoded <img>
+		if ( ( $step > 3 ) && $img = tbcity_get_first_image() )
+			return $img['src'];
+
+		// step #4  - has a generated <img>
+		if ( ( $step > 4 ) && $img = tbcity_get_first_image( false, true) )
+			return $img['src'];
+
+		// step #5  - get the header image
+		if ( ( $step > 5 ) && $img = get_header_image() )
+			return $img;
+
+		// step #6  - nothing found
+		return '';
+	}
+
+}
+
+
+// Get first image in the post content
+if ( !function_exists( 'tbcity_get_first_image' ) ) {
+	function tbcity_get_first_image( $post_id = null, $filtered_content = false ) {
+
+		$post = get_post( $post_id );
+
+		$first_image = array( 'img' => '', 'title' => '', 'src' => '' );
+
+		//search the images in post content
+		preg_match_all( '/<img[^>]+>/i',$filtered_content ? apply_filters( 'the_content', $post->post_content ): $post->post_content, $result );
+		//grab the first one
+		if ( isset( $result[0][0] ) ){
+			$first_image['img'] = $result[0][0];
+			//get the title (if any)
+			preg_match_all( '/(title)=(["|\'][^"|\']*["|\'])/i',$first_image['img'], $title );
+			if ( isset( $title[2][0] ) ){
+				$first_image['title'] = str_replace( '"','',$title[2][0] );
+			}
+			//get the path
+			preg_match_all( '/(src)=(["|\'][^"|\']*["|\'])/i',$first_image['img'], $src );
+			if ( isset( $src[2][0] ) ){
+				$first_image['src'] = str_replace( array( '"', '\''),'',$src[2][0] );
+			}
+			return $first_image;
+		} else {
+			return false;
 		}
 
 	}
@@ -1247,7 +1366,8 @@ function tbcity_body_classes($classes) {
 
 	$classes[] = 'tb-no-js';
 
-	if ( has_nav_menu( 'secondary1' ) ) $classes[] = 'top-menu';
+	if ( has_nav_menu( 'secondary1' ) )
+		$classes[] = 'top-menu';
 
 	return $classes;
 
@@ -1256,6 +1376,9 @@ function tbcity_body_classes($classes) {
 
 // Add specific CSS class by filter
 function tbcity_post_classes($classes) {
+
+	if ( ! is_singular() && tbcity_get_opt( 'post_formats_standard_title' ) == 'none' )
+		$classes[] = 'micro-title';
 
 	return $classes;
 
@@ -1457,7 +1580,7 @@ function tbcity_add_quoted_on( $return ) {
 
 	$text = '';
 	if ( get_comment_type() != 'comment' )
-		$text = '<span style="font-weight: normal;">' . __( 'quoted on', 'tbcity' ) . ' </span>';
+		$text = '<img class="avatar" width="32" src="' . get_template_directory_uri() . '/images/bot.png" alt="talking bot"/><span>' . __( 'quoted on', 'tbcity' ) . ' </span>';
 
 	return $text . $return;
 

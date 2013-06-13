@@ -171,10 +171,8 @@ tbcityScripts = {
 
 	scroll_top_bottom : function() {
 
-		top_but = $('#posts_content').find('.jump-to-top');
-
 		// smooth scroll top/bottom
-		top_but.click(function() {
+		top_but = $('#posts_content').find('.jump-to-top').unbind().click(function() {
 			$("html, body").animate({
 				scrollTop: 0
 			}, {

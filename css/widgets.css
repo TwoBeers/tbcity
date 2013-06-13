@@ -1,4 +1,9 @@
-/* tbcity - Widgets page */
+/**
+ * Widgets page specific CSS
+ *
+ * @package The Black City
+ * @since 2.00
+ */
 
 div[id*=_tb-] .widget-title {
 	background: url("../images/widgets/tb_micrologo.png") no-repeat 2px center transparent;

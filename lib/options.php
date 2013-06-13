@@ -16,7 +16,6 @@ function tbcity_get_coa( $option = false ) {
 							'style'			=> __( 'Style' , 'tbcity' ),
 							'content'		=> __( 'Contents' , 'tbcity' ),
 							'javascript'	=> __( 'Javascript' , 'tbcity' ),
-							'header'		=> __( 'Header Animation' , 'tbcity' ),
 							'other'			=> __( 'Other' , 'tbcity' ),
 	);
 	$tbcity_groups = apply_filters( 'tbcity_options_groups', $tbcity_groups );
@@ -193,15 +192,7 @@ function tbcity_get_coa( $option = false ) {
 							'description'	=> __( 'javascript features', 'tbcity' ),
 							'info'			=> __( 'try disable all javascript features if you encountered problems with javascript', 'tbcity' ),
 							'req'			=> '',
-		),
-		'js_basic' => array(
-							'group'			=> 'javascript',
-							'type'			=> '',
-							'default'		=> 1,
-							'description'	=> __( 'basic animations', 'tbcity' ),
-							'info'			=> '',
-							'req'			=> 'jsani',
-							'sub'			=> array( 'js_basic_menu', 'js_basic_extra_info', 'js_basic_quickbar', 'js_basic_autoscroll', 'js_basic_video_resize' ),
+							'sub'			=> array( 'js_basic_menu', 'js_basic_extra_info', 'js_basic_quickbar', 'js_basic_autoscroll', 'js_basic_video_resize', 'js_basic_comment_tooltip' ),
 		),
 		'js_basic_menu' => array(
 							'group'			=> 'javascript',
@@ -248,17 +239,26 @@ function tbcity_get_coa( $option = false ) {
 							'req'			=> 'jsani',
 							'sub'			=> false,
 		),
-		'geo_location' => array(
-							'group'			=> 'header',
-							'type'			=> '',
+		'js_basic_comment_tooltip' => array(
+							'group'			=> 'javascript',
+							'type'			=> 'chk',
 							'default'		=> 1,
-							'description'	=> __( "Blog's geographical location", 'tbcity' ),
-							'info'			=> 'Latitude and longitude are needed to show the correct changes in light (sunrise, day, sunset, night) in the header of the blog.<br />You can use <a href="http://itouchmap.com/latlong.html" target="_blank">itouchmap.com</a> to find yours',
+							'description'	=> __( 'last comment tooltip', 'tbcity' ),
+							'info'			=> __( 'fade in/out the last comments tooltips', 'tbcity' ),
+							'req'			=> 'jsani',
+							'sub'			=> false,
+		),
+		'geo_location' => array(
+							'group'			=> 'javascript',
+							'type'			=> 'chk',
+							'default'		=> 1,
+							'description'	=> __( 'Header Animation' , 'tbcity' ),
+							'info'			=> sprintf ( __( 'If you set an <a href="%s">header image</a>, this option will be ignored.<br  />The following options are needed to set the geographical location of your blog in order to show the correct changes in light (sunrise, day, sunset, night).<br />You can use <a href="http://itouchmap.com/latlong.html" target="_blank">itouchmap.com</a> to find yours', 'tbcity' ), get_admin_url() . 'themes.php?page=custom-header' ),
 							'req'			=> '',
 							'sub'			=> array( 'latitude', 'longitude' ),
 		),
 		'latitude' => array(
-							'group'			=> 'header',
+							'group'			=> 'javascript',
 							'type'			=> 'int',
 							'range'			=> array( 'min' => -90, 'max' => 90 ),
 							'default'		=> 46,
@@ -268,7 +268,7 @@ function tbcity_get_coa( $option = false ) {
 							'sub'			=> false,
 		),
 		'longitude' => array(
-							'group'			=> 'header',
+							'group'			=> 'javascript',
 							'type'			=> 'int',
 							'range'			=> array( 'min' => -90, 'max' => 90 ),
 							'default'		=> 13,

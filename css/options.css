@@ -1,46 +1,62 @@
-/* tbcity - Theme options stylesheet */
+/**
+ * options page specific CSS
+ *
+ * @package The Black City
+ * @since 2.00
+ */
 
 #theme-icon {
 	background: url('../images/tbcity.png') no-repeat scroll center transparent;
 }
+
 #theme-infos ul {
 	list-style: disc outside;
 	margin-left: 30px;
 }
+
 #theme-options,
 #theme-infos {
 	padding: 20px 10px;
 }
+
 #tabs-container {
 	margin: 20px 20px 20px 150px;
 }
+
 #theme-options select {
 	max-width: 160px;
 }
+
 #tabselector,
 #selector {
 	position: absolute;
 	top: 100px;
 	left: 0;
 }
+
 #tabselector li,
 #selector li {
 	width: 130px;
 	padding: 3px 16px 3px 4px;
 }
+
 #tabselector li a,
 #selector li a {
 	text-decoration: none;
 }
+
 .sel-active a {
 	color: #000;
 }
+
 .sel-active {
 	font-weight: bold;
 }
+
 #main-wrap {
 	position: relative;
 }
+
 .tab-opt {
 	margin-bottom: 20px;
 	padding: 10px;
@@ -48,22 +64,28 @@
 	box-shadow: 0 2px 2px rgba(0,0,0,0.1);
 	border: 1px solid #ccc;
 }
+
 .tab-opt:hover {
 }
+
 .tab-opt input {
 	margin-left: 10px;
 }
+
 .type-url,
 .type-txt {
 	width: 50%;
 }
+
 .column-nam {
 	font-weight: bold;
 }
+
 .tabgroup-colors .column-nam {
 	margin-bottom: 10px;
 	display: block;
 }
+
 .column-des {
 	font-style:italic;
 	border-top: 1px solid #eee;
@@ -71,18 +93,22 @@
 	margin-top: 10px;
 	color: #666;
 }
+
 .column-req {
 	border-top: 1px solid #eee;
 	margin-top: 10px;
 	color: #666;
 }
+
 .sub-opt-wrap {
 	font-size: 11px;
 	margin-top: 10px;
 }
+
 .sub-opt-wrap br.clear {
 	display: block;
 }
+
 .tabgroup-colors .col-tools {
 	border: 1px solid #DFDFDF;
 	float: left;
@@ -92,27 +118,31 @@
 	position: relative;
 	text-align: center;
 }
+
 .catcol:nth-child(3n+1) {
 	clear: left;
 }
+
 .col-tools span {
 	font-weight: bold;
 }
+
 .tab-opt textarea {
 	vertical-align: middle;
 	height: 10em;
 	width: 50%;
 }
+
 #buttons a {
-	font-size: 10px; 
-	text-decoration: none; 
-	margin: 0 10px; 
+	font-size: 10px;
+	text-decoration: none;
+	margin: 0 10px;
 }
+
 .wp-picker-holder {
 	position: absolute;
 	z-index: 999;
 }
-
 
 /*!
  * jQuery UI Slider 1.8.19
@@ -123,35 +153,121 @@
  *
  * http://docs.jquery.com/UI/Slider#theming
  */
-.color_slider.ui-slider { position: relative; text-align: left; }
-.color_slider.ui-slider .ui-slider-handle { position: absolute; z-index: 2; width: 5px; height: 1.2em; cursor: default; }
-.color_slider.ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; background-position: 0 0; }
-
-.color_slider.ui-slider-horizontal { height: .8em; }
-.color_slider.ui-slider-horizontal .ui-slider-handle { top: -.35em; margin-left: -4px; }
-.color_slider.ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
-.color_slider.ui-slider-horizontal .ui-slider-range-min { left: 0; }
-.color_slider.ui-slider-horizontal .ui-slider-range-max { right: 0; }
 
 .color_slider.ui-slider {
-	background: url('../images/hue.png') no-repeat scroll left center transparent;
+	position: relative;
+	text-align: left;
+}
+
+.color_slider.ui-slider .ui-slider-handle {
+	position: absolute;
+	z-index: 2;
+	width: 5px;
+	height: 1.2em;
+	cursor: default;
+}
+
+.color_slider.ui-slider .ui-slider-range {
+	position: absolute;
+	z-index: 1;
+	font-size: .7em;
+	display: block;
+	border: 0;
+	background-position: 0 0;
+}
+
+.color_slider.ui-slider-horizontal {
+	height: .8em;
+}
+
+.color_slider.ui-slider-horizontal .ui-slider-handle {
+	top: -.35em;
+	margin-left: -4px;
+}
+
+.color_slider.ui-slider-horizontal .ui-slider-range {
+	top: 0;
+	height: 100%;
+}
+
+.color_slider.ui-slider-horizontal .ui-slider-range-min {
+	left: 0;
+}
+
+.color_slider.ui-slider-horizontal .ui-slider-range-max {
+	right: 0;
+}
+
+.color_slider.ui-slider {
+	background: url('../images/hue.png') repeat scroll left center transparent;
 	border: 1px solid #DDDDDD;
 	margin: 0.5em 0;
 	width: 245px;
 	display: inline-block;
 	vertical-align: middle;
 }
+
 .color_slider.ui-slider .ui-slider-handle {
 	background: transparent;
-	cursor: pointer; 
+	cursor: pointer;
 	border: 2px solid #ccc;
 }
+
 .color_slider.ui-corner-all {
     border-radius: 3px;
 }
+
 .color_slider.ui-slider-range {
 	background: #EAF2FA;
 }
+
 .wp-color-result {
 	margin-bottom: 0;
+}
+
+.stylediv {
+	clear: both;
+	text-align: center;
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	padding: 10px;
+}
+/* MP6 plugin integration
+----------------------------------------------------------*/
+
+.admin-color-mp6 .column-des {
+	border-top: 1px solid #E1E1E1;
+	margin: 10px -10px 0;
+	padding: 0 10px;
+}
+
+.admin-color-mp6 .tab-opt {
+	border: none;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.admin-color-mp6 .column-nam {
+	font-size: 15px;
+	font-weight: normal;
+}
+
+.admin-color-mp6 #tabselector li, #selector li {
+	border-left: 3px solid transparent;
+}
+
+.admin-color-mp6 .sel-active {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-left: 3px solid #0074A2 !important;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	font-weight: normal;
+}
+
+.admin-color-mp6 .column-req {
+	color: #aaa;
+	text-align: right;
+}
+
+.admin-color-mp6 .stylediv {
+	border: none;
+	border-top: 1px solid #DFDFDF;
 }

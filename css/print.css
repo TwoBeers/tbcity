@@ -1,4 +1,9 @@
-/* tbcity - stylesheet for print */
+/**
+ * specific CSS for print
+ *
+ * @package The Black City
+ * @since 2.00
+ */
 
 body {
 	font-family: monospace;

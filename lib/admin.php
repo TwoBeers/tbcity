@@ -89,7 +89,7 @@ function tbcity_theme_admin_scripts() {
 
 	wp_enqueue_media();
 	wp_enqueue_script( 'wp-color-picker' );
-	wp_enqueue_script( 'tbcity-options-script', get_template_directory_uri().'/js/options.dev.js', array( 'jquery', 'farbtastic', 'thickbox' ), tbcity_get_info( 'version' ), true ); //thebird js
+	wp_enqueue_script( 'tbcity-options-script', get_template_directory_uri().'/js/options.js', array( 'jquery', 'farbtastic', 'thickbox' ), tbcity_get_info( 'version' ), true ); //thebird js
 
 	$data = array(
 		'confirm_to_defaults' => __( 'Are you really sure you want to set all the options to their default values?', 'tbcity' )
@@ -110,7 +110,7 @@ function tbcity_widgets_style() {
 //add js script to the widgets page
 function tbcity_widgets_scripts() {
 
-	wp_enqueue_script( 'tbcity-widgets-scripts', get_template_directory_uri() . '/js/widgets.dev.js', array('jquery','jquery-ui-slider'), tbcity_get_info( 'version' ), true );
+	wp_enqueue_script( 'tbcity-widgets-scripts', get_template_directory_uri() . '/js/widgets.js', array('jquery','jquery-ui-slider'), tbcity_get_info( 'version' ), true );
 
 }
 
@@ -206,7 +206,7 @@ if ( !function_exists( 'tbcity_edit_options' ) ) {
 		$the_groups = tbcity_get_coa( 'groups' );
 		$the_option_name = 'tbcity_options';
 
-		if ( isset( $_GET['erase'] ) ) {
+		if ( isset( $_GET['erase'] ) && check_admin_referer( 'tbcity_reset_options_nonce' ) ) {
 			$_SERVER['REQUEST_URI'] = remove_query_arg( 'erase', $_SERVER['REQUEST_URI'] );
 			delete_option( $the_option_name );
 			tbcity_default_options();
@@ -332,17 +332,17 @@ if ( !function_exists( 'tbcity_edit_options' ) ) {
 							<input class="button-primary" type="submit" name="Submit" value="<?php _e( 'Update Options' , 'tbcity' ); ?>" />
 							<a href="themes.php?page=tbcity_functions" target="_self"><?php _e( 'Undo Changes' , 'tbcity' ); ?></a>
 							|
-							<a id="to-defaults" href="themes.php?page=tbcity_functions&erase=1" target="_self"><?php _e( 'Back to defaults' , 'tbcity' ); ?></a>
+							<a id="to-defaults" href="themes.php?page=tbcity_functions&erase=1&_wpnonce=<?php echo $nonce = wp_create_nonce( 'tbcity_reset_options_nonce' ); ?>" target="_self"><?php _e( 'Back to defaults' , 'tbcity' ); ?></a>
 						</p>
 					</form>
-					<p class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc;">
+					<p class="stylediv">
 						<small>
 							<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'tbcity' ); ?><br />
 							<a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-tbcity' ); ?>" title="tbcity theme" target="_blank"><?php _e( 'Leave a feedback', 'tbcity' ); ?></a>
 						</small>
 					</p>
-					<p class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc; margin-top: 10px;">
-						<small>Support the theme in your language, provide a <a href="<?php echo esc_url( 'http://www.twobeers.net/wp-themes/themes-translations-wordpress' ); ?>" title="Themes translation" target="_blank">translation</a>.</small>
+					<p class="stylediv">
+						<small><?php //this line is intentionally untraslated ?>Support the theme in your language, provide a <a href="<?php echo esc_url( 'http://www.twobeers.net/wp-themes/themes-translations-wordpress' ); ?>" title="Themes translation" target="_blank">translation</a>.</small>
 					</p>
 				</div>
 				<div id="theme-infos">

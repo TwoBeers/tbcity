@@ -14,6 +14,8 @@ class Tbcity_Parallax_Header {
 
 	function __construct() {
 
+		if ( ! tbcity_get_opt( 'geo_location' ) ) return;
+
 		add_action( 'wp_enqueue_scripts'	, array( $this, 'script' ) );
 		add_action( 'wp_enqueue_scripts'	, array( $this, 'stylesheet' ) );
 		add_filter( 'tbcity_filter_header'	, array( $this, 'parallax_header' ) );
@@ -29,7 +31,7 @@ class Tbcity_Parallax_Header {
 
 	function script() {
 
-		wp_enqueue_script( 'tbcity-parallax-header-script', get_template_directory_uri() . '/lib/header/parallax-header.dev.js', array('jquery'), tbcity_get_info( 'version' ), true );
+		wp_enqueue_script( 'tbcity-parallax-header-script', get_template_directory_uri() . '/lib/header/parallax-header.js', array('jquery'), tbcity_get_info( 'version' ), true );
 
 	}
 

@@ -219,6 +219,14 @@ function tbcity_hook_post_title_wrap_bottom() {
 	do_action( 'tbcity_hook_post_title_wrap_bottom' );
 }
 
+function tbcity_hook_post_title_wrap_before() {
+	do_action( 'tbcity_hook_post_title_wrap_before' );
+}
+
+function tbcity_hook_post_title_wrap_after() {
+	do_action( 'tbcity_hook_post_title_wrap_after' );
+}
+
 /**
  * the breadcrumb section
  */
