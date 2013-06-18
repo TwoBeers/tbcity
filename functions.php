@@ -57,7 +57,6 @@ add_action( 'tbcity_hook_post_title_wrap_top'		, 'tbcity_entry_thumb' );
 
 /* Custom filters - WP hooks */
 
-add_filter( 'post_gallery'							, 'tbcity_gallery_shortcode', 10, 2 );
 add_filter( 'use_default_gallery_style'				, '__return_false' );
 add_filter( 'embed_oembed_html'						, 'tbcity_wmode_transparent', 10, 3);
 add_filter( 'img_caption_shortcode'					, 'tbcity_img_caption_shortcode', 10, 3 );
@@ -73,6 +72,7 @@ add_filter( 'the_title'								, 'tbcity_titles_filter', 10, 2 );
 add_filter( 'excerpt_length'						, 'tbcity_excerpt_length' );
 add_filter( 'excerpt_mblength'						, 'tbcity_excerpt_length' );
 add_filter( 'excerpt_more'							, 'tbcity_excerpt_more' );
+add_filter( 'the_excerpt'							, 'tbcity_non_empty_excerpt' );
 add_filter( 'the_content_more_link'					, 'tbcity_more_link', 10, 2 );
 add_filter( 'wp_title'								, 'tbcity_filter_wp_title' );
 add_filter( 'avatar_defaults'						, 'tbcity_addgravatar' );
@@ -128,9 +128,7 @@ require_once( 'lib/breadcrumb.php' ); // load the breadcrumb module
 
 //require_once( 'lib/audio-player/audio-player.php' ); // load the audio player module
 
-require_once( 'lib/jetpack.php' ); // load the jetpack support module
-
-require_once( 'lib/bbpress-functions.php' ); // load the bbpress support module
+require_once( 'lib/plugin.php' ); // load the plugins support module
 
 require_once( 'lib/quickbar.php' ); // load the quickbar module
 
@@ -543,7 +541,7 @@ if ( !function_exists( 'tbcity_extrainfo' ) ) {
 				<span class="meta-trigger-wrap"><i class="icon-comment meta-trigger"></i></span>
 				<div class="metafield_content">
 					<?php _e( 'Comments', 'tbcity' ); ?>:
-					<?php comments_popup_link( __( 'No Comments', 'tbcity' ), __( '1 Comment', 'tbcity' ), __( '% Comments', 'tbcity' ) ); // number of comments?>
+					<?php echo tbcity_get_comments_link(); // number of comments?>
 				</div>
 			</div>
 		<?php } ?>
@@ -646,6 +644,64 @@ if ( !function_exists( 'tbcity_last_comments' ) ) {
 		}
 
 	}
+}
+
+
+/**
+ * Displays the link to the comments popup window for the current post ID.
+ *
+ */
+function tbcity_get_comments_link( $args = '' ) {
+
+	$defaults = array(
+		'zero'		=> false,
+		'one'		=> false,
+		'more'		=> false,
+		'css_class'	=> '',
+		'none'		=> false,
+		'before'	=> '',
+		'after'		=> '',
+		'id'		=> false,
+	);
+	$args = wp_parse_args( $args, $defaults );
+	extract($args, EXTR_SKIP);
+
+	if ( false === $zero )	$zero	= __( 'No Comments', 'tbcity' );
+	if ( false === $one )	$one	= __( '1 Comment', 'tbcity' );
+	if ( false === $more )	$more	= __( '% Comments', 'tbcity' );
+	if ( false === $none )	$none	= __( 'Comments Off', 'tbcity' );
+	$id = ( $id ) ? (int)$id : get_the_ID();
+	$css_class = ( ! empty( $css_class ) ) ? ' class="' . esc_attr( $css_class ) . '"' : '';
+
+	$number = get_comments_number( $id );
+
+	if ( 0 == $number && !comments_open() && !pings_open() ) {
+
+		$output = $none ? $before . '<span' . $css_class . '>' . $none . '</span>' . $after : '';
+
+	} elseif ( post_password_required() ) {
+
+		$output = $before . __( 'Enter your password to view comments', 'tbcity' ) . $after;
+
+	} else {
+
+		$label = tbcity_get_opt( 'tbcity_cust_comrep' ) ? '#comments' : '#respond';
+		$href = ( 0 == $number ) ? get_permalink() . $label : get_comments_link();
+		$title = esc_attr( sprintf( __( 'Comment on %s', 'tbcity'), the_title_attribute( array( 'echo' => 0 ) ) ) );
+
+		if ( $number > 1 )
+			$text = str_replace( '%', number_format_i18n( $number ), $more );
+		elseif ( $number == 0 )
+			$text = $zero;
+		else
+			$text = $one;
+
+		$output = $before . '<a' . $css_class . ' href="' . esc_url( $href ) . '" title="' . $title . '">' . $text . '</a>' . $after;
+
+	}
+
+	return apply_filters( 'tbcity_get_comments_link' , $output );
+
 }
 
 
@@ -992,17 +1048,7 @@ if ( !function_exists( 'tbcity_setup' ) ) {
 		if ( tbcity_get_opt( 'editor_style' ) ) add_editor_style( 'css/editor-style.css' );
 
 		// This theme uses post formats
-		$format = array();
-		if ( tbcity_get_opt( 'post_formats_aside'		) ) $format[] = 'aside';
-		if ( tbcity_get_opt( 'post_formats_audio'		) ) $format[] = 'audio';
-		if ( tbcity_get_opt( 'post_formats_chat'		) ) $format[] = 'chat';
-		if ( tbcity_get_opt( 'post_formats_gallery'		) ) $format[] = 'gallery';
-		if ( tbcity_get_opt( 'post_formats_image'		) ) $format[] = 'image';
-		if ( tbcity_get_opt( 'post_formats_link'		) ) $format[] = 'link';
-		if ( tbcity_get_opt( 'post_formats_quote'		) ) $format[] = 'quote';
-		if ( tbcity_get_opt( 'post_formats_status'		) ) $format[] = 'status';
-		if ( tbcity_get_opt( 'post_formats_video'		) ) $format[] = 'video';
-		add_theme_support( 'post-formats', apply_filters( 'tbcity_post_formats', $format ) );
+		add_theme_support( 'post-formats', apply_filters( 'tbcity_post_formats', array() ) );
 
 		add_theme_support( 'custom-background', array(
 			'default-color' => '222',
@@ -1021,90 +1067,6 @@ function tbcity_addgravatar( $avatar_defaults ) {
 
 	return $avatar_defaults;
 
-}
-
-
-// Get first gallery
-if ( !function_exists( 'tbcity_get_gallery_shortcode' ) ) {
-	function tbcity_get_gallery_shortcode() {
-		global $post;
-
-		$pattern = get_shortcode_regex();
-
-		if (   preg_match_all( '/'. $pattern .'/s', $post->post_content, $matches )
-			&& array_key_exists( 2, $matches )
-			&& in_array( 'gallery', $matches[2] ) ) // gallery shortcode is being used
-		{
-			$key = array_search( 'gallery', $matches[2] );
-			$attrs = shortcode_parse_atts( $matches['3'][$key] );
-			return $attrs;
-		}
-
-	}
-}
-
-
-// run the gallery preview
-if ( !function_exists( 'tbcity_gallery_preview' ) ) {
-	function tbcity_gallery_preview() {
-
-			$attrs = tbcity_get_gallery_shortcode();
-			$attrs['preview'] = true;
-			return tbcity_gallery_shortcode( '', $attrs );
-
-	}
-}
-
-
-// the gallery preview walker
-if ( !function_exists( 'tbcity_gallery_preview_walker' ) ) {
-	function tbcity_gallery_preview_walker( $attachments = '', $id = 0 ) {
-
-		if ( ! $id )
-			return false;
-
-		if ( empty( $attachments ) )
-			$attachments = get_children( array( 'post_parent' => $id, 'post_type' => 'attachment', 'post_mime_type' => 'image', 'orderby' => 'menu_order', 'order' => 'ASC', 'numberposts' => 999 ) );
-
-		if ( empty( $attachments ) )
-			return false;
-
-		$permalink = get_permalink( $id );
-
-		$images_count = count( $attachments );
-		$first_image = array_shift( $attachments );
-		$other_imgs = array_slice( $attachments, 0, 3 );
-
-		$output = '<span class="gallery-item size-medium">' . wp_get_attachment_image( $first_image->ID, 'medium' ) . '</span><!-- .gallery-item -->';
-
-		$output .= '<div class="thumbnail-wrap">';
-		foreach ($other_imgs as $image) {
-			$output .= '
-				<div class="gallery-item size-thumbnail">
-					' . wp_get_attachment_image( $image->ID, 'thumbnail' ) . '
-				</div>
-			';
-		}
-		$output .= '</div>';
-
-		$output .= '
-			<p class="info">
-				<em>' . sprintf( _n( 'This gallery contains <a %1$s><strong>%2$s</strong> image</a>', 'This gallery contains <a %1$s><strong>%2$s</strong> images</a>', $images_count, 'tbcity' ),
-				'href="' . esc_url( get_permalink() ) . '" title="' . esc_attr ( __( 'View gallery', 'tbcity' ) ) . '" rel="bookmark"',
-				number_format_i18n( $images_count )
-				) . '</em>
-			</p>
-			';
-
-		$output = apply_filters( 'tbcity_gallery_preview_walker', $output );
-
-		$output = '<div class="gallery gallery-preview">' . $output . '<br class="fixfloat" /></div>';
-
-		echo $output;
-
-		return true;
-
-	}
 }
 
 
@@ -1385,109 +1347,6 @@ function tbcity_post_classes($classes) {
 }
 
 
-// custom gallery shortcode function
-function tbcity_gallery_shortcode( $output, $attr ) {
-
-	$post = get_post();
-
-	static $instance = 0;
-	$instance++;
-
-	if ( ! empty( $attr['ids'] ) ) {
-		// 'ids' is explicitly ordered, unless you specify otherwise.
-		if ( empty( $attr['orderby'] ) )
-			$attr['orderby'] = 'post__in';
-		$attr['include'] = $attr['ids'];
-	}
-
-	// We're trusting author input, so let's at least make sure it looks like a valid orderby statement
-	if ( isset( $attr['orderby'] ) ) {
-		$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
-		if ( !$attr['orderby'] )
-			unset( $attr['orderby'] );
-	}
-
-	extract( shortcode_atts( array(
-		'order'	=> 'ASC',
-		'orderby'    => 'menu_order ID',
-		'id'	 => $post->ID,
-		'itemtag'    => 'dl',
-		'icontag'    => 'dt',
-		'captiontag' => 'dd',
-		'columns'    => 3,
-		'size'	 => 'thumbnail',
-		'include'    => '',
-		'exclude'    => ''
-	), $attr) );
-
-	$id = intval( $id );
-	if ( 'RAND' == $order )
-		$orderby = 'none';
-
-	if ( ! empty( $include ) ) {
-		$_attachments = get_posts( array( 'include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby ) );
-
-		$attachments = array();
-		foreach ( $_attachments as $key => $val ) {
-			$attachments[$val->ID] = $_attachments[$key];
-		}
-	} elseif ( ! empty( $exclude ) ) {
-		$attachments = get_children( array( 'post_parent' => $id, 'exclude' => $exclude, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby ) );
-	} else {
-		$attachments = get_children( array( 'post_parent' => $id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby ) );
-	}
-
-	if ( isset( $attr['preview'] ) && $attr['preview'] )
-		return tbcity_gallery_preview_walker( $attachments, $id );
-
-	if ( empty($attachments) )
-		return '';
-
-	if ( is_feed() ) {
-		$output = "\n";
-		foreach ( $attachments as $att_id => $attachment )
-			$output .= wp_get_attachment_link($att_id, $size, true) . "\n";
-		return $output;
-	}
-
-	$itemtag = tag_escape($itemtag);
-	$captiontag = tag_escape($captiontag);
-	$columns = intval($columns);
-	$itemwidth = $columns > 0 ? floor(100/$columns) : 100;
-
-	$selector = "gallery-{$instance}";
-
-	$size_class = sanitize_html_class( $size );
-	$output = "<div id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class}'>";
-
-	$i = 0;
-	foreach ( $attachments as $id => $attachment ) {
-		$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_get_attachment_link($id, $size, false, false) : wp_get_attachment_link($id, $size, true, false);
-
-		$output .= "<{$itemtag} class='gallery-item'>";
-		$output .= "
-			<{$icontag} class='gallery-icon'>
-				$link
-			</{$icontag}>";
-		if ( $captiontag && trim($attachment->post_excerpt) ) {
-			$output .= "
-				<{$captiontag} class='wp-caption-text gallery-caption'>
-				" . wptexturize($attachment->post_excerpt) . "
-				</{$captiontag}>";
-		}
-		$output .= "</{$itemtag}>";
-		if ( $columns > 0 && ++$i % $columns == 0 )
-			$output .= '<br style="clear: both" />';
-	}
-
-	$output .= "
-			<br style='clear: both;' />
-		</div>\n";
-
-	return $output;
-}
-
-
 //add attachment description to thickbox
 function tbcity_get_attachment_link( $markup = '', $id = 0, $size = 'thumbnail', $permalink = false, $icon = false, $text = false ) {
 
@@ -1745,6 +1604,18 @@ function tbcity_comment_reply_link( $link ) {
 		$link = str_replace( '>' . $text[1][0], ' title="' . esc_attr( __( 'Reply to comment', 'tbcity' ) ) . '" >' . __( 'Reply', 'tbcity' ) . ' <i class="icon-share-alt"></i>', $link);
 
 	return $link;
+
+}
+
+
+function tbcity_non_empty_excerpt( $excerpt ) {
+
+	$output = trim(str_replace( array('<p>','</p>','&nbsp;'), '', $excerpt));
+
+	if ( empty( $output ) )
+		$excerpt = '';
+
+	return $excerpt;
 
 }
 

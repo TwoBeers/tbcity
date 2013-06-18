@@ -520,15 +520,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d555555', e
 	max-width: 150px;
 }
 
-.entrytitle_wrap .post-image
-{
-	margin: 10px 0;
-	max-width: 100%;
-	height: auto;
-	border: 1px solid #ddd;
-	box-shadow: 0 0 4px #000;
-}
-
 .sticky .entrytitle_wrap
 {
 	border-left: 5px solid #0988d9;
@@ -1071,7 +1062,7 @@ a.comment-reply-link:hover {
 	padding:2px 0;
 }
 #wp-calendar tbody td:hover {
-	background: #fff;
+	background: #666;
 }
 #wp-calendar tbody .pad {
 	background: none !important;
@@ -1642,6 +1633,10 @@ img.alignright,
 	width: 1px;
 	margin: 0 auto;
 }
+#main div.sharedaddy div.sd-block {
+	border-top: 1px solid #888;
+	box-shadow: 0 -1px 0 #333;
+}
 .last-comments {
 	background: rgb(68,68,68); /* Old browsers */
 	background: -moz-linear-gradient(left,  rgba(68,68,68,1) 0%, rgba(85,85,85,1) 50%, rgba(68,68,68,1) 100%); /* FF3.6+ */
@@ -1688,6 +1683,62 @@ img.alignright,
 	display: block;
 }
 
+/* TB Chat Post
+----------------------------------------------------------*/
+.tb-chat {
+	color: #404040;
+}
+.tb-chat .chat-select li,
+.tb-chat .chat-transcript li {
+	border: none;
+	background: #ffdab9;
+	border-left: 3px solid;
+	border-color: #FF7700;
+	overflow: hidden;
+}
+.tb-chat li.rightalign {
+	border-left: none;
+	border-right: 3px solid;
+}
+.tb-chat li.speaker-1 {
+	background: #fffacd;
+	border-color: #FFE600;
+}
+.tb-chat li.speaker-2 {
+	background: #d8eef4;
+	border-color: #00C0F5;
+}
+.tb-chat li.speaker-3 {
+	background: #d8ffcd;
+	border-color: #37FF00;
+}
+.tb-chat li.aside-text {
+	border: none;
+	background: transparent;
+	color: #ddd;
+}
+.tb-chat .chat-transcript li {
+	margin: 0 100px 20px 0;
+	padding: 0 5px;
+}
+.tb-chat .chat-select .rightalign {
+	margin: 0 0 0 10px;
+}
+.tb-chat .chat-transcript .rightalign {
+	margin: 0 0 20px 100px;
+	text-align: left;
+}
+.tb-chat .timestamp {
+	font-size: 0.8em;
+	opacity: 0.3;
+	display: block;
+	line-height:1em;
+	padding-top: 5px;
+}
+.tb-chat .rightalign .timestamp {
+	text-align: right;
+}
+
 /* Low Resolutions
 ----------------------------------------------------------*/
 @media screen and (max-width: 960px) {
@@ -1700,8 +1751,10 @@ img.alignright,
 		float: none;
 		margin: 0;
 		width: auto;
+		border-left: none;
+		border-right: none;
 	}
-	.entrytitle {
+	.entrytitle_wrap {
 		margin: 0;
 	}
 	#sidebar-primary {
@@ -1714,7 +1767,17 @@ img.alignright,
 	#footer{
 		overflow: hidden
 	}
-
+	#footer-widgets-area .widget {
+		float: none;
+		padding: 0;
+		width: auto;
+	}
+	.entrytitle_wrap .feaured-image {
+		display: none;
+	}
+	.entrytitle_wrap img + .entrytitle {
+		margin-left: 10px;
+	}
 }
 
 

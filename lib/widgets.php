@@ -847,7 +847,7 @@ class Tbcity_Widget_Social extends WP_Widget {
 				$account = $account? $account : get_bloginfo( 'rss2_url' );
 				$prefix = __( 'Keep updated with our RSS feed', 'tbcity' );
 			}
-			if ( $follow_service == 'Mail' ) {
+			if ( $follow_service == 'mail' ) {
 				$account = preg_replace( '/(.)(.)/', '$2$1', 'mailto:'.$account );
 				$prefix = __( 'Contact us', 'tbcity' );
 				$class= ' hide-if-no-js';
@@ -885,19 +885,26 @@ class Tbcity_Widget_Social extends WP_Widget {
 			$this->alert[] = 'icon_size';
 		}
 
-		$pattern = "/^(http|https):\/\//";
+		$url_pattern = "/^(http|https):\/\//";
+		$email_pattern = "/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/";
 		foreach ($this->follow_urls as $follow_service => $service_name ) {
 
 			$instance['show_'.$follow_service] = $new_instance['show_'.$follow_service];
 			$instance[$follow_service.'_account'] = $new_instance[$follow_service.'_account'];
 
 			if ( $instance[$follow_service.'_account'] ) {
-				preg_match($pattern, $instance[$follow_service.'_account'], $is_valid_url);
+
+				if( $follow_service == 'mail' )
+					preg_match($email_pattern, strtoupper( $instance[$follow_service.'_account'] ), $is_valid_url);
+				else
+					preg_match($url_pattern, $instance[$follow_service.'_account'], $is_valid_url);
+
 				if ( ! $is_valid_url ) {
 					$instance['show_'.$follow_service] = false;
 					$instance[$follow_service.'_account'] = '';
 					$this->alert[] = $follow_service;
 				}
+
 			}
 
 		}

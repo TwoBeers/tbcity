@@ -164,7 +164,7 @@ class Tbcity_Comment_Style {
 		}
 		#headimg img {
 			height: auto;
-			max-width: 100%;
+			max-width: 80%;
 			display: block;
 			margin: 0 auto;
 		}
