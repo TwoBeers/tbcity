@@ -75,7 +75,7 @@ function tbcity_widget_area_init() {
 		array(
 			'name' => __( 'Primary Sidebar', 'tbcity' ),
 			'id' => 'primary-widget-area',
-			'description' => __( 'The primary sidebar widget area', 'tbcity' )
+			'description' => __( 'the primary sidebar widget area', 'tbcity' )
 		),
 		tbcity_get_default_widget_args()
 	) );
@@ -105,9 +105,20 @@ function tbcity_widget_area_init() {
 		array(
 			'name' => __( 'Page 404', 'tbcity' ),
 			'id' => 'error404-widgets-area',
-			'description' => __( 'Enrich the page 404 with some useful widgets', 'tbcity' )
+			'description' => __( 'enrich the page 404 with some useful widgets', 'tbcity' )
 		),
 		tbcity_get_default_widget_args()
+	) );
+
+	// Area 4, the quickbar.
+	register_sidebar( array(
+		'name' => __( 'Sliding Menu', 'tbcity' ),
+		'id' => 'quickbar-widgets-area',
+		'description' => __( 'up to 5 widgets', 'tbcity' ),
+		'before_widget' => '<div id="%1$s" class="menuitem widget %2$s"><div>',
+		'after_widget' => '</div></div>',
+		'before_title' => '</div><span class="menuitem-trigger">',
+		'after_title' => '</span><div class="ddmcontent">'
 	) );
 
 }
@@ -116,9 +127,9 @@ function tbcity_widget_area_init() {
 /**
  * Popular_Posts widget class
  */
-class Tbcity_Widget_Popular_Posts extends WP_Widget {
+class TBCity_Widget_Popular_Posts extends WP_Widget {
 
-	function Tbcity_Widget_Popular_Posts() {
+	function TBCity_Widget_Popular_Posts() {
 
 		$widget_ops = array( 'classname' => 'tb_popular_posts', 'description' => __( 'The most commented posts on your site', 'tbcity' ) );
 		$this->WP_Widget( 'tb-popular-posts', __( 'Popular Posts', 'tbcity' ), $widget_ops );
@@ -271,9 +282,9 @@ class Tbcity_Widget_Popular_Posts extends WP_Widget {
  * latest_Commented_Posts widget class
  *
  */
-class Tbcity_Widget_Latest_Commented_Posts extends WP_Widget {
+class TBCity_Widget_Latest_Commented_Posts extends WP_Widget {
 
-	function Tbcity_Widget_Latest_Commented_Posts() {
+	function TBCity_Widget_Latest_Commented_Posts() {
 		$widget_ops = array( 'classname' => 'tb_latest_commented_posts', 'description' => __( 'The latest commented posts/pages of your site', 'tbcity' ) );
 		$this->WP_Widget( 'tb-recent-comments', __( 'Latest activity', 'tbcity' ), $widget_ops );
 		$this->alt_option_name = 'tb_latest_commented_posts';
@@ -427,9 +438,9 @@ class Tbcity_Widget_Latest_Commented_Posts extends WP_Widget {
  * latest_Comment_Authors widget class
  *
  */
-class Tbcity_Widget_Latest_Commentators extends WP_Widget {
+class TBCity_Widget_Latest_Commentators extends WP_Widget {
 
-	function Tbcity_Widget_Latest_Commentators() {
+	function TBCity_Widget_Latest_Commentators() {
 
 		$widget_ops = array( 'classname' => 'tb_latest_commentators', 'description' => __( 'The latest comment authors', 'tbcity' ) );
 		$this->WP_Widget( 'tb-recent-commentators', __( 'Latest comment authors', 'tbcity' ), $widget_ops);
@@ -609,9 +620,9 @@ class Tbcity_Widget_Latest_Commentators extends WP_Widget {
  * Popular Categories widget class
  *
  */
-class Tbcity_Widget_Pop_Categories extends WP_Widget {
+class TBCity_Widget_Pop_Categories extends WP_Widget {
 
-	function Tbcity_Widget_Pop_Categories() {
+	function TBCity_Widget_Pop_Categories() {
 
 		$widget_ops = array( 'classname' => 'tb_categories', 'description' => __( 'A list of popular categories', 'tbcity' ) );
 
@@ -735,9 +746,9 @@ class Tbcity_Widget_Pop_Categories extends WP_Widget {
  * Optional: RSS icon. 
  *
  */
-class Tbcity_Widget_Social extends WP_Widget {
+class TBCity_Widget_Social extends WP_Widget {
 
-	function Tbcity_Widget_Social() {
+	function TBCity_Widget_Social() {
 
 		$widget_ops = array(
 			'classname'		=> 'tb_social',
@@ -996,9 +1007,9 @@ class Tbcity_Widget_Social extends WP_Widget {
  * Recent Posts in Category widget class
  *
  */
-class Tbcity_Widget_Recent_Posts extends WP_Widget {
+class TBCity_Widget_Recent_Posts extends WP_Widget {
 
-	function Tbcity_Widget_Recent_Posts() {
+	function TBCity_Widget_Recent_Posts() {
 
 		$widget_ops = array( 'classname' => 'tb_recent_entries', 'description' => __( 'The most recent posts in a single category', 'tbcity' ) );
 		$this->WP_Widget( 'tb-recent-posts', __( 'Recent Posts in Category', 'tbcity' ), $widget_ops );
@@ -1198,9 +1209,9 @@ class Tbcity_Widget_Recent_Posts extends WP_Widget {
 /**
  * Post details widget class
  */
-class Tbcity_Widget_Post_Details extends WP_Widget {
+class TBCity_Widget_Post_Details extends WP_Widget {
 
-	function Tbcity_Widget_Post_Details() {
+	function TBCity_Widget_Post_Details() {
 		$widget_ops = array( 'classname' => 'tb_post_details', 'description' => __( "Show some details and links related to the current post. It's visible ONLY in single posts", 'tbcity' ) );
 		$this->WP_Widget( 'tb-post-details', __( 'Post details', 'tbcity' ), $widget_ops);
 		$this->alt_option_name = 'tb_post_details';
@@ -1385,9 +1396,9 @@ class Tbcity_Widget_Post_Details extends WP_Widget {
 /**
  * Post Format list
  */
-class Tbcity_Widget_Post_Formats extends WP_Widget {
+class TBCity_Widget_Post_Formats extends WP_Widget {
 
-	function Tbcity_Widget_Post_Formats() {
+	function TBCity_Widget_Post_Formats() {
 
 		$widget_ops = array( 'classname' => 'tb_post_formats', 'description' => __( 'A list of Post Formats', 'tbcity' ) );
 		$this->WP_Widget( 'tb-widget-post-formats', __( 'Post Formats', 'tbcity' ), $widget_ops );
@@ -1515,9 +1526,9 @@ class Tbcity_Widget_Post_Formats extends WP_Widget {
 /**
  * Image EXIF widget class
  */
-class Tbcity_Widget_Image_Exif extends WP_Widget {
+class TBCity_Widget_Image_Exif extends WP_Widget {
 
-	function Tbcity_Widget_Image_Exif() {
+	function TBCity_Widget_Image_Exif() {
 
 		$widget_ops = array( 'classname' => 'tb_exif_details', 'description' => __( "Display image EXIF details. It's visible ONLY in single attachments", "tbcity" ) );
 		$this->WP_Widget( 'tb-exif-details', __( 'Image EXIF details', 'tbcity' ), $widget_ops );
@@ -1614,9 +1625,9 @@ class Tbcity_Widget_Image_Exif extends WP_Widget {
  * User_quick_links widget class
  *
  */
-class Tbcity_Widget_User_Quick_Links extends WP_Widget {
+class TBCity_Widget_User_Quick_Links extends WP_Widget {
 
-	function Tbcity_Widget_User_Quick_Links() {
+	function TBCity_Widget_User_Quick_Links() {
 
 		$widget_ops = array( 'classname' => 'tb_user_quick_links', 'description' => __( "Some useful links for users. It's a kind of enhanced meta widget", "tbcity" ) );
 		$this->WP_Widget( 'tb-user-quick-links', __( 'User quick links', 'tbcity' ), $widget_ops );
@@ -1925,7 +1936,7 @@ class Tbcity_Widget_User_Quick_Links extends WP_Widget {
 /**
  * Post share links
  */
-class Tbcity_Widget_Share_This extends WP_Widget {
+class TBCity_Widget_Share_This extends WP_Widget {
 
 	var $default_services = array(
 		//'ID' => array( 'NAME', 'LINK' ),
@@ -1951,7 +1962,7 @@ class Tbcity_Widget_Share_This extends WP_Widget {
 	var $default_icon_size = array ( '16', '24', '32', '48', '64' );
 
 
-	function Tbcity_Widget_Share_This() {
+	function TBCity_Widget_Share_This() {
 
 		$widget_ops = array( 'classname' => 'tb_share_this', 'description' => __( "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments", 'tbcity' ) );
 		$this->WP_Widget( 'tb-share-this', __( 'Share this', 'tbcity' ), $widget_ops );
@@ -2063,9 +2074,9 @@ class Tbcity_Widget_Share_This extends WP_Widget {
 /**
  * Clean Archives Widget
  */
-class Tbcity_Widget_Clean_Archives extends WP_Widget {
+class TBCity_Widget_Clean_Archives extends WP_Widget {
 
-	function Tbcity_Widget_Clean_Archives() {
+	function TBCity_Widget_Clean_Archives() {
 
 		$widget_ops = array( 'classname' => 'tb_clean_archives', 'description' => __( 'Show archives in a cleaner way', 'tbcity' ) );
 		$this->WP_Widget( 'tb-clean-archives', __( 'Clean Archives', 'tbcity' ), $widget_ops );
@@ -2200,7 +2211,7 @@ class Tbcity_Widget_Clean_Archives extends WP_Widget {
 /**
  * simple font resize widget
  */
-function Tbcity_Widget_font_resize($args) {
+function TBCity_Widget_font_resize($args) {
 
 	extract($args);
 
@@ -2225,37 +2236,34 @@ function tbcity_widgets_init() {
 	if ( !is_blog_installed() )
 		return;
 
-	if ( ! tbcity_get_opt( 'custom_widgets' ) )
-		return;
+	register_widget( 'TBCity_Widget_Popular_Posts' );
 
-	register_widget( 'Tbcity_Widget_Popular_Posts' );
+	register_widget( 'TBCity_Widget_Latest_Commented_Posts' );
 
-	register_widget( 'Tbcity_Widget_Latest_Commented_Posts' );
+	register_widget( 'TBCity_Widget_Latest_Commentators' );
 
-	register_widget( 'Tbcity_Widget_Latest_Commentators' );
+	register_widget( 'TBCity_Widget_Pop_Categories' );
 
-	register_widget( 'Tbcity_Widget_Pop_Categories' );
+	register_widget( 'TBCity_Widget_Social' );
 
-	register_widget( 'Tbcity_Widget_Social' );
+	register_widget( 'TBCity_Widget_Recent_Posts' );
 
-	register_widget( 'Tbcity_Widget_Recent_Posts' );
+	register_widget( 'TBCity_Widget_User_Quick_Links' );
 
-	register_widget( 'Tbcity_Widget_User_Quick_Links' );
+	register_widget( 'TBCity_Widget_Post_Details' );
 
-	register_widget( 'Tbcity_Widget_Post_Details' );
+	register_widget( 'TBCity_Widget_Post_Formats' );
 
-	register_widget( 'Tbcity_Widget_Post_Formats' );
+	register_widget( 'TBCity_Widget_Image_Exif' );
 
-	register_widget( 'Tbcity_Widget_Image_Exif' );
+	register_widget( 'TBCity_Widget_Share_This' );
 
-	register_widget( 'Tbcity_Widget_Share_This' );
-
-	register_widget( 'Tbcity_Widget_Clean_Archives' );
+	register_widget( 'TBCity_Widget_Clean_Archives' );
 
 	if ( tbcity_is_mobile() )
 		return;
 
-	wp_register_sidebar_widget( 'tb-font-resize', 'Font Resize', 'Tbcity_Widget_font_resize', array( 'classname' => 'tb_font_resize', 'description' => __( 'Simple javascript-based font resizer', 'tbcity' ) ) );
+	wp_register_sidebar_widget( 'tb-font-resize', 'Font Resize', 'TBCity_Widget_font_resize', array( 'classname' => 'tb_font_resize', 'description' => __( 'Simple javascript-based font resizer', 'tbcity' ) ) );
 
 }
 

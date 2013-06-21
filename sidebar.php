@@ -9,7 +9,7 @@
  */
 ?>
 
-<?php if ( tbcity_get_opt( 'sidebar_primary' ) == 'hidden' ) return; ?>
+<?php if ( ! tbcity_get_opt( 'primary_sidebar' ) ) return; ?>
 
 <?php tbcity_hook_sidebars_before( 'primary' ); ?>
 

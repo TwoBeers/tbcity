@@ -86,6 +86,7 @@ add_filter( 'page_css_class'						, 'tbcity_add_selected_class_to_page_item', 10
 add_filter( 'nav_menu_css_class'					, 'tbcity_add_selected_class_to_menu_item', 10, 2 );
 add_filter( 'comment_form_logged_in'				, 'tbcity_add_avatar_to_logged_in', 10, 3 );
 add_filter( 'get_search_form'						, 'tbcity_search_form' );
+add_filter( 'widget_categories_args'				, 'tbcity_widget_categories_args' );
 
 
 /* get the theme options */
@@ -160,7 +161,7 @@ function tbcity_is_allcat() { //is "all category" page
 
 // Set the content width based on the theme's design
 if ( ! isset( $content_width ) ) {
-	$content_width = 560;
+	$content_width = 1024;
 }
 
 
@@ -173,7 +174,8 @@ if ( !function_exists( 'tbcity_custom_style' ) ) {
 
 ?>
 <style type="text/css">
-	body {
+	body,
+	select {
 		font-size: <?php echo tbcity_get_opt( 'font_size' ); ?>px;
 <?php if ( tbcity_get_opt( 'google_font_family' ) && tbcity_get_opt( 'google_font_body' ) ) { ?>
 		font-family: <?php echo tbcity_get_opt( 'google_font_family' ); ?>;
@@ -288,8 +290,14 @@ if ( !function_exists( 'tbcity_custom_style' ) ) {
 <!-- InternetExplorer really sucks! -->
 <!--[if lte IE 8]>
 <style type="text/css">
-	.storycontent img.size-full,
-	.gallery img {
+	.attachment-thumbnail,
+	.wp-caption img,
+	.gallery-item img,
+	.storycontent img,
+	.widget img.size-full,
+	.widget img.attachment-full,
+	.widget img.size-medium,
+	.widget img.attachment-medium {
 		width:auto;
 	}
 	.widget .avatar {
@@ -394,7 +402,12 @@ if ( !function_exists( 'tbcity_featured_title' ) ) {
 	function tbcity_featured_title( $args = '' ) {
 		global $post;
 
-		if ( is_front_page() && get_option('show_on_front') == "page" && ! tbcity_is_allcat() ) return;
+		if ( tbcity_get_opt( 'hide_frontpage_title' ) && is_front_page() && is_page() && ! tbcity_is_allcat() ) return;
+
+		if ( tbcity_get_opt( 'hide_pages_title' ) && is_page() ) return;
+
+		$selected_ids = explode( ',', tbcity_get_opt( 'hide_selected_entries_title' ) );
+		if ( in_array( $post->ID, $selected_ids ) ) return;
 
 		$defaults = array(
 			'alternative'	=> '',
@@ -459,7 +472,7 @@ if ( !function_exists( 'tbcity_entry_date' ) ) {
 ?>
 	<div class="entrydate">
 
-		<?php if ( ! is_page() ) { ?><span><?php the_author(); ?> , <?php the_time( get_option( 'date_format' ) ); ?></span><?php } ?>
+		<?php if ( ! is_page() ) { ?><span><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>" title="<?php echo esc_attr( printf( __( 'View all posts by %s', 'tbcity' ), get_the_author() ) ); ?>"><?php echo get_the_author(); ?></a> , <?php the_time( get_option( 'date_format' ) ); ?></span><?php } ?>
 
 		<?php edit_post_link( '<i class="icon-pencil"></i>', '<span>', '</span>' ); ?>
 
@@ -574,7 +587,7 @@ if ( !function_exists( 'tbcity_multipages' ) ) {
 		if ( ( $childrens ) || ( $the_parent_page ) ){
 
 ?>
-	<div class="metafield">
+	<div class="metafield alternate">
 		<span class="meta-trigger-wrap"><i class="icon-indent-right meta-trigger"></i></span>
 		<div class="metafield_content">
 			<?php
@@ -973,6 +986,62 @@ if ( !function_exists( 'tbcity_get_first_image' ) ) {
 }
 
 
+// Get first link of a post
+if ( !function_exists( 'tbcity_get_first_link' ) ) {
+	function tbcity_get_first_link( $post_id = null ) {
+
+		$post = get_post( $post_id );
+
+		$first_info = array( 'anchor' => '', 'title' => '', 'href' => '', 'text' => '' );
+		//search the link in post content
+		preg_match_all( "/<a\b[^>]*>(.*?)<\/a>/i",$post->post_content, $result );
+		//grab the first one
+		if ( isset( $result[0][0] ) ){
+			$first_info['anchor'] = $result[0][0];
+			$first_info['text'] = isset( $result[1][0] ) ? $result[1][0] : '';
+			//get the title (if any)
+			preg_match_all( '/(title)=(["\'][^"]*["\'])/i',$first_info['anchor'], $link_title );
+			$first_info['title'] = isset( $link_title[2][0] ) ? str_replace( array('"','\''),'',$link_title[2][0] ) : '';
+			//get the path
+			preg_match_all( '/(href)=(["\'][^"]*["\'])/i',$first_info['anchor'], $link_href );
+			$first_info['href'] = isset( $link_href[2][0] ) ? str_replace( array('"','\''),'',$link_href[2][0] ) : '';
+			return $first_info;
+		} else {
+			return false;
+		}
+
+	}
+}
+
+
+// Get first blockquote words
+if ( !function_exists( 'tbcity_get_blockquote' ) ) {
+	function tbcity_get_blockquote( $post_id = null, $trim = false ) {
+
+		$post = get_post( $post_id );
+
+		$first_quote = array( 'quote' => '', 'cite' => '' );
+		//search the blockquote in post content
+		preg_match_all( '/<blockquote\b[^>]*>([\w\W]*?)<\/blockquote>/',$post->post_content, $blockquote );
+		//grab the first one
+		if ( isset( $blockquote[0][0] ) ){
+			$first_quote['quote'] = strip_tags( $blockquote[0][0] );
+			if ( $trim ) {
+				$words = explode( " ", $first_quote['quote'], 6 );
+				if ( count( $words ) == 6 ) $words[5] = '...';
+				$first_quote['quote'] = implode( ' ', $words );
+			}
+			preg_match_all( '/<cite>([\w\W]*?)<\/cite>/',$blockquote[0][0], $cite );
+			$first_quote['cite'] = ( isset( $cite[1][0] ) ) ? $cite[1][0] : '';
+			return $first_quote;
+		} else {
+			return false;
+		}
+
+	}
+}
+
+
 // get the post thumbnail or (if not set) the format related icon
 if ( !function_exists( 'tbcity_get_the_thumb' ) ) {
 	function tbcity_get_the_thumb( $args ) {
@@ -1272,6 +1341,17 @@ function tbcity_search_form() {
 }
 
 
+//order the categories list by count 
+function tbcity_widget_categories_args( $cat_args ) {
+
+	$cat_args['orderby'] = 'count';
+	$cat_args['order'] = 'DESC';
+
+	return $cat_args;
+
+}
+
+
 // add a fix for embed videos
 if ( !function_exists( 'tbcity_wmode_transparent' ) ) {
 	function tbcity_wmode_transparent($html, $url = null, $attr = null) {
@@ -1330,6 +1410,9 @@ function tbcity_body_classes($classes) {
 
 	if ( has_nav_menu( 'secondary1' ) )
 		$classes[] = 'top-menu';
+
+	if ( ! tbcity_get_opt( 'primary_sidebar' ) )
+		$classes[] = 'no-sidebar';
 
 	return $classes;
 
@@ -1622,6 +1705,8 @@ function tbcity_non_empty_excerpt( $excerpt ) {
 
 // display the second secondary menu
 function tbcity_primary_menu() {
+
+	if ( ! tbcity_get_opt( 'main_menu' ) ) return;
 
 	wp_nav_menu( array(
 		'container'			=> false,
