@@ -13,7 +13,7 @@ get_header(); ?>
 
 <?php tbcity_hook_content_before(); ?>
 
-<div id="posts_content">
+<div id="posts_content" class="multiple-posts">
 
 	<?php tbcity_hook_content_top(); ?>
 

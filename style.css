@@ -2,7 +2,7 @@
 Theme Name: The Black City
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-tbcity
 Description: The theme supports the latest WP features like custom menus, post formats and featured images. WP3.5 compatible
-Version: 2.00
+Version: 2.00.20130724
 Tags: translation-ready, threaded-comments, custom-menu, theme-options, flexible-width, two-columns, left-sidebar, gray, dark, sticky-post, editor-style, custom-colors, rtl-language-support, custom-header, featured-images, flexible-header
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -776,6 +776,7 @@ a.more-link:hover {
 #comments,
 .nocomments {
 	border-top: 1px solid #888;
+	border-bottom: 1px solid #333;
 	padding: 10px;
 	margin: 0;
 }
@@ -807,6 +808,10 @@ a.more-link:hover {
 	list-style-type: none;
 	padding:10px;
 	margin:0;
+}
+
+#commentlist-wrap {
+	border-top: 1px solid #888;
 	border-bottom: 1px solid #333;
 }
 
@@ -1404,7 +1409,6 @@ button:focus {
 +NAVIGATION
 *****************************/
 .navigation-links {
-	border-top: 2px groove #888;
 	padding: 20px;
 	text-align: center;
 }
@@ -1781,6 +1785,43 @@ img.alignright,
 .tb-chat .rightalign .timestamp {
 	text-align: right;
 }
+
+/* BuddyPress
+----------------------------------------------------------*/
+div#buddypress button,
+div#buddypress a.button,
+div#buddypress input[type="submit"],
+div#buddypress input[type="button"],
+div#buddypress input[type="reset"],
+div#buddypress ul.button-nav li a,
+div#buddypress div.generic-button a,
+div#buddypress .comment-reply-link,
+div a.bp-title-button {
+	cursor: pointer;
+	font-size: 1em;
+	outline: none;
+	text-align: center;
+	text-decoration: none;
+	background: #0870b2;
+	border: 2px groove #888;
+	color: #fff;
+	padding: 8px 10px;
+}
+
+div#buddypress button:hover,
+div#buddypress a.button:hover,
+div#buddypress input[type="submit"]:hover,
+div#buddypress input[type="button"]:hover,
+div#buddypress input[type="reset"]:hover,
+div#buddypress ul.button-nav li a:hover,
+div#buddypress div.generic-button a:hover,
+div#buddypress .comment-reply-link:hover,
+div a.bp-title-button:hover {
+	background: #87CEFB;
+	color: #fff;
+	border: 2px groove #888;
+}
+
 
 /* Low Resolutions
 ----------------------------------------------------------*/

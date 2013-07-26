@@ -125,3 +125,34 @@ class TBCity_bbPress {
 }
 
 new TBCity_bbPress;
+
+
+
+/**
+ * Functions and hooks for BuddyPress integration
+ */
+ 
+class TBCity_BuddyPress {
+
+	function __construct() {
+
+		add_action( 'wp_head', array( $this, 'init' ), 999 );
+
+	}
+
+	/**
+	 * Filters and hooks initialization
+	 */
+	function init() {
+
+		if ( ! ( function_exists( 'is_buddypress' ) && is_buddypress() ) ) return;
+
+		add_filter( 'tbcity_skip_widget_post_details'	, '__return_true' );
+		add_filter( 'tbcity_skip_widget_share_this'		, '__return_true' );
+
+	}
+
+}
+
+new TBCity_BuddyPress;
+

@@ -1301,7 +1301,7 @@ class TBCity_Widget_Post_Details extends WP_Widget {
 
 	function widget($args, $instance) {
 
-		if ( !is_single() || is_attachment() ) return;
+		if ( !is_single() || is_attachment() || apply_filters( 'tbcity_skip_widget_post_details', false ) ) return;
 
 		extract($args);
 		$instance = wp_parse_args( (array)$instance, $this->defaults );
@@ -1974,7 +1974,7 @@ class TBCity_Widget_Share_This extends WP_Widget {
 	function widget( $args, $instance ) {
 		global $post;
 
-		if ( !is_singular() ) return;
+		if ( !is_singular() || apply_filters( 'tbcity_skip_widget_share_this', false ) ) return;
 
 		extract( $args );
 

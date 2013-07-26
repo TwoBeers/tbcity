@@ -264,8 +264,8 @@ function tbcity_get_coa( $option = false ) {
 							'default'		=> 'thumbnail',
 							'description'	=> __( 'enhanced post title', 'tbcity' ),
 							'info'			=> __( 'enhance the posts title by adding a little image before', 'tbcity' ),
-							'options'		=> array( 'avatar', 'thumbnail', 'none' ),
-							'options_l10n'	=> array( __( 'author avatar', 'tbcity' ), __( 'post thumbnail', 'tbcity' ), __( 'none', 'tbcity' ) ),
+							'options'		=> array( 'avatar', 'thumbnail', 'qr_code', 'none' ),
+							'options_l10n'	=> array( __( 'author avatar', 'tbcity' ), __( 'post thumbnail', 'tbcity' ), __( 'qr code', 'tbcity' ), __( 'none', 'tbcity' ) ),
 							'req'			=> '',
 		),
 		'quickbar' => array(

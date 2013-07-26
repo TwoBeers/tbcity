@@ -36,13 +36,17 @@
 
 <?php if ( have_comments() ) { ?>
 
-	<?php tbcity_hook_comments_list_before(); ?>
+	<div id="commentlist-wrap">
 
-	<ol id="commentlist">
-		<?php wp_list_comments(); ?>
-	</ol>
+		<?php tbcity_hook_comments_list_before(); ?>
 
-	<?php tbcity_hook_comments_list_after(); ?>
+		<ol id="commentlist">
+			<?php wp_list_comments(); ?>
+		</ol>
+
+		<?php tbcity_hook_comments_list_after(); ?>
+
+	</div>
 
 <?php } ?>
 

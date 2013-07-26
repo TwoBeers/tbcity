@@ -180,6 +180,14 @@ tbcityScripts = {
 			});
 			return false;
 		});
+		top_but = $('#posts_content').find('.jump-to-bottom').unbind().click(function() {
+			$("html, body").animate({
+				scrollTop: $('#footer').offset().top
+			}, {
+				duration: 400
+			});
+			return false;
+		});
 	},
 
 

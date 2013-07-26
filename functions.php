@@ -58,7 +58,7 @@ add_action( 'tbcity_hook_post_title_wrap_top'		, 'tbcity_entry_thumb' );
 /* Custom filters - WP hooks */
 
 add_filter( 'use_default_gallery_style'				, '__return_false' );
-add_filter( 'embed_oembed_html'						, 'tbcity_wmode_transparent', 10, 3);
+add_filter( 'embed_oembed_html'						, 'tbcity_wmode_transparent', 99, 3);
 add_filter( 'img_caption_shortcode'					, 'tbcity_img_caption_shortcode', 10, 3 );
 add_filter( 'the_content'							, 'tbcity_clear_float' );
 add_filter( 'body_class'							, 'tbcity_body_classes' );
@@ -129,7 +129,7 @@ require_once( 'lib/breadcrumb.php' ); // load the breadcrumb module
 
 //require_once( 'lib/audio-player/audio-player.php' ); // load the audio player module
 
-require_once( 'lib/plugin.php' ); // load the plugins support module
+require_once( 'lib/plug-n-play.php' ); // load the plugins support module
 
 require_once( 'lib/quickbar.php' ); // load the quickbar module
 
@@ -210,7 +210,16 @@ if ( !function_exists( 'tbcity_custom_style' ) ) {
 	#respond input#submit:hover,
 	#respond input#submit:active,
 	a.comment-reply-link:hover,
-	a.more-link:hover {
+	a.more-link:hover,
+	div#buddypress button:hover,
+	div#buddypress a.button:hover,
+	div#buddypress input[type="submit"]:hover,
+	div#buddypress input[type="button"]:hover,
+	div#buddypress input[type="reset"]:hover,
+	div#buddypress ul.button-nav li a:hover,
+	div#buddypress div.generic-button a:hover,
+	div#buddypress .comment-reply-link:hover,
+	div a.bp-title-button:hover {
 		background: <?php echo tbcity_get_colors(0); ?>;
 	}
 	#mainmenu li.selected > a {
@@ -240,8 +249,20 @@ if ( !function_exists( 'tbcity_custom_style' ) ) {
 	div.navigation-links a,
 	a.more-link,
 	#respond input#submit,
-	a.comment-reply-link {
+	a.comment-reply-link,
+	div#buddypress button,
+	div#buddypress a.button,
+	div#buddypress input[type="submit"],
+	div#buddypress input[type="button"],
+	div#buddypress input[type="reset"],
+	div#buddypress ul.button-nav li a,
+	div#buddypress div.generic-button a,
+	div#buddypress .comment-reply-link,
+	div a.bp-title-button {
 		background: <?php echo tbcity_get_colors(2); ?>;
+<?php if ( tbcity_get_opt( 'google_font_family' ) && tbcity_get_opt( 'google_font_body' ) ) { ?>
+		font-family: <?php echo tbcity_get_opt( 'google_font_family' ); ?>;
+<?php } ?>
 	}
 	.bypostauthor > .comment-body  {
 		border-left: 2px groove <?php echo tbcity_get_colors(2); ?>;
@@ -478,6 +499,8 @@ if ( !function_exists( 'tbcity_entry_date' ) ) {
 
 		<span><a class="jump-to-top" href="#" title="top"><i class="icon-caret-up"></i></a></span>
 
+		<span><a class="jump-to-bottom" href="#footer" title="bottom"><i class="icon-caret-down"></i></a></span>
+
 	</div>
 <?php
 
@@ -497,6 +520,10 @@ function tbcity_entry_thumb() {
 	elseif ( ( tbcity_get_opt( 'featured_title' ) == 'thumbnail' ) )
 
 		$thumb = ( $src = tbcity_get_the_thumb_url( 0 , 4) ) ? '<img class="feaured-image" src="' . esc_url( $src ) . '" alt="thumbnail" />' : '';//get_the_post_thumbnail( $post->ID, array( 50, 50 ) );
+
+	elseif ( ( tbcity_get_opt( 'featured_title' ) == 'qr_code' ) )
+
+		$thumb = '<img class="feaured-image qrcode" src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=' . urlencode( home_url() . '/?p=' . get_the_ID() ) . '&chld=L|0" alt="thumbnail" />';
 
 	$thumb = apply_filters( 'tbcity_entry_thumb', $thumb );
 
@@ -1398,7 +1425,7 @@ function tbcity_img_caption_shortcode( $deprecated, $attr, $content = null ) {
 //clear any floats at the end of post content
 function tbcity_clear_float( $content ) {
 
-	return $content . '<br class=fixfloat />';
+	return $content . '<br class="fixfloat" />';
 
 }
 

@@ -8,7 +8,7 @@
  * @since 2.04
  */
 
-class Tbcity_Comment_Style {
+class Tbcity_Custom_Header {
 
 	function __construct() {
 
@@ -208,6 +208,6 @@ class Tbcity_Comment_Style {
 
 }
 
-new Tbcity_Comment_Style;
+new Tbcity_Custom_Header;
 
 
